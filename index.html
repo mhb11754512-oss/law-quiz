@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrative Law Interactive Quiz</title>
+    <!-- إعدادات الميتا الخاصة بالـ Web App للموبايلات -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="منصة القانون">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a2a6c 0%, #2c3e50 50%, #3498db 100%);
+            color: #FFFFFF;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            perspective: 1000px;
+        }
+
+        .card {
+            background: rgba(0, 0, 0, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(26, 42, 108, 0.3),
+                        0 5px 15px rgba(0, 0, 0, 0.5),
+                        inset 0 0 1px rgba(52, 152, 219, 0.8);
+            padding: 30px;
+            transform-style: preserve-3d;
+            transition: transform 0.5s;
+            border: 2px solid #3498db;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(45deg, #1a2a6c, #2c3e50, #3498db);
+            z-index: -1;
+            filter: blur(20px);
+            opacity: 0.3;
+        }
+
+        .designer-credit {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 14px;
+            font-weight: bold;
+            color: #3498db;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 8px 12px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            border: 1px solid #3498db;
+            z-index: 10;
+        }
+
+        h1, h2 {
+            color: #3498db;
+            text-align: center;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        h1 {
+            background: linear-gradient(135deg, #1a2a6c, #3498db);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 32px;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .login-form, .quiz-container, .welcome-screen {
+            display: none;
+        }
+
+        .active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #3498db;
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #1a2a6c;
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: #FFFFFF;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        input[type="text"]:focus, textarea:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.3);
+            background: rgba(0, 0, 0, 0.9);
+        }
+
+        .btn, .option, .quiz-btn, .feedback-toggle-btn, .download-btn {
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .btn {
+            background: linear-gradient(to right, #1a2a6c, #3498db);
+            color: #FFFFFF;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            transition: all 0.2s ease-in-out;
+            display: block;
+            width: 100%;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(26, 42, 108, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* ستايل أزرار التحميل المباشر الجديد */
+        .download-buttons-container {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+            margin-bottom: 25px;
+        }
+
+        .download-btn {
+            flex: 1;
+            background: linear-gradient(135deg, #2c3e50 0%, #1a2a6c 100%);
+            color: #FFFFFF;
+            border: 1px solid #3498db;
+            padding: 15px 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.2s ease-in-out;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+            display: inline-block;
+        }
+
+        .feedback-toggle-btn {
+            background: linear-gradient(to right, #e67e22, #f39c12);
+            color: #FFFFFF;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.2s ease-in-out;
+            display: block;
+            width: 100%;
+            margin-top: 25px;
+            box-shadow: 0 4px 15px rgba(230, 126, 34, 0.4);
+        }
+
+        @media (hover: hover) {
+            .btn:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+            }
+            .download-btn:hover {
+                transform: translateY(-3px);
+                border-color: #ffffff;
+                box-shadow: 0 6px 15px rgba(52, 152, 219, 0.3);
+            }
+            .feedback-toggle-btn:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 20px rgba(243, 156, 18, 0.5);
+            }
+            .option:hover {
+                background: rgba(26, 42, 108, 0.3);
+                transform: translateX(5px);
+                border-color: #3498db;
+            }
+            .quiz-btn:hover {
+                transform: translateY(-2px);
+                border-color: #3498db;
+            }
+        }
+
+        .btn:active, .quiz-btn:active, .feedback-toggle-btn:active, .download-btn:active {
+            transform: scale(0.98);
+        }
+
+        .question-container {
+            margin-bottom: 30px;
+        }
+
+        .question-text {
+            font-size: 20px;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            color: #FFFFFF;
+            background: rgba(26, 42, 108, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #3498db;
+            direction: ltr !important;
+            text-align: left !important;
+        }
+
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            direction: ltr !important;
+            text-align: left !important;
+        }
+
+        .option {
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid #1a2a6c;
+            border-radius: 8px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            display: flex;
+            align-items: center;
+            color: #FFFFFF;
+        }
+
+        .option:active {
+            background: rgba(52, 152, 219, 0.15);
+        }
+
+        .option.selected {
+            background: rgba(52, 152, 219, 0.2);
+            border-color: #3498db;
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.3);
+        }
+
+        .option input {
+            margin-right: 12px;
+            min-width: 18px;
+            min-height: 18px;
+        }
+
+        .option label {
+            cursor: pointer;
+            width: 100%;
+            text-align: left;
+            display: inline-block;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .navigation .btn {
+            width: 48%;
+        }
+
+        .progress-bar {
+            height: 10px;
+            background: rgba(26, 42, 108, 0.3);
+            border-radius: 5px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background: linear-gradient(to right, #1a2a6c, #3498db);
+            border-radius: 5px;
+            transition: width 0.5s;
+        }
+
+        .quiz-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: #3498db;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .fast-correction-panel {
+            background: rgba(26, 42, 108, 0.2);
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            border: 1px solid rgba(52, 152, 219, 0.4);
+        }
+
+        .fast-correction-panel label {
+            margin-bottom: 0;
+            font-size: 15px;
+            color: #FFFFFF;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .fast-correction-panel input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .instant-feedback-msg {
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .error-message {
+            color: #e74c3c;
+            text-align: center;
+            margin-top: 15px;
+            font-weight: bold;
+            display: none;
+            background: rgba(231, 76, 60, 0.1);
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #e74c3c;
+            direction: rtl;
+        }
+
+        .welcome-message {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #3498db;
+            font-size: 18px;
+            background: rgba(26, 42, 108, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .quiz-selector {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .quiz-btn {
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid #1a2a6c;
+            border-radius: 8px;
+            padding: 18px 20px;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            color: #FFFFFF;
+            font-weight: bold;
+            text-align: center;
+            font-size: 18px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .quiz-btn.active {
+            background: linear-gradient(to right, #1a2a6c, #3498db);
+            color: #FFFFFF;
+            border-color: #3498db;
+        }
+
+        .feedback-section {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            border: 1px dashed #f39c12;
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .results-summary {
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            border-left: 4px solid #3498db;
+        }
+
+        .results-summary h3 {
+            color: #3498db;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .results-summary p {
+            margin-bottom: 10px;
+            color: #FFFFFF;
+            font-size: 16px;
+        }
+
+        .welcome-screen {
+            text-align: center;
+            padding: 10px;
+        }
+
+        .user-info {
+            background: rgba(26, 42, 108, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            border-left: 4px solid #3498db;
+        }
+
+        .user-info h2 {
+            color: #3498db;
+            margin-bottom: 10px;
+        }
+
+        .review-container {
+            margin-top: 20px;
+            text-align: left;
+            direction: ltr !important;
+        }
+
+        .review-item {
+            margin-bottom: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.5);
+            border-left: 4px solid #e74c3c;
+        }
+
+        .review-content {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #FFFFFF;
+            text-align: left;
+        }
+
+        .correct-answer {
+            color: #2ecc71;
+            font-weight: bold;
+        }
+
+        .user-answer {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+        .timer-container {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(26, 42, 108, 0.3);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            color: #3498db;
+            box-shadow: 0 0 10px rgba(52, 152, 219, 0.3);
+            display: none;
+            border: 1px solid #3498db;
+            z-index: 10;
+        }
+
+        .timer-warning {
+            color: #f39c12;
+            animation: pulse 1s infinite;
+        }
+
+        .timer-critical {
+            color: #e74c3c;
+            animation: pulse 0.5s infinite;
+        }
+
+        /* ستايل إشعار تثبيت التطبيق PWA */
+        .pwa-banner {
+            display: none;
+            background: rgba(243, 156, 18, 0.15);
+            border: 1px solid #f39c12;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            animation: fadeIn 0.5s ease;
+            direction: rtl;
+        }
+
+        .pwa-banner p {
+            color: #f39c12;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 15px;
+        }
+
+        .pwa-btn {
+            background: linear-gradient(to right, #e67e22, #f39c12);
+            color: #fff;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 14px;
+            transition: transform 0.2s;
+        }
+
+        .pwa-btn:active {
+            transform: scale(0.95);
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .subject-title {
+            text-align: center;
+            color: #3498db;
+            margin-bottom: 20px;
+            font-size: 26px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-top: 10px;
+            direction: ltr;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            .card {
+                padding: 15px;
+                border-radius: 15px;
+            }
+            h1 {
+                font-size: 24px;
+            }
+            .subject-title {
+                font-size: 20px;
+                margin-bottom: 10px;
+            }
+            .designer-credit {
+                position: static;
+                text-align: center;
+                margin-bottom: 10px;
+                width: 100%;
+                display: block;
+            }
+            .timer-container {
+                position: static;
+                text-align: center;
+                margin-bottom: 15px;
+                width: 100%;
+                border-radius: 10px;
+            }
+            .quiz-info {
+                flex-direction: column;
+                gap: 5px;
+                align-items: center;
+                font-size: 14px;
+            }
+            .question-text {
+                font-size: 17px;
+                padding: 15px;
+                margin-bottom: 15px;
+            }
+            .option {
+                padding: 14px 12px;
+                font-size: 15px;
+            }
+            .quiz-btn {
+                padding: 15px;
+                font-size: 16px;
+            }
+            .navigation {
+                margin-top: 20px;
+            }
+            .download-buttons-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- بنر تثبيت التطبيق -->
+        <div id="pwaBanner" class="pwa-banner">
+            <p>📱 يمكنك تثبيت المنصة كتطبيق على شاشتك الرئيسية الآن للاستخدام السريع!</p>
+            <button id="pwaInstallBtn" class="pwa-btn">تثبيت التطبيق الآن</button>
+        </div>
+
+        <div class="card">
+            <div class="designer-credit">Designed by Mohamed Nasser</div>
+            <div class="timer-container" id="timerContainer">
+                Time Remaining: <span id="timerDisplay">00:00</span>
+            </div>
+            
+            <div class="subject-title">Administrative Law</div>
+            <h1>Interactive Quiz System</h1>
+            
+            <!-- Login Screen -->
+            <div id="loginScreen" class="login-form active">
+                <div class="form-group">
+                    <label for="username" style="text-align: center;">الاسم الثنائي للكلية</label>
+                    <input type="text" id="username" placeholder="اكتب اسمك الثنائي الحقيقي هنا..." style="direction: rtl; text-align: right;">
+                </div>
+                <button id="loginBtn" class="btn">Start Quiz</button>
+                <div id="loginError" class="error-message"></div>
+            </div>
+            
+            <!-- Welcome Screen -->
+            <div id="welcomeScreen" class="welcome-screen">
+                <div class="user-info">
+                    <h2>Welcome, <span id="userNameWelcome"></span>!</h2>
+                </div>
+
+                <!-- أزرار التحميل المباشر الجديدة للمقالي والتست بنك -->
+                <div class="download-buttons-container">
+                    <a href="https://drive.google.com/uc?export=download&id=1pvjn9xfp_YUmCStHMX09QVN5tElgQkG-" class="download-btn" download>📝 Solve Essay Questions</a>
+                    <a href="https://drive.google.com/uc?export=download&id=1-nhkP1z_Cas_WIStg2Cr7TCtYoAXtOeK" class="download-btn" download>📚 Solve Test Bank</a>
+                </div>
+                
+                <div class="quiz-selector" id="welcomeQuizSelector">
+                    <div class="quiz-btn" data-quiz="quiz1">Exam 1</div>
+                    <div class="quiz-btn" data-quiz="quiz2">Exam 2</div>
+                    <div class="quiz-btn" data-quiz="comprehensive">Exam 3</div>
+                </div>
+
+                <!-- زرار رأيك في المنصة -->
+                <button id="feedbackToggleBtn" class="feedback-toggle-btn">💡 رأيك في المنصة</button>
+                
+                <div id="feedbackSection" class="feedback-section">
+                    <textarea id="feedbackText" rows="3" placeholder="اكتب رأيك أو اقتراحك هنا لتطوير المنصة..." style="direction: rtl; text-align: right;"></textarea>
+                    <button id="sendFeedbackBtn" class="btn" style="margin-top:10px; padding:10px;">إرسال الرأي</button>
+                </div>
+            </div>
+            
+            <!-- Quiz Screen -->
+            <div id="quizScreen" class="quiz-container">
+                <div class="welcome-message" id="welcomeMessage">Welcome, <span id="userName"></span>!</div>
+                
+                <div class="quiz-info">
+                    <span id="quizTitle">Exam 1</span>
+                    <span id="questionNumber">Question 1 of 10</span>
+                </div>
+
+                <div class="fast-correction-panel">
+                    <label for="fastCorrectionToggle">
+                        <input type="checkbox" id="fastCorrectionToggle">
+                        Fast Correction (التصحيح السريع)
+                    </label>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress" id="progressBar"></div>
+                </div>
+                
+                <div class="question-container">
+                    <div class="question-text" id="questionText"></div>
+                    <div class="options-container" id="optionsContainer"></div>
+                    <div class="instant-feedback-msg" id="instantFeedbackMsg"></div>
+                </div>
+                
+                <div class="navigation">
+                    <button id="prevBtn" class="btn">Previous</button>
+                    <button id="nextBtn" class="btn">Next</button>
+                </div>
+                
+                <div class="results-summary" id="resultsSummary" style="display: none;">
+                    <h3>Quiz Results Summary</h3>
+                    <p id="scoreText"></p>
+                    <p id="correctAnswers"></p>
+                    <p id="incorrectAnswers"></p>
+                    <div class="review-container" id="reviewContainer"></div>
+                    
+                    <button id="backToQuizzesBtn" class="btn">Back to Quiz Selection</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const quizzes = {
+            quiz1: {
+                title: "Exam 1",
+                questions: [
+                    { text: "What is administrative centralization based on?", type: "multiple", options: ["Delegation of authority to regions", "Distribution of functions to local units", "Unification and indivisibility", "Independent governance of departments"], correctAnswer: 2 },
+                    { text: "What system concentrates administrative activity in the hands of the central executive authority?", type: "multiple", options: ["Administrative decentralization", "Judicial oversight", "Administrative centralization", "Utility governance"], correctAnswer: 2 },
+                    { text: "What does presidential authority include?", type: "multiple", options: ["Right to participate in elections", "Authority over subordinates’ personal and work matters", "Freedom from state regulations", "Direct judicial control"], correctAnswer: 1 },
+                    { text: "Which is considered a basic pillar of centralization?", type: "multiple", options: ["Multiple authorities", "Democratic elections", "Hierarchical hierarchy", "Public-private partnerships"], correctAnswer: 2 },
+                    { text: "In administrative centralization, what is the role of employees in regions?", type: "multiple", options: ["Full autonomy in decisions", "Appointing regional governors", "Submit proposals and implement ministerial decisions", "Create new policies"], correctAnswer: 2 },
+                    { text: "Which form is referred to as \"extreme centralization\"?", type: "multiple", options: ["Utility decentralization", "Local governance", "Administrative concentration", "Departmental focus"], correctAnswer: 2 },
+                    { text: "What is the aim of non-ministerial centralization?", type: "multiple", options: ["Increase capital control", "Granting local employees full independence", "Reducing burden on central government", "Reducing public facilities"], correctAnswer: 2 },
+                    { text: "What differentiates decentralization from lack of concentration?", type: "multiple", options: ["Location of government offices", "Presence of regional financial institutions", "Multiplicity of legal persons in decentralization", "Voting rights of employees"], correctAnswer: 2 },
+                    { text: "A key benefit of administrative centralization is:", type: "multiple", options: ["Increasing bureaucracy", "Slowing down decisions", "Reducing expenses and extravagance", "Increasing political debate"], correctAnswer: 2 },
+                    { text: "Centralization is justified in:", type: "multiple", options: ["Established federal nations", "Newly emerging countries", "Multi-national corporations", "Private sector"], correctAnswer: 1 },
+                    { text: "Which utility best suits administrative centralization?", type: "multiple", options: ["Local trash collection", "Village development", "National defense", "Kindergarten management"], correctAnswer: 2 },
+                    { text: "One disadvantage of centralization is:", type: "multiple", options: ["Promoting innovation", "Ignoring capital cities", "Killing employee creativity", "Increased decentralization"], correctAnswer: 2 },
+                    { text: "Administrative decentralization is based on:", type: "multiple", options: ["Absolute independence from government", "Executive power in the capital", "Distribution of functions between central and local entities", "Judicial appointments"], correctAnswer: 2 },
+                    { text: "Local decentralized units are granted:", type: "multiple", options: ["No control", "Complete sovereignty", "Independent legal personality", "Ju-dicial immunity"], correctAnswer: 2 },
+                    { text: "What is a feature of regional decentralization?", type: "multiple", options: ["Focused on national interests", "No local elections", "Based on democratic principles", "All decisions made by ministers"], correctAnswer: 2 },
+                    { text: "Local councils should ideally be formed through:", type: "multiple", options: ["Inheritance", "Ministerial selection", "Elections", "Random selection"], correctAnswer: 2 },
+                    { text: "Utility decentralization is mainly concerned with:", type: "multiple", options: ["Political representation", "Heterogeneous services", "Technical efficiency", "Tax collection"], correctAnswer: 2 },
+                    { text: "An example of utility decentralization is:", type: "multiple", options: ["Municipal parks", "Public Broadcasting Authority", "National Parliament", "Local food markets"], correctAnswer: 1 },
+                    { text: "A benefit of decentralization is:", type: "multiple", options: ["Overburdening central authority", "Delayed crisis response", "Enhancing democratic involvement", "Centralized tax spending"], correctAnswer: 2 },
+                    { text: "What is a potential drawback of decentralization?", type: "multiple", options: ["Equal service provision", "Duplication of central orders", "Conflicts between local and central bodies", "Strict presidential authority"], correctAnswer: 2 },
+                    
+                    { text: "Administrative centralization involves distributing power among various local authorities.", type: "truefalse", options: ["True", "False"], correctAnswer: 1 },
+                    { text: "In a centralized system, subordinates must follow the orders of their superiors.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                    { text: "Administrative decentralization gives complete independence to local authorities.", type: "truefalse", options: ["True", "False"], correctAnswer: 1 },
+                    { text: "Lack of administrative concentration falls under administrative centralization.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                    { text: "Presidential authority includes appointing, transferring, and disciplining subordinates.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                    { text: "Administrative concentration allows regional employees to make final decisions.", type: "truefalse", options: ["True", "False"], correctAnswer: 1 },
+                    { text: "One of the benefits of centralization is that it strengthens the state's authority.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                    { text: "Administrative centralization promotes creativity and autonomy among employees.", type: "truefalse", options: ["True", "False"], correctAnswer: 1 },
+                    { text: "Administrative decentralization supports democratic principles.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                    { text: "Regional decentralization requires residents to manage local utilities themselves.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                    { text: "Utility decentralization is based on democratic participation.", type: "truefalse", options: ["True", "False"], correctAnswer: 1 },
+                    { text: "In administrative concentration, ministers handle all decision-making processes.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                    { text: "Non-ministerial centralization gives regional employees full independence.", type: "truefalse", options: ["True", "False"], correctAnswer: 1 },
+                    { text: "Centralization helps in reducing unnecessary administrative expenses.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                    { text: "Local councils in decentralization must always be appointed, not elected.", type: "truefalse", options: ["True", "False"], correctAnswer: 1 },
+                    { text: "Administrative decentralization can reduce burden on central authorities.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                    { text: "A disadvantage of decentralization is the possible conflict with central authority.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                    { text: "The central government has no control over decentralized bodies.", type: "truefalse", options: ["True", "False"], correctAnswer: 1 },
+                    { text: "Administrative decentralization helps in faster and more suitable local decision-making.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                    { text: "Most countries today are abandoning decentralization in favor of total central control.", type: "truefalse", options: ["True", "False"], correctAnswer: 1 }
+                ]
+            },
+            quiz2: {
+                title: "Exam 2",
+                questions: [
+                    { text: "Professor De Laubadere tried to renew the standard of public utility after the disintegration it suffered as a result of the crises to which he was exposed, by combining the ideas of public utility and public authority, but he gave priority to......", type: "multiple", options: ["public utility", "public authority", "public interest standard", "Modern public authority"], correctAnswer: 0 },
+                    { text: "Standard of....despite its simplicity and clarity, is difficult to apply in reality, where it is not easy to distinguish between the actions of authority and the actions of ordinary administration due to its nature and the overlapping of administrative activity.", type: "multiple", options: ["authority and management actions", "public utility", "public interest", "combining public utility and public authority"], correctAnswer: 0 },
+                    { text: "....... A rule having the force of law, promulgated by an administrative agency.", type: "multiple", options: ["Regulations", "Legislation", "Legal Doctrine", "General principles of law"], correctAnswer: 0 },
+                    { text: "What is the \"Presumption of Legality\" of administrative decisions?", type: "multiple", options: ["The decision is invalid until proven otherwise", "The administrative decision is presumed valid and legal until proven otherwise", "The decision needs judicial approval before implementation", "Individuals can freely refuse to implement it"], correctAnswer: 1 },
+                    { text: "\"Direct Implementation\" means:", type: "multiple", options: ["The administration must always go to court to enforce its decisions", "Implementing decisions only through voluntary compliance", "The administration's authority to enforce its own decisions by coercive force without resorting to the judiciary", "Asking the police to implement all administrative decisions"], correctAnswer: 2 },
+                    { text: "What is the purpose of utility decentralization?", type: "multiple", options: ["To promote democratic elections", "To centralize all administrative functions", "To facilitate management efficiency", "To eliminate local governance"], correctAnswer: 2 },
+                    { text: "What is one of the pillars of administrative centralization?", type: "multiple", options: ["Democratic elections", "Financial independence", "Hierarchical hierarchy", "Local decision-making"], correctAnswer: 2 },
+                    { text: "What is a key feature of the president's authority to command in administrative centralization?", type: "multiple", options: ["Issuing non-binding suggestions", "Allowing subordinates to amend decisions", "Delegating all decisions to subordinates", "Issuing binding orders and instructions"], correctAnswer: 3 },
+                    { text: "When can departmental orders be considered administrative decisions?", type: "multiple", options: ["When they are purely internal instructions", "When they are issued by private contractors", "When they lack any directives", "When they cause legal effects on individuals' positions"], correctAnswer: 3 },
+                    { text: "What is the reason for an administrative decision?", type: "multiple", options: ["The psychological motive of the decision-maker", "The internal procedures of the administration", "The factual or legal situation prompting the decision", "The public interest goal of the decision"], correctAnswer: 2 },
+                    { text: "What condition must the reason for an administrative decision fulfill?", type: "multiple", options: ["It must be a future event", "It must exist until the date the decision is made", "It must be a psychological motive", "It must be irrelevant to the decision"], correctAnswer: 1 },
+                    { text: "According to Professor Osman Khalil, the State Council should be viewed as:", type: "multiple", options: ["A living organism that evolves with society", "A lifeless institution", "A rigid judicial body", "A purely political institution"], correctAnswer: 0 },
+                    { text: "What is the highest level of judicial oversight over the reason element of an administrative decision?", type: "multiple", options: ["Monitoring the existence of facts", "Oversight over the adaptation of facts", "Monitoring the appropriateness of the decision to the facts", "Monitoring the psychological motives"], correctAnswer: 2 },
+                    { text: "What defect occurs if an administrative decision seeks goals conflicting with the public interest?", type: "multiple", options: ["Misuse of authority or deviation from purpose", "Lack of jurisdiction", "Violation of form", "Absence of reason"], correctAnswer: 0 },
+                    { text: "The second source of the administrative law is the ....., which can be defined as \"Abstract and general rules enacted by a legislative authority or the parliament, which has been authorized by the constitution to perform such function\".", type: "multiple", options: ["constitution", "statutes", "Conventions", "Regulations"], correctAnswer: 1 },
+                    { text: "When is an administrative decision considered invalid due to a time-based jurisdiction violation?", type: "multiple", options: ["When issued after the employee's resignation or retirement", "When issued within the specified time frame", "When issued by a centralized authority", "When issued with proper delegation"], correctAnswer: 0 },
+                    { text: "Why are preliminary and preparatory works not considered administrative decisions?", type: "multiple", options: ["They lack the ability to generate legal effects", "They produce immediate legal effects", "They are issued by private entities", "They are always appealable"], correctAnswer: 0 },
+                    { text: "A new idea has emerged for other moral entities represented by organizations and unions of a ....... nature, which undertake the management of public utilities established by the legislator to achieve public interests, including The Bar Association, the Engineers Syndicate, and the Doctors Syndicate.", type: "multiple", options: ["regional", "public", "territory", "professional"], correctAnswer: 3 },
+                    { text: "The President of the Republic represents the state in foreign relations and concludes treaties and ratifies them after the approval of the House of Representatives. They shall acquire the force of law upon promulgation in accordance with the provisions of the Egyptian Constitution (Article 151).", type: "multiple", options: ["The Prime Minister", "The House of Representatives", "The President of the Republic", "The Minister of Justice"], correctAnswer: 2 },
+                    { text: "Some jurists have likened the rules of ..... in public law to the rules of eligibility in private law because both are essentially based on the ability to carry out legal action.", type: "multiple", options: ["reason", "form", "purpose", "jurisdiction"], correctAnswer: 3 },
+                    { text: "The .... for an administrative decision is the factual or legal situation that precedes the decision and prompts the administration to issue it.", type: "multiple", options: ["jurisdiction", "reason", "Form", "Purpose"], correctAnswer: 1 },
+                    { text: "There are two main types of moral persons: ..... moral persons, and private moral persons, with the importance that private moral persons enjoy within the scope of private law.", type: "multiple", options: ["Public", "Territory", "Private", "Natural"], correctAnswer: 0 },
+                    { text: "it is called the .... a group of individuals or a group of funds that aims to achieve a specific goal and is an autonomous entity independent of the individuals that make up it, allowing the achievement of its goal.", type: "multiple", options: ["territory personality", "human personality", "moral personality", "natural personality"], correctAnswer: 2 },
+                    { text: "What is the basic principle regarding the administration's obligation to provide reasons for its decisions?", type: "multiple", options: ["It is not obligated unless the law requires it", "It must provide reasons only for individual decisions", "It must obligated only for internal procedures", "It must always provide reasons"], correctAnswer: 0 },
+                    { text: "Administrative law is primarily concerned with:", type: "multiple", options: ["Criminal law and punishment", "The relationship between private individuals", "The activities of administrative agencies of government", "Constitutional amendments"], correctAnswer: 2 },
+                    
+                    { text: "The standard of public authority and its Privileges went beyond the criticisms directed at the criterion of distinction between acts of authority and ordinary acts of administration and included all administration activities directly related to public utilities governed by administrative law.", type: "truefalse", options: ["True", "False"], correctAnswer: 1 },
+                    { text: "The most prominent jurists of public utility school are Teissier, Duguit, Bonnard and Jeze.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                    { text: "Judicial oversight of the reason element includes monitoring the appropriateness of the decision to the facts.", type: "truefalse", options: ["True", "False"], correctAnswer: 1 },
+                    { text: "The subject of an administrative decision refers to its psychological goal.", type: "truefalse", options: ["True", "False"], correctAnswer: 1 },
+                    { text: "All final administrative decisions are subject to judicial oversight without exception.", type: "truefalse", options: ["True", "False"], correctAnswer: 1 },
+                    { text: "The reason for an administrative decision is an internal psychological motive of the decision-maker.", type: "truefalse", options: ["True", "False"], correctAnswer: 1 },
+                    { text: "The state was described in the nineteenth century as a law-and-order state and its role was conceived to be negative as its internal extended primarily to defending the country from external aggression, maintaining law and order within the country dispensing justice to its subjects and collecting a few taxes to finance these activities.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                    { text: "For a reason to be valid, it must exist and continue until the decision is issued.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                    { text: "Judicial Precedents is a source of law because it creates and allocates power between the legislative, executive, and judicial branches of the government.", type: "truefalse", options: ["True", "False"], correctAnswer: 1 },
+                    { text: "The legislature may not authorize the administration to issue administrative decisions retroactively.", type: "truefalse", options: ["True", "False"], correctAnswer: 1 },
+                    { text: "Regulation is the second key source of administrative law and usually takes priority over sources of law other than the Constitution.", type: "truefalse", options: ["True", "False"], correctAnswer: 1 },
+                    { text: "The territorial legal persons, they end with the same instrument by which they were created.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                    { text: "Administrative Law is that branch of the law, which is concerned, with the composition of powers, duties, rights and liabilities of the various organs of the Government.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                    { text: "Utility decentralization is based on democratic participation.", type: "truefalse", options: ["True", "False"], correctAnswer: 1 },
+                    { text: "According to Duguit, an administrative decision aims to amend legal conditions at the time of issuance or in the future.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                    { text: "It is recognized in administrative judiciary that the rule of non-retroactivity of administrative decisions is a peremptory rule and the penalty for violating it is the invalidation of the administrative decision.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                    { text: "The Constitution, used as a source of law.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                    { text: "The rule of public utility is that cancellation is carried out by the same instrument by which the establishment was decided.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                    { text: "What distinguishes an administrative decision from an administrative contract is that it is issued unilaterally.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                    { text: "The purpose of an administrative decision is to achieve the public interest.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                    { text: "The legislator may expressly authorize the administration to issue certain decisions retroactively, given that the legislator represents the public interest that the administration seeks to achieve.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                    { text: "An administrative decision requires the acceptance of the addressed party to produce legal effects.", type: "truefalse", options: ["True", "False"], correctAnswer: 1 },
+                    { text: "The principle is that the administration is not obligated to express its will in a specific way unless the law stipulates otherwise. In this case, the decision must take the formality prescribed for its issuance, such as the law stipulating that the decision must be in writing.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                    { text: "Therefore, the administration often resorts to putting an end to the implementation of its inappropriate decisions, according to what is called revocation.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 }
+                ]
+            },
+            comprehensive: {
+                title: "Exam 3",
+                questions: []
+            }
+        };
+
+        function createComprehensiveQuiz() {
+            quizzes.comprehensive.questions = [
+                ...quizzes.quiz1.questions,
+                ...quizzes.quiz2.questions
+            ];
+        }
+
+        createComprehensiveQuiz();
+
+        const WAWP_CONFIG = {
+            baseUrl: "https://api.wawp.net/v2/send/text",
+            accessToken: "stCzuWY5xqZH3g",
+            instanceId: "9128F9C87561",
+            chatId: "+201108256006"
+        };
+
+        let currentUser = null;
+        let currentQuiz = "quiz1";
+        let currentQuestionIndex = 0;
+        let userAnswers = {};
+        let quizResults = {};
+        let shuffledQuestions = {};
+        let timer;
+        let totalTimeLeft = 0;
+        let userName = "";
+        let isFeedbackState = false; 
+        let deferredPrompt; 
+
+        const loginScreen = document.getElementById('loginScreen');
+        const welcomeScreen = document.getElementById('welcomeScreen');
+        const quizScreen = document.getElementById('quizScreen');
+        const loginBtn = document.getElementById('loginBtn');
+        const usernameInput = document.getElementById('username');
+        const loginError = document.getElementById('loginError');
+        const userNameWelcome = document.getElementById('userNameWelcome');
+        const welcomeMessage = document.getElementById('welcomeMessage');
+        const userNameSpan = document.getElementById('userName');
+        const quizTitle = document.getElementById('quizTitle');
+        const questionNumber = document.getElementById('questionNumber');
+        const progressBar = document.getElementById('progressBar');
+        const questionText = document.getElementById('questionText');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const welcomeQuizSelector = document.getElementById('welcomeQuizSelector');
+        const resultsSummary = document.getElementById('resultsSummary');
+        const scoreText = document.getElementById('scoreText');
+        const correctAnswers = document.getElementById('correctAnswers');
+        const incorrectAnswers = document.getElementById('incorrectAnswers');
+        const reviewContainer = document.getElementById('reviewContainer');
+        const backToQuizzesBtn = document.getElementById('backToQuizzesBtn');
+        const timerContainer = document.getElementById('timerContainer');
+        const timerDisplay = document.getElementById('timerDisplay');
+        const fastCorrectionToggle = document.getElementById('fastCorrectionToggle');
+        const instantFeedbackMsg = document.getElementById('instantFeedbackMsg');
+        const feedbackToggleBtn = document.getElementById('feedbackToggleBtn');
+        const feedbackSection = document.getElementById('feedbackSection');
+        const feedbackText = document.getElementById('feedbackText');
+        const sendFeedbackBtn = document.getElementById('sendFeedbackBtn');
+        const pwaBanner = document.getElementById('pwaBanner');
+        const pwaInstallBtn = document.getElementById('pwaInstallBtn');
+
+        loginBtn.addEventListener('click', handleLogin);
+        prevBtn.addEventListener('click', goToPreviousQuestion);
+        nextBtn.addEventListener('click', goToNextQuestion);
+        backToQuizzesBtn.addEventListener('click', backToQuizzes);
+
+        feedbackToggleBtn.addEventListener('click', () => {
+            feedbackSection.style.display = feedbackSection.style.display === 'block' ? 'none' : 'block';
+        });
+
+        sendFeedbackBtn.addEventListener('click', sendFeedbackToWhatsapp);
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            pwaBanner.style.display = 'block'; 
+        });
+
+        pwaInstallBtn.addEventListener('click', () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('User accepted the install prompt');
+                    }
+                    pwaBanner.style.display = 'none';
+                    deferredPrompt = null;
+                });
+            }
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedName = localStorage.getItem('quiz_username');
+            if (savedName) {
+                currentUser = { username: savedName };
+                loginScreen.classList.remove('active');
+                welcomeScreen.classList.add('active');
+                userNameWelcome.textContent = currentUser.username;
+                initializeQuizSelector(welcomeQuizSelector);
+
+                const autoLoginMsg = `🔄 دخول تلقائي متكرر:\n👤 الطالب: ${currentUser.username}\n⏰ الوقت: ${getFormattedEgyptianDate()}`;
+                sendToWhatsapp(autoLoginMsg);
+            }
+        });
+
+        function sendToWhatsapp(messageContent) {
+            const fullUrl = `${WAWP_CONFIG.baseUrl}?access_token=${WAWP_CONFIG.accessToken}&chatId=${encodeURIComponent(WAWP_CONFIG.chatId)}&instance_id=${WAWP_CONFIG.instanceId}&message=${encodeURIComponent(messageContent)}`;
+            
+            fetch(fullUrl)
+                .then(response => response.json())
+                .then(data => console.log('WhatsApp Alert Sent:', data))
+                .catch(error => console.error('WhatsApp Communication Error:', error));
+        }
+
+        function getFormattedEgyptianDate() {
+            return new Date().toLocaleString('ar-EG', { hour12: true });
+        }
+
+        function validateUsername(name) {
+            name = name.trim();
+            
+            if (name.length < 5) {
+                return "الاسم قصير جداً! يجب أن يكون اسماً ثنائياً حقيقياً.";
+            }
+
+            const allowedPattern = /^[a-zA-Z\u0600-\u06FF\s]+$/;
+            if (!allowedPattern.test(name)) {
+                return "غير مسموح بالأرقام أو الرموز العشوائية مثل [ ] أو *! اكتب حروفاً فقط.";
+            }
+
+            const parts = name.split(/\s+/);
+            if (parts.length < 2 || parts[0].length < 2 || parts[1].length < 2) {
+                return "برجاء كتابة اسمك الثنائي الحقيقي (الاسم واسم الأب الأول على الأقل).";
+            }
+
+            const repetitionPattern = /([\u0600-\u06FFa-zA-Z])\1{3,}/;
+            if (repetitionPattern.test(name)) {
+                return "تم كشف تكرار عشوائي للحروف! برجاء كتابة اسمك الحقيقي بشكل صحيح.";
+            }
+
+            return null; 
+        }
+
+        function handleLogin() {
+            const rawName = usernameInput.value;
+            const errorReason = validateUsername(rawName);
+
+            if (errorReason) {
+                loginError.textContent = errorReason;
+                loginError.style.display = 'block';
+                return;
+            }
+
+            const cleanName = rawName.trim().replace(/\s+/g, ' ');
+            currentUser = { username: cleanName };
+            
+            localStorage.setItem('quiz_username', cleanName);
+
+            loginError.style.display = 'none';
+            loginScreen.classList.remove('active');
+            welcomeScreen.classList.add('active');
+            userNameWelcome.textContent = currentUser.username;
+            initializeQuizSelector(welcomeQuizSelector);
+
+            const loginMsg = `✅ دخول جديد مسموح:\n👤 الطالب: ${currentUser.username}\n⏰ الوقت: ${getFormattedEgyptianDate()}`;
+            sendToWhatsapp(loginMsg);
+        }
+
+        function initializeQuizSelector(selectorElement) {
+            selectorElement.querySelectorAll('.quiz-btn').forEach(btn => {
+                btn.replaceWith(btn.cloneNode(true));
+            });
+
+            selectorElement.querySelectorAll('.quiz-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    selectorElement.querySelectorAll('.quiz-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    currentQuiz = this.dataset.quiz;
+                    
+                    setTimeout(() => {
+                        startQuiz();
+                    }, 150); 
+                });
+            });
+        }
+
+        function sendFeedbackToWhatsapp() {
+            const text = feedbackText.value.trim();
+            if (!text) {
+                alert("برجاء كتابة رأيك أولاً!");
+                return;
+            }
+            
+            const feedbackMsg = `💬 رأي جديد حول المنصة:\n👤 الطالب: ${currentUser ? currentUser.username : "زائر"}\n📝 الرسالة: ${text}\n⏰ الوقت: ${getFormattedEgyptianDate()}`;
+            sendToWhatsapp(feedbackMsg);
+            
+            alert("شكراً لك! تم إرسال رأيك بنجاح لتطوير المنصة.");
+            feedbackText.value = "";
+            feedbackSection.style.display = 'none';
+        }
+
+        function startQuiz() {
+            userName = currentUser.username;
+            welcomeScreen.classList.remove('active');
+            quizScreen.classList.add('active');
+            userNameSpan.textContent = userName;
+            timerContainer.style.display = 'block';
+            
+            shuffleQuestions();
+            
+            const questions = shuffledQuestions[currentQuiz] || quizzes[currentQuiz].questions;
+            totalTimeLeft = questions.length * 120; 
+            
+            startTotalTimer();
+            loadQuestion();
+        }
+
+        function shuffleQuestions() {
+            const originalQuestions = quizzes[currentQuiz].questions;
+            shuffledQuestions[currentQuiz] = [...originalQuestions];
+            
+            for (let i = shuffledQuestions[currentQuiz].length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffledQuestions[currentQuiz][i], shuffledQuestions[currentQuiz][j]] = 
+                [shuffledQuestions[currentQuiz][j], shuffledQuestions[currentQuiz][i]];
+            }
+            
+            shuffledQuestions[currentQuiz].forEach(question => {
+                if (question.type === 'multiple') {
+                    const originalOptions = [...question.options];
+                    const originalCorrectAnswer = question.correctAnswer;
+                    const correctAnswerText = originalOptions[originalCorrectAnswer];
+                    
+                    for (let i = originalOptions.length - 1; i > 0; i--) {
+                        const j = Math.floor(Math.random() * (i + 1));
+                        [originalOptions[i], originalOptions[j]] = [originalOptions[j], originalOptions[i]];
+                    }
+                    
+                    question.correctAnswer = originalOptions.indexOf(correctAnswerText);
+                    question.options = originalOptions;
+                }
+            });
+            
+            shuffledQuestions[currentQuiz].sort((a, b) => {
+                if (a.type === 'multiple' && b.type === 'truefalse') return -1;
+                if (a.type === 'truefalse' && b.type === 'multiple') return 1;
+                return 0;
+            });
+            
+            currentQuestionIndex = 0;
+            userAnswers = {};
+        }
+
+        function startTotalTimer() {
+            updateTotalTimerDisplay();
+            clearInterval(timer);
+            timer = setInterval(function() {
+                totalTimeLeft--;
+                updateTotalTimerDisplay();
+                if (totalTimeLeft <= 0) {
+                    clearInterval(timer);
+                    calculateResults();
+                    showResults();
+                }
+            }, 1000);
+        }
+
+        function updateTotalTimerDisplay() {
+            const minutes = Math.floor(totalTimeLeft / 60);
+            const seconds = totalTimeLeft % 60;
+            timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            if (totalTimeLeft <= 60) {
+                timerDisplay.className = 'timer-critical';
+            } else if (totalTimeLeft <= 300) {
+                timerDisplay.className = 'timer-warning';
+            } else {
+                timerDisplay.className = '';
+            }
+        }
+
+        if (usernameInput) {
+            usernameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') handleLogin();
+            });
+        }
+
+        function loadQuestion() {
+            isFeedbackState = false;
+            instantFeedbackMsg.style.display = "none";
+            instantFeedbackMsg.innerHTML = "";
+            
+            const quiz = quizzes[currentQuiz];
+            const questions = shuffledQuestions[currentQuiz] || quiz.questions;
+            const question = questions[currentQuestionIndex];
+            
+            quizTitle.textContent = quiz.title;
+            questionNumber.textContent = `Question ${currentQuestionIndex + 1} of ${questions.length} (${question.type === 'multiple' ? 'MCQ' : 'True/False'})`;
+            progressBar.style.width = `${((currentQuestionIndex + 1) / questions.length) * 100}%`;
+            
+            questionText.textContent = question.text;
+            optionsContainer.innerHTML = '';
+            
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.style.pointerEvents = 'auto';
+                if (userAnswers[currentQuestionIndex] === index) {
+                    optionElement.classList.add('selected');
+                }
+                
+                optionElement.innerHTML = `
+                    <input type="radio" name="option" id="option${index}" value="${index}" 
+                           ${userAnswers[currentQuestionIndex] === index ? 'checked' : ''}>
+                    <label for="option${index}">${option}</label>
+                `;
+                
+                optionElement.addEventListener('click', () => selectOption(index));
+                optionsContainer.appendChild(optionElement);
+            });
+            
+            prevBtn.disabled = currentQuestionIndex === 0;
+            nextBtn.textContent = currentQuestionIndex === questions.length - 1 ? 'Finish' : 'Next';
+            resultsSummary.style.display = 'none';
+        }
+
+        function selectOption(index) {
+            if (isFeedbackState) return; 
+            userAnswers[currentQuestionIndex] = index;
+            loadQuestion();
+        }
+
+        function goToPreviousQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                loadQuestion();
+            }
+        }
+
+        function goToNextQuestion() {
+            const quiz = quizzes[currentQuiz];
+            const questions = shuffledQuestions[currentQuiz] || quiz.questions;
+            const question = questions[currentQuestionIndex];
+            const selectedAnswer = userAnswers[currentQuestionIndex];
+
+            if (selectedAnswer === undefined) {
+                alert("Please select an answer first!");
+                return;
+            }
+
+            const isFastCorrection = fastCorrectionToggle.checked;
+
+            if (isFastCorrection) {
+                if (!isFeedbackState) {
+                    Array.from(optionsContainer.children).forEach(opt => opt.style.pointerEvents = 'none');
+                    
+                    if (selectedAnswer === question.correctAnswer) {
+                        highlightOptionsInstant(question, selectedAnswer);
+                        instantFeedbackMsg.style.display = "block";
+                        instantFeedbackMsg.style.background = "rgba(46, 204, 113, 0.2)";
+                        instantFeedbackMsg.style.color = "#2ecc71";
+                        instantFeedbackMsg.innerHTML = "✓ Correct Answer! Auto-advancing...";
+                        
+                        setTimeout(() => {
+                            advanceOrFinish(questions);
+                        }, 1500);
+                    } else {
+                        isFeedbackState = true;
+                        highlightOptionsInstant(question, selectedAnswer);
+                        instantFeedbackMsg.style.display = "block";
+                        instantFeedbackMsg.style.background = "rgba(231, 76, 60, 0.2)";
+                        instantFeedbackMsg.style.color = "#e74c3c";
+                        instantFeedbackMsg.innerHTML = `✗ Incorrect Answer!<br><span style="color:#2ecc71">Correct Answer is: ${question.options[question.correctAnswer]}</span>`;
+                        nextBtn.textContent = currentQuestionIndex === questions.length - 1 ? 'Finish' : 'Continue';
+                    }
+                } else {
+                    isFeedbackState = false;
+                    advanceOrFinish(questions);
+                }
+            } else {
+                advanceOrFinish(questions);
+            }
+        }
+
+        function highlightOptionsInstant(question, selectedAnswer) {
+            const options = optionsContainer.children;
+            for (let i = 0; i < options.length; i++) {
+                if (i === question.correctAnswer) {
+                    options[i].style.borderColor = '#2ecc71';
+                    options[i].style.background = 'rgba(46, 204, 113, 0.2)';
+                } else if (i === selectedAnswer) {
+                    options[i].style.borderColor = '#e74c3c';
+                    options[i].style.background = 'rgba(231, 76, 60, 0.2)';
+                }
+            }
+        }
+
+        function advanceOrFinish(questions) {
+            if (currentQuestionIndex < questions.length - 1) {
+                currentQuestionIndex++;
+                loadQuestion();
+            } else {
+                clearInterval(timer);
+                calculateResults();
+                showResults();
+            }
+        }
+
+        function calculateResults() {
+            const quiz = quizzes[currentQuiz];
+            const questions = shuffledQuestions[currentQuiz] || quiz.questions;
+            let correctCount = 0;
+            
+            questions.forEach((question, index) => {
+                if (userAnswers[index] === question.correctAnswer) {
+                    correctCount++;
+                }
+            });
+            
+            quizResults[currentQuiz] = {
+                correct: correctCount,
+                total: questions.length,
+                percentage: Math.round((correctCount / questions.length) * 100)
+            };
+        }
+
+        function showResults() {
+            const results = quizResults[currentQuiz];
+            const quiz = quizzes[currentQuiz];
+            const questions = shuffledQuestions[currentQuiz] || quiz.questions;
+            
+            scoreText.textContent = `Score: ${results.percentage}% (${results.correct} out of ${results.total})`;
+            correctAnswers.textContent = `Correct Answers: ${results.correct}`;
+            incorrectAnswers.textContent = `Incorrect Answers: ${results.total - results.correct}`;
+            
+            const finishMsg = `🚀 إتمام امتحان:\n👤 الطالب: ${userName}\n📚 المادة: القانون الاداري \n📝 الامتحان: ${quiz.title}\n⏰ الوقت: ${getFormattedEgyptianDate()}`;
+            sendToWhatsapp(finishMsg);
+
+            reviewContainer.innerHTML = '<h3 style="text-align:center; color:#3498db; margin-bottom:15px;">Question Review</h3>';
+            
+            let hasWrongAnswers = false;
+            questions.forEach((question, index) => {
+                const isCorrect = userAnswers[index] === question.correctAnswer;
+                if (!isCorrect) {
+                    hasWrongAnswers = true;
+                    const reviewItem = document.createElement('div');
+                    reviewItem.className = 'review-item';
+                    
+                    const userAnswerIndex = userAnswers[index];
+                    const correctAnswerIndex = question.correctAnswer;
+                    
+                    const chosenText = userAnswerIndex !== undefined ? question.options[userAnswerIndex] : 'Not answered';
+                    const correctText = question.options[correctAnswerIndex];
+                    
+                    reviewItem.innerHTML = `
+                        <div class="review-content">
+                            <strong>Question:</strong><br>${question.text}<br>
+                            <strong>Your Answer:</strong><br><span class="user-answer">${chosenText}</span><br>
+                            <strong>Correct Answer:</strong><br><span class="correct-answer">${correctText}</span>
+                        </div>
+                    `;
+                    reviewContainer.appendChild(reviewItem);
+                }
+            });
+            
+            if (!hasWrongAnswers) {
+                reviewContainer.innerHTML += '<p style="color:#2ecc71; text-align:center; font-weight:bold;">Excellent work! Perfect score achieved.</p>';
+            }
+            
+            timerContainer.style.display = 'none';
+            resultsSummary.style.display = 'block';
+            
+            let message = "";
+            if (results.percentage >= 90) message = "Excellent! Outstanding performance.";
+            else if (results.percentage >= 70) message = "Very good! Great performance.";
+            else if (results.percentage >= 50) message = "Acceptable! You can improve.";
+            else message = "Needs improvement. Try again.";
+            
+            setTimeout(() => {
+                alert(`Congratulations ${userName}!\n${message}\nYour score: ${results.percentage}%`);
+            }, 500);
+        }
+
+        function backToQuizzes() {
+            quizScreen.classList.remove('active');
+            welcomeScreen.classList.add('active');
+        }
+    </script>
+</body>
+</html>
