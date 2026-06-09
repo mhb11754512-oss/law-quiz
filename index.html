@@ -268,16 +268,12 @@
             padding: 20px;
             border-radius: 10px;
             border-left: 4px solid #3498db;
-            direction: ltr !important;
-            text-align: left !important;
         }
 
         .options-container {
             display: flex;
             flex-direction: column;
             gap: 12px;
-            direction: ltr !important;
-            text-align: left !important;
         }
 
         .option {
@@ -311,7 +307,7 @@
         .option label {
             cursor: pointer;
             width: 100%;
-            text-align: left;
+            text-align: inherit;
             display: inline-block;
         }
 
@@ -491,8 +487,6 @@
 
         .review-container {
             margin-top: 20px;
-            text-align: left;
-            direction: ltr !important;
         }
 
         .review-item {
@@ -507,7 +501,7 @@
             font-size: 16px;
             line-height: 1.8;
             color: #FFFFFF;
-            text-align: left;
+            text-align: inherit;
         }
 
         .correct-answer {
@@ -709,6 +703,7 @@
                 <div class="subject-selector">
                     <div class="subject-btn" data-subject="admin_law">⚖️ Administrative Law (القانون الإداري)</div>
                     <div class="subject-btn" data-subject="evidence_law">📜 Law of Evidence (قانون الإثبات)</div>
+                    <div class="subject-btn" data-subject="obligations_law">🤝 Law of Obligations (أحكام الالتزام)</div>
                 </div>
             </div>
 
@@ -960,7 +955,7 @@
                             { text: "Which of the following is not considered valid evidence?", type: "multiple", options: ["Documents shared between business partners.", "Evidence created by one party themselves.", "Commercial books used by merchants.", "All of the above."], correctAnswer: 1 },
                             { text: "An official document must be issued by:", type: "multiple", options: ["Any citizen.", "One of the parties.", "Government institution.", "A public employee within his authority."], correctAnswer: 3 },
                             { text: "What happens if an official document lacks one of the official terms?", type: "multiple", options: ["It becomes invalid.", "It is still considered official.", "It is no longer valid as evidence.", "It becomes a customary document."], correctAnswer: 3 },
-                            { text: "What condition must an official copy meet to be valid evidence?", type: "multiple", options: ["To be a written or photographic copy.", "To be conforming to the original.", "To be undisputed.", "All of the above."], correctAnswer: 3 },
+                            { text: "What condition must an official copy meet to be valid evidence?", type: "multiple", options: ["To be a written or photographic copy.", "To be conforming to the original.", "To be undisputed.", "All of the above."], correctAnswer: 1 },
                             { text: "The party that brings the case always bears the burden of evidence throughout the trial.", type: "truefalse", options: ["True", "False"], correctAnswer: 1 },
                             { text: "The principle of confrontation with evidence means that evidence must not be shared with the other party.", type: "truefalse", options: ["True", "False"], correctAnswer: 1 },
                             { text: "Evidence that is created by one party themselves and used against the other party holds no legal value.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
@@ -988,6 +983,204 @@
                         questions: []
                     }
                 }
+            },
+            obligations_law: {
+                title: "Law of Obligations",
+                essayUrl: "#",
+                bankUrl: "#",
+                quizzes: {
+                    quiz1: {
+                        title: "Exam 1 ",
+                        questions: [
+                            { text: "الأصل العام في الالتزام أن يكون:", type: "multiple", options: ["موصوفا دائما", "بسيطا غير موصوف", "باطلا", "متعدد الأطراف دائما"], correctAnswer: 1 },
+                            { text: "الشرط في الالتزام هو:", type: "multiple", options: ["أمر حاضر محقق الوقوع", "حدث مستقبلي غير محقق الوقوع", "ميعاد ماض", "وفاء فوري بالدين"], correctAnswer: 1 },
+                            { text: "الشرط الواقف هو الشرط الذي يترتب على تحققه:", type: "multiple", options: ["زوال الالتزام", "وجود الالتزام ونشأته", "انقضاء الأجل", "بطلان العقد دائما"], correctAnswer: 1 },
+                            { text: "الشرط الفاسخ هو الشرط الذي يترتب على تحققه:", type: "multiple", options: ["زوال الالتزام أو انقضاؤه", "إنشاء الالتزام فقط", "تحديد الدائن", "تحويل الالتزام إلى طبيعي"], correctAnswer: 0 },
+                            { text: "من خصائص الشرط الصحيح أن يكون:", type: "multiple", options: ["أمرا مستقبليا", "أمرا ماضيا فقط", "مستحيلا استحالة مطلقة", "مخالفا للنظام العام"], correctAnswer: 0 },
+                            { text: "إذا كان الحدث محقق الوقوع، فإنه يعد غالبا:", type: "multiple", options: ["شرطا", "أجلا", "بطلانا", "تضامنا"], correctAnswer: 1 },
+                            { text: "الموت من حيث الأصل يعد:", type: "multiple", options: ["شرطا غير محقق الوقوع", "أجلا لأنه محقق الوقوع ولو جهل تاريخه", "استحالة مطلقة", "التزاما تخييريا"], correctAnswer: 1 },
+                            { text: "تعليق الالتزام على شرط مستحيل استحالة مطلقة يجعل الشرط:", type: "multiple", options: ["صحيحا دائما", "لغوا لا أثر له", "أجلا واقفا", "تضامنا إيجابيا"], correctAnswer: 1 },
+                            { text: "إذا علق الشرط الواقف على محض إرادة المدين وحده، فإن:", type: "multiple", options: ["الشرط والالتزام يصحان دائما", "الشرط والالتزام يبطلان", "الدائن يلتزم وحده", "الأجل يسقط فقط"], correctAnswer: 1 },
+                            { text: "قبل تحقق الشرط الواقف يكون حق الدائن:", type: "multiple", options: ["حقا كاملا حال الأداء", "حقا محتمل الوجود لا يجوز التنفيذ الجبري به", "منعدما بلا أي حماية", "واجب الأداء فورا"], correctAnswer: 1 },
+                            { text: "بعد تحقق الشرط الواقف يصبح حق الدائن:", type: "multiple", options: ["مؤكدا وقابلا للاستيفاء", "باطلا", "مجرد أمل", "غير مشروع"], correctAnswer: 0 },
+                            { text: "الأجل هو:", type: "multiple", options: ["أمر مستقبلي غير محقق الوقوع", "أمد مستقبلي لأمر محقق الوقوع", "عيب في الرضا", "تعدد في الدائنين"], correctAnswer: 1 },
+                            { text: "الأجل الواقف يترتب عليه:", type: "multiple", options: ["إضافة تنفيذ الالتزام إلى وقت حلوله", "إعدام الالتزام منذ البداية", "بطلان الدين", "تحويل الدائن إلى مدين"], correctAnswer: 0 },
+                            { text: "الأجل الفاسخ يترتب على حلوله:", type: "multiple", options: ["بقاء الالتزام إلى الأبد", "زوال الالتزام للمستقبل دون أثر رجعي", "نشأة الالتزام لأول مرة", "تعدد المحل"], correctAnswer: 1 },
+                            { text: "الالتزام التخييري هو الالتزام الذي يكون محله:", type: "multiple", options: ["شيئا واحدا فقط بلا بديل", "أشياء متعددة وتبرأ ذمة المدين بأداء واحد منها", "دائنين متعددين فقط", "دينا طبيعيا"], correctAnswer: 1 },
+                            { text: "الأصل في الالتزام التخييري أن الخيار يكون:", type: "multiple", options: ["للمدين", "للدائن دائما", "للقاضي دائما", "للغير فقط"], correctAnswer: 0 },
+                            { text: "الالتزام البدلي يكون محله الأصلي:", type: "multiple", options: ["عدة أشياء متساوية", "شيئا واحدا أصليا مع جواز الوفاء ببديل", "الدائن فقط", "التضامن فقط"], correctAnswer: 1 },
+                            { text: "إذا استحال تنفيذ المحل الأصلي في الالتزام البدلي لسبب أجنبي، فإن:", type: "multiple", options: ["المدين يلتزم حتما بالبديل", "ذمة المدين تبرأ ولو كان البديل ممكنا", "يتحول الالتزام إلى تضامني", "يبطل العقد دائما بأثر رجعي"], correctAnswer: 1 },
+                            { text: "التضامن بين المدينين يفيد الدائن لأنه:", type: "multiple", options: ["يمنعه من مطالبة أي مدين", "يمكنه من مطالبة أي مدين بكل الدين", "يجعل الدين منعدما", "يسقط الأجل دائما"], correctAnswer: 1 },
+                            { text: "التضامن في الالتزام:", type: "multiple", options: ["يفترض دائما", "لا يفترض ويحتاج إلى اتفاق أو نص قانوني", "يوجد في كل دين", "لا يكون إلا بين الدائنين"], correctAnswer: 1 },
+                            // T/F 1-20
+                            { text: "الأصل أن الالتزام ينشأ بسيطا غير موصوف بوصف يعدل آثاره.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                            { text: "الشرط يجب أن يكون حدثا مستقبليا غير محقق الوقوع.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                            { text: "الشرط الواقف يؤدي إلى زوال الالتزام بمجرد تحققه.", type: "truefalse", options: ["True", "False"], correctAnswer: 1 },
+                            { text: "الشرط الفاسخ يجعل الالتزام موجودا لكنه مهدد بالزوال عند تحقق الشرط.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                            { text: "إذا كان الحدث قد وقع في الماضي فإنه يصلح دائما أن يكون شرطا.", type: "truefalse", options: ["True", "False"], correctAnswer: 1 },
+                            { text: "الحدث محقق الوقوع يعد أجلا لا شرطا.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                            { text: "الاستحالة النسبية تمنع دائما قيام الالتزام.", type: "truefalse", options: ["True", "False"], correctAnswer: 1 },
+                            { text: "الشرط المخالف للنظام العام أو الآداب يكون باطلا.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                            { text: "لتحقق الشرط كقاعدة عامة أثر رجعي يرتد إلى وقت العقد.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                            { text: "قبل تحقق الشرط الواقف يجوز للدائن اتخاذ إجراءات التنفيذ الجبري.", type: "truefalse", options: ["True", "False"], correctAnswer: 1 },
+                            { text: "الأجل لا يؤثر في وجود الالتزام الواقف، وإنما يؤخر تنفيذه إلى وقت حلوله.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                            { text: "الأجل الفاسخ يزيل الالتزام بأثر رجعي دائما.", type: "truefalse", options: ["True", "False"], correctAnswer: 1 },
+                            { text: "الأجل قد يكون اتفاقيا أو قانونيا أو قضائيا.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                            { text: "نظرة الميسرة التي يمنحها القاضي تعد من صور الأجل القضائي.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                            { text: "الالتزام التخييري يرد على أشياء متعددة وتبرأ ذمة المدين بأداء أحدها.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                            { text: "في الالتزام البدلي يكون للدائن دائما مطالبة المدين بالبديل دون المحل الأصلي.", type: "truefalse", options: ["True", "False"], correctAnswer: 1 },
+                            { text: "طبيعة الالتزام البدلي تتحدد بالمحل الأصلي لا بالمحل البديل.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                            { text: "الأصل عند تعدد المدينين أو الدائنين أن الالتزام يقبل الانقسام ما لم يوجد اتفاق أو نص أو طبيعة تمنع ذلك.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                            { text: "في التضامن الإيجابي يجوز لأي دائن متضامن مطالبة المدين بكل الدين.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                            { text: "التضامن السلبي لا يفيد الدائن ولا يضيف له أي ضمانة.", type: "truefalse", options: ["True", "False"], correctAnswer: 1 },
+                        ]
+                    },
+                    quiz2: {
+                        title: "Exam 2 (20 MCQ + 20 T/F)",
+                        questions: [
+                            // MCQ 21-40
+                            { text: "معنى انتقال الالتزام هو:", type: "multiple", options: ["تغيير محل الالتزام فقط", "حلول شخص جديد محل الدائن أو المدين في ذات الحق أو الالتزام", "انقضاء الالتزام نهائيا", "بطلان الالتزام"], correctAnswer: 1 },
+                            { text: "ينتقل الحق بين الأحياء غالبا عن طريق:", type: "multiple", options: ["حوالة الحق", "الوفاة فقط", "التقادم فقط", "الدفاع الشرعي"], correctAnswer: 0 },
+                            { text: "حوالة الحق هي عقد ينقل به:", type: "multiple", options: ["المدين دينه إلى مدين جديد", "الدائن حقه إلى دائن جديد", "القاضي الحكم إلى محكمة أخرى", "الوارث نصيبه إلى التركة"], correctAnswer: 1 },
+                            { text: "يطلق على الدائن القديم في حوالة الحق اسم:", type: "multiple", options: ["المحال عليه", "المحال إليه", "المحيل", "الكفيل"], correctAnswer: 2 },
+                            { text: "يطلق على الدائن الجديد في حوالة الحق اسم:", type: "multiple", options: ["المحال إليه", "المحال عليه", "المدين الأصلي", "الضامن"], correctAnswer: 0 },
+                            { text: "يطلق على المدين في حوالة الحق اسم:", type: "multiple", options: ["المحيل", "المحال عليه", "المحال إليه", "الدائن الجديد"], correctAnswer: 1 },
+                            { text: "تنعقد حوالة الحق في الأصل بمجرد التراضي بين:", type: "multiple", options: ["المحيل والمحال إليه", "القاضي والكاتب", "المدين والكفيل فقط", "الورثة جميعا"], correctAnswer: 0 },
+                            { text: "رضاء المدين في حوالة الحق بالنسبة لانعقادها:", type: "multiple", options: ["شرط أساسي دائما", "ليس لازما لانعقاد الحوالة", "يجعل الحوالة باطلة", "لا يكون إلا أمام المحكمة"], correctAnswer: 1 },
+                            { text: "إذا كانت حوالة الحق بقصد التبرع، فإنها تحتاج إلى:", type: "multiple", options: ["شكل رسمي", "إعلان صحفي", "حكم جنائي", "رهن عقاري"], correctAnswer: 0 },
+                            { text: "من الحقوق التي لا تجوز حوالتها غالبا:", type: "multiple", options: ["الحقوق غير القابلة للحجز مثل دين النفقة", "كل الحقوق المالية بلا استثناء", "دين البيع دائما", "حق المؤجر في الأجرة دائما"], correctAnswer: 0 },
+                            { text: "لا تنفذ حوالة الحق في مواجهة المدين إلا إذا:", type: "multiple", options: ["مات المحيل", "أعلن بها رسميا أو قبلها", "أفلس المحال إليه", "انتهى العقد الأصلي"], correctAnswer: 1 },
+                            { text: "عند حوالة الحق ينتقل إلى المحال إليه الحق:", type: "multiple", options: ["بذاته ومقداره وتوابعه ودفوعه", "دون أي تأمينات", "باسم جديد فقط", "بعد انقضاء الدين"], correctAnswer: 0 },
+                            { text: "في الحوالة بعوض، يضمن المحيل في الأصل:", type: "multiple", options: ["وجود الحق وقت الحوالة", "يسار المدين دائما", "أرباح المحال إليه", "عدم رفع أي دعوى"], correctAnswer: 0 },
+                            { text: "الأصل أن المحيل لا يضمن يسار المدين المحال عليه إلا إذا:", type: "multiple", options: ["اتفق على ذلك", "رفض المدين الحوالة", "كان الحق غير موجود", "كان الدين منقضيا"], correctAnswer: 0 },
+                            { text: "حوالة الدين هي عقد ينقل:", type: "multiple", options: ["حق الدائن إلى دائن جديد", "الدين من ذمة المدين إلى مدين جديد", "ملكية العقار فقط", "اسم الدائن فقط"], correctAnswer: 1 },
+                            { text: "الغالب في حوالة الدين أنها تتم باتفاق بين:", type: "multiple", options: ["الدائن والوارث", "المدين الأصلي والمدين الجديد", "القاضي والمحامي", "الدائن والمدين القديم فقط"], correctAnswer: 1 },
+                            { text: "لا تنفذ حوالة الدين في حق الدائن إلا إذا:", type: "multiple", options: ["أقرها", "سكت يوما واحدا فقط", "رفضها صراحة", "توفي المدين الجديد"], correctAnswer: 0 },
+                            { text: "إذا أعلم الدائن بحوالة الدين وحدد له أجل معقول ثم سكت، فإن سكوته يعد:", type: "multiple", options: ["قبولا دائما", "رفضا للحوالة", "إبراء للمدين", "تنازلا عن الدين"], correctAnswer: 1 },
+                            { text: "بعد نفاذ حوالة الدين في حق الدائن، فإن ذمة المدين الأصلي:", type: "multiple", options: ["تبقى مشغولة دائما", "تبرأ من الدين", "تتضاعف بالديون", "تنتقل إلى الورثة فورا"], correctAnswer: 1 },
+                            { text: "الكفالة لا تنتقل مع الدين إلى المدين الجديد إلا إذا:", type: "multiple", options: ["رضي الكفيل ببقائها", "رفض الدائن الحوالة", "كانت الحوالة باطلة", "كان الدين قد انقضى"], correctAnswer: 0 },
+                            // T/F 21-40
+                            { text: "انتقال الالتزام لا يغير ذات الحق أو الالتزام، وإنما يغير أحد أطرافه فقط.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                            { text: "ينتقل الالتزام بسبب الوفاة أو بسبب الحوالة بين الأحياء.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                            { text: "حوالة الحق تنقل الدين من مدين قديم إلى مدين جديد.", type: "truefalse", options: ["True", "False"], correctAnswer: 1 },
+                            { text: "حوالة الحق عقد يتم بين المحيل والمحال إليه.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                            { text: "يشترط رضاء المدين لانعقاد حوالة الحق بين طرفيها.", type: "truefalse", options: ["True", "False"], correctAnswer: 1 },
+                            { text: "تصح حوالة الحقوق الشخصية بوجه عام ما لم يمنع القانون أو الاتفاق أو طبيعة الحق ذلك.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                            { text: "دين النفقة يجوز حوالته دائما لأنه من الحقوق القابلة للحجز.", type: "truefalse", options: ["True", "False"], correctAnswer: 1 },
+                            { text: "تنفذ حوالة الحق في مواجهة المدين بإعلانه بها إعلانا رسميا أو بقبوله لها.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                            { text: "قبول المدين لحوالة الحق قبل انعقادها يكفي دائما لنفاذها في حقه.", type: "truefalse", options: ["True", "False"], correctAnswer: 1 },
+                            { text: "يجوز أن يكون قبول المدين لحوالة الحق صريحا أو ضمنيا.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                            { text: "ينتقل الحق المحال إلى المحال إليه بذات مقداره وأوصافه وتوابعه وتأميناته.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                            { text: "يجوز للمدين المحال عليه أن يتمسك قبل المحال إليه بالدفوع المتعلقة بالحق المحال.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                            { text: "إذا كانت حوالة الحق بغير عوض، يضمن المحيل وجود الحق دائما.", type: "truefalse", options: ["True", "False"], correctAnswer: 1 },
+                            { text: "المحيل يضمن أفعاله الشخصية التي تمس وجود الحق ولو كانت الحوالة بغير عوض.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                            { text: "القانون المدني المصري الحديث يجيز حوالة الدين.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                            { text: "قد تتم حوالة الدين باتفاق مباشر بين الدائن والمدين الجديد.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                            { text: "إذا لم يكن الدائن طرفا في حوالة الدين، فلا تنفذ في حقه إلا بإقراره لها.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                            { text: "للدائن حرية قبول حوالة الدين أو رفضها.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                            { text: "عند نفاذ حوالة الدين تنتقل الكفالة تلقائيا إلى المدين الجديد دون حاجة إلى رضاء الكفيل.", type: "truefalse", options: ["True", "False"], correctAnswer: 1 },
+                            { text: "للمدين الجديد أن يتمسك بالدفوع المتعلقة بالدين وبالدفوع المستمدة من عقد الحوالة.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 }
+                        ]
+                    },
+                    quiz3: {
+                        title: "Exam 3 (20 MCQ + 20 T/F)",
+                        questions: [
+                            // MCQ 41-60
+                            { text: "الضمان العام للدائنين يرد في الأصل على:", type: "multiple", options: ["مال معين بالذات من أموال المدين", "جميع أموال المدين", "شخص المدين فقط", "أموال الدائنين الآخرين"], correctAnswer: 1 },
+                            { text: "حق الدائن العادي في ذمة مدينه يتعلق بـ:", type: "multiple", options: ["جميع عناصر الذمة المالية للمدين دون تخصيص مال معين", "عقار محدد فقط", "منقول معين فقط", "حق عيني أصلي"], correctAnswer: 0 },
+                            { text: "من أسباب عدم كفاية الضمان العام لتأمين حق الدائن:", type: "multiple", options: ["أنه لا يرد إلا على مال واحد فقط", "احتمال خلو ذمة المدين من الأموال", "أنه يمنع المدين من كل تصرف", "أنه يمنح كل دائن أولوية مطلقة"], correctAnswer: 1 },
+                            { text: "إذا لم تكف أموال المدين للوفاء بحقوق الدائنين العاديين فإنهم يقتسمونها:", type: "multiple", options: ["بالتساوي دائما", "قسمة غرماء بحسب نسبة دين كل منهم", "حسب أسبقية السن", "حسب رغبة المدين"], correctAnswer: 1 },
+                            { text: "التأمين الشخصي يقوم على:", type: "multiple", options: ["تخصيص مال معين فقط", "إضافة ذمة شخص آخر إلى جانب ذمة المدين", "إلغاء الضمان العام", "منع الدائن من الرجوع على المدين"], correctAnswer: 1 },
+                            { text: "الصورة المثلى للتأمينات الشخصية هي:", type: "multiple", options: ["الكفالة", "الرهن التأميني", "حق الامتياز", "الرهن الحيازي"], correctAnswer: 0 },
+                            { text: "التأمين العيني يتمثل في:", type: "multiple", options: ["تعدد المدينين فقط", "تخصيص مال معين لضمان حق الدائن", "منع كل الدائنين من التنفيذ", "إسقاط الدين"], correctAnswer: 1 },
+                            { text: "من أمثلة التأمينات العينية:", type: "multiple", options: ["الكفالة", "التضامن بين المدينين", "الرهن التأميني", "الإنابة الناقصة"], correctAnswer: 2 },
+                            { text: "الغرض العام من وسائل المحافظة على الضمان العام هو:", type: "multiple", options: ["حماية أموال المدين من كل دائن", "حماية الدائن من تصرفات المدين الضارة بضمانه العام", "إنهاء الالتزام فورا", "تحويل الحق الشخصي إلى حق سياسي"], correctAnswer: 1 },
+                            { text: "الدعوى غير المباشرة ترخص للدائن أن يستعمل:", type: "multiple", options: ["حقه الشخصي ضد نفسه", "حقوق مدينه باسم هذا المدين", "حق غيره باسمه الشخصي", "حقا غير قابل للحجز"], correctAnswer: 1 },
+                            { text: "من شروط حق الدائن في الدعوى غير المباشرة أن يكون حقه:", type: "multiple", options: ["موجودا وغير متنازع فيه", "مستحيل الوجود", "معدوما", "معلقا على شرط واقف لم يتحقق"], correctAnswer: 0 },
+                            { text: "في الدعوى غير المباشرة لا يشترط في حق الدائن أن يكون:", type: "multiple", options: ["موجودا", "غير متنازع فيه", "مستحق الأداء دائما", "ثابتا في مواجهة المدين"], correctAnswer: 2 },
+                            { text: "إذا كان حق الدائن معلقا على شرط واقف لم يتحقق، فإنه:", type: "multiple", options: ["يستعمل الدعوى غير المباشرة فورا", "لا يستعمل الدعوى غير المباشرة قبل تحقق الشرط", "يصبح دائنا ممتازا", "ينفرد بالضمان العام"], correctAnswer: 1 },
+                            { text: "من الشروط المتصلة بالمدين في الدعوى غير المباشرة:", type: "multiple", options: ["أن يكون قد استعمل حقوقه كاملة", "أن يتقاعس عن استعمال حقوقه وأن يؤدي ذلك إلى إعساره", "أن يكون موسرا دائما", "أن يتنازل الدائن عن حقه"], correctAnswer: 1 },
+                            { text: "يخرج من نطاق الدعوى غير المباشرة:", type: "multiple", options: ["الحقوق المالية القابلة للحجز", "الحقوق المتصلة بشخص المدين", "حقوق المدين في الثمن", "حق المدين في قيد الرهن"], correctAnswer: 1 },
+                            { text: "من الشروط الإجرائية للدعوى غير المباشرة:", type: "multiple", options: ["رفعها باسم الدائن الشخصي فقط", "إدخال المدين خصما في الدعوى", "عدم ذكر المدين مطلقا", "رفعها دون أي خصومة"], correctAnswer: 1 },
+                            { text: "أثر الدعوى غير المباشرة أن الحق الذي يحافظ عليه الدائن:", type: "multiple", options: ["يدخل في ذمة الدائن وحده", "يدخل في ذمة المدين ويستفيد منه الدائنون جميعا", "ينقضي فورا", "ينتقل إلى القاضي"], correctAnswer: 1 },
+                            { text: "الدعوى المباشرة تتميز بأن الدائن يرفعها:", type: "multiple", options: ["باسم مدينه ولحساب جميع الدائنين", "باسمه الشخصي ولحسابه الشخصي", "دون حق حال الأداء مطلقا", "نيابة عن غيره فقط"], correctAnswer: 1 },
+                            { text: "الدعوى البوليصية أو دعوى عدم نفاذ التصرف تهدف إلى:", type: "multiple", options: ["إبطال كل تصرف للمدين", "عدم الاحتجاج على الدائن بتصرف ضار صادر من المدين", "إثبات النسب", "تحديد موطن المدين"], correctAnswer: 1 },
+                            { text: "من شروط الدائن في الدعوى البوليصية أن يكون حقه:", type: "multiple", options: ["مستحق الأداء", "مستقبليا محتملا فقط", "منعدما", "لاحقا دائما للتصرف المطعون فيه"], correctAnswer: 0 },
+                            // T/F 41-60
+                            { text: "حق الدائن العادي لا يتعلق بمال معين بالذات من أموال المدين.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                            { text: "أموال المدين جميعها تعد ضمانا عاما للوفاء بديونه.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                            { text: "الضمان العام يكفي دائما لتأمين حق الدائن كاملا دون أي مخاطر.", type: "truefalse", options: ["True", "False"], correctAnswer: 1 },
+                            { text: "من عيوب الضمان العام أنه لا يمنع المدين من التصرف في أمواله بما قد يضعف الضمان.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                            { text: "الدائنون العاديون متساوون في المرتبة عند الرجوع على الضمان العام.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                            { text: "التأمين الشخصي يقوم على تخصيص مال معين بالذات فقط.", type: "truefalse", options: ["True", "False"], correctAnswer: 1 },
+                            { text: "الكفالة تعد من صور التأمينات الشخصية.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                            { text: "الرهن التأميني والرهن الحيازي من التأمينات العينية.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                            { text: "وسائل المحافظة على الضمان العام تشمل الدعوى غير المباشرة والبوليصية ودعوى الصورية.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                            { text: "الدعوى غير المباشرة تعالج غالبا تقاعس المدين عن استعمال حقوقه.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                            { text: "يرفع الدائن الدعوى غير المباشرة باسمه الشخصي لا باسم مدينه.", type: "truefalse", options: ["True", "False"], correctAnswer: 1 },
+                            { text: "لا يشترط في الدعوى غير المباشرة أن يكون حق الدائن مستحق الأداء.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                            { text: "يجوز لصاحب الحق المعلق على شرط واقف لم يتحقق أن يستعمل الدعوى غير المباشرة فورا.", type: "truefalse", options: ["True", "False"], correctAnswer: 1 },
+                            { text: "لا يلزم إعذار المدين قبل استعمال الدائن حقوقه في الدعوى غير المباشرة.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                            { text: "يجب إدخال المدين خصما في الدعوى غير المباشرة وإلا كانت غير مقبولة.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                            { text: "الحقوق المتصلة بشخص المدين يجوز للدائن استعمالها دائما نيابة عنه.", type: "truefalse", options: ["True", "False"], correctAnswer: 1 },
+                            { text: "الحقوق غير القابلة للحجز تخرج من نطاق الدعوى غير المباشرة.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                            { text: "الدعوى غير المباشرة تمنح الدائن رافعها أفضلية خاصة على باقي الدائنين.", type: "truefalse", options: ["True", "False"], correctAnswer: 1 },
+                            { text: "الدعوى المباشرة يرفعها الدائن باسمه الشخصي وفي الحالات التي يقررها القانون.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                            { text: "الدعوى البوليصية تعالج تصرفا إيجابيا صادرا من المدين يضر بالضمان العام.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 }
+                        ]
+                    },
+                    quiz4: {
+                        title: "Exam 4 (20 MCQ + 20 T/F)",
+                        questions: [
+                            // MCQ 61-80
+                            { text: "يشترط في حق الدائن في الدعوى البوليصية أن يكون في نشأته:", type: "multiple", options: ["لاحقا على التصرف", "سابقا على التصرف المطعون فيه", "غير موجود", "معلقا على شرط واقف دائما"], correctAnswer: 1 },
+                            { text: "التصرف المطعون فيه بالدعوى البوليصية يجب أن يكون:", type: "multiple", options: ["تصرفا قانونيا مفقرا مؤديا إلى إعسار المدين", "عملا ماديا فقط", "حقا غير قابل للحجز", "مجرد رفض للتبرع"], correctAnswer: 0 },
+                            { text: "إذا كان تصرف المدين معاوضة، فيلزم للطعن عليه غالبا:", type: "multiple", options: ["غش المدين وعلم المتصرف إليه بهذا الغش", "حسن نية المدين فقط", "عدم وجود أي ضرر", "أن يكون التصرف شفويا"], correctAnswer: 0 },
+                            { text: "إذا كان تصرف المدين تبرعا ضارا بالدائنين، فيجوز الطعن عليه:", type: "multiple", options: ["ولو لم يثبت الغش وكان المتصرف إليه حسن النية", "فقط إذا كان المتصرف إليه سيئ النية", "إذا كان الدائن غير مستحق الأداء", "إذا تعلق بحق غير قابل للحجز"], correctAnswer: 0 },
+                            { text: "تتقادم دعوى عدم نفاذ التصرف بالمدة القصيرة وهي:", type: "multiple", options: ["سنة واحدة من تاريخ العقد", "ثلاث سنوات من تاريخ علم الدائن", "خمس سنوات من تاريخ الوفاة", "عشر سنوات من تاريخ الميلاد"], correctAnswer: 1 },
+                            { text: "المدة الطويلة لتقادم دعوى عدم نفاذ التصرف هي:", type: "multiple", options: ["ثلاث سنوات من العلم", "خمس عشرة سنة من تاريخ إبرام التصرف", "شهر واحد من التصرف", "ستة أشهر من الإعلان"], correctAnswer: 1 },
+                            { text: "الحكم بعدم نفاذ التصرف يعني أن التصرف:", type: "multiple", options: ["باطل بين طرفيه دائما", "صحيح بين طرفيه لكنه لا يحتج به على الدائن الطاعن", "ينقلب إلى جريمة", "ينقضي بالنسبة للجميع حتما"], correctAnswer: 1 },
+                            { text: "الصورية تعني:", type: "multiple", options: ["وجود وضع ظاهر يخالف حقيقة الواقع", "تنفيذ الالتزام جبرا", "تخصيص مال للرهن", "إعسار المدين فقط"], correctAnswer: 0 },
+                            { text: "الصورية المطلقة هي التي:", type: "multiple", options: ["تعدم التصرف الظاهر ذاته في الحقيقة", "تستر شرطا فقط", "تتعلق دائما بشخص المتعاقد فقط", "لا تؤثر في التصرف الظاهر مطلقا"], correctAnswer: 0 },
+                            { text: "الصورية النسبية تعني أن التصرف الظاهر:", type: "multiple", options: ["لا يستر شيئا مطلقا", "يستر تصرفا حقيقيا مختلفا عنه", "يعد باطلا دائما", "لا يجوز إثباته"], correctAnswer: 1 },
+                            { text: "من صور الصورية النسبية:", type: "multiple", options: ["الصورية بطريق التستر", "التنفيذ الجبري", "الحجز التحفظي", "إعسار القانوني"], correctAnswer: 0 },
+                            { text: "دعوى الصورية تهدف إلى:", type: "multiple", options: ["إثبات حقيقة العلاقة المستترة", "إسقاط جميع الديون", "منع الدائن من التنفيذ", "منح المدين أجلا قضائيا"], correctAnswer: 0 },
+                            { text: "الفرق الجوهري بين دعوى الصورية ودعوى عدم نفاذ التصرف أن التصرف في دعوى الصورية:", type: "multiple", options: ["حقيقي وجدي دائما", "صوري يخالف الحقيقة أو يستر تصرفا آخر", "لا علاقة له بالمدين", "لا يمس الضمان العام مطلقا"], correctAnswer: 1 },
+                            { text: "الحق في الحبس هو وسيلة تسمح للدائن بـ:", type: "multiple", options: ["حبس الأداء حتى يستوفي حقه المرتبط به", "إبطال العقد فورا", "منع المدين من التقاضي", "نقل ملكية الشيء المحبوس"], correctAnswer: 0 },
+                            { text: "من شروط الحق في الحبس:", type: "multiple", options: ["أن يكون حق الحابس مستحق الأداء", "أن يكون حق الحابس منعدما", "عدم وجود ارتباط بين الحق والأداء", "أن يكون الشيء غير قابل للحبس"], correctAnswer: 0 },
+                            { text: "الحق في الحبس يقوم على وجود ارتباط بين:", type: "multiple", options: ["حق الحابس والتزامه برد الأداء", "حق أجنبي لا علاقة له بالمدين", "حق الدائن وحق سياسي", "المدين والمحكمة فقط"], correctAnswer: 0 },
+                            { text: "الأصل في الأشياء القابلة للحبس أنها تشمل:", type: "multiple", options: ["المنقولات والعقارات متى توافرت الشروط", "الأموال العامة وحدها", "الحقوق غير القابلة للحجز فقط", "النفقة فقط"], correctAnswer: 0 },
+                            { text: "من واجبات الحابس:", type: "multiple", options: ["المحافظة على الشيء المحبوس", "إتلاف الشيء المحبوس", "بيعه لنفسه فورا", "رفض تقديم حساب عن غلته"], correctAnswer: 0 },
+                            { text: "الإعسار المدني يعد نظاما مقابلا لـ:", type: "multiple", options: ["الإفلاس التجاري", "الرهن التأميني", "الصورية المطلقة", "الحق في الاسم"], correctAnswer: 0 },
+                            { text: "من آثار شهر الإعسار في القانون المصري:", type: "multiple", options: ["سقوط آجال الديون وغل يد المدين عن التصرف الضار", "زيادة حرية المدين في التصرف الضار", "إلغاء حقوق الدائنين", "تحويل الديون إلى هبات"], correctAnswer: 0 },
+                            // T/F 61-80
+                            { text: "يشترط في الدعوى البوليصية أن يكون حق الدائن مستحق الأداء.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                            { text: "لا يشترط أن يكون حق الدائن سابقا في نشوئه على التصرف المطعون فيه بالدعوى البوليصية.", type: "truefalse", options: ["True", "False"], correctAnswer: 1 },
+                            { text: "التصرف المطعون فيه بالدعوى البوليصية يجب أن يكون تصرفا قانونيا مفقرا.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                            { text: "رفض المدين قبول تبرع يعرض عليه يعد دائما تصرفا مفقرا يجوز الطعن عليه.", type: "truefalse", options: ["True", "False"], correctAnswer: 1 },
+                            { text: "في تصرفات المعاوضة يشترط غالبا غش المدين وعلم المتصرف إليه بهذا الغش.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                            { text: "في تصرفات التبرع يجوز الطعن بعدم النفاذ ولو لم يثبت غش المدين.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                            { text: "تتقادم دعوى عدم نفاذ التصرف بثلاث سنوات من تاريخ علم الدائن.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                            { text: "تتقادم دعوى عدم نفاذ التصرف في جميع الأحوال بعد خمس عشرة سنة من إبرام التصرف.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                            { text: "عدم نفاذ التصرف يعني بطلان التصرف بين المدين والمتصرف إليه.", type: "truefalse", options: ["True", "False"], correctAnswer: 1 },
+                            { text: "الصورية هي إيجاد وضع ظاهر يخالف حقيقة الواقع.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                            { text: "الصورية المطلقة تفيد أن التصرف الظاهر لا وجود له في الحقيقة.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                            { text: "الصورية النسبية لا يمكن أن تتعلق بشخص المتعاقد.", type: "truefalse", options: ["True", "False"], correctAnswer: 1 },
+                            { text: "دعوى الصورية يمكن أن يستعملها الدائن لإثبات أن التصرف الظاهر يخفي حقيقة ضارة به.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                            { text: "التصرف في دعوى عدم نفاذ التصرف يكون صوريا دائما.", type: "truefalse", options: ["True", "False"], correctAnswer: 1 },
+                            { text: "الحق في الحبس يقوم على اعتبارات العدالة والمنطق.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                            { text: "يجوز استعمال حق الحبس للحصول على حق مؤجل لم يحل أجله اتفاقا.", type: "truefalse", options: ["True", "False"], correctAnswer: 1 },
+                            { text: "يشترط لحق الحبس وجود ارتباط بين حق الحابس والأداء المحبوس.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                            { text: "لا يشترط دائما التناسب التام بين قيمة الشيء المحبوس وقيمة حق الحابس.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                            { text: "القانون المدني البحريني خلا من تنظيم نظام الإعسار المدني بحسب النص.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 },
+                            { text: "بصدور الحكم بشهر الإعسار يتحول الإعسار الفعلي إلى إعسار قانوني.", type: "truefalse", options: ["True", "False"], correctAnswer: 0 }
+                        ]
+                    },
+                    quiz5: {
+                        title: "Exam 5 (Comprehensive - All 160 Qs)",
+                        questions: []
+                    }
+                }
             }
         };
 
@@ -999,6 +1192,12 @@
             subjectsData.evidence_law.quizzes.comprehensive.questions = [
                 ...subjectsData.evidence_law.quizzes.quiz1.questions,
                 ...subjectsData.evidence_law.quizzes.quiz2.questions
+            ];
+            subjectsData.obligations_law.quizzes.quiz5.questions = [
+                ...subjectsData.obligations_law.quizzes.quiz1.questions,
+                ...subjectsData.obligations_law.quizzes.quiz2.questions,
+                ...subjectsData.obligations_law.quizzes.quiz3.questions,
+                ...subjectsData.obligations_law.quizzes.quiz4.questions
             ];
         }
         setupComprehensiveQuizzes();
