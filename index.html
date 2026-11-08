@@ -702,6 +702,7 @@
                 </div>
                 <div class="subject-selector">
                     <div class="subject-btn" data-subject="medical_ethics">🩺 Medical Ethics Revision (أخلاقيات الطب)</div>
+                    <div class="subject-btn" data-subject="biochemistry">🧬 Biochemistry Level 1 (L1 - L10 Questions)</div>
                 </div>
             </div>
 
@@ -789,7 +790,6 @@
             }
         } catch (e) { console.error("Firebase Init Error:", e); }
 
-        // الأسئلة الـ 71 بالكامل من ملف PDF بالضبط وبدون أي تعديل
         const subjectsData = {
             medical_ethics: {
                 title: "Medical Ethics Revision",
@@ -883,6 +883,88 @@
                     comprehensive: {
                         title: "Exam 4 (Comprehensive - All 71 Questions)",
                         questions: []
+                    }
+                }
+            },
+            biochemistry: {
+                title: "Biochemistry Level 1 (L1 - L10)",
+                essayUrl: "#",
+                bankUrl: "#",
+                quizzes: {
+                    biochem_all: {
+                        title: "Biochemistry Complete Question Bank (L1-L10)",
+                        questions: [
+                            { text: "The aldose sugar is:", type: "multiple", options: ["Glyceraldehyde", "Ribulose", "Erythrulose", "Dihydroxyacetone", "Xylulose"], correctAnswer: 0 },
+                            { text: "A pentose sugar is:", type: "multiple", options: ["Dihydroxyacetone", "Ribulose", "Erythrose", "Glucose", "Fructose"], correctAnswer: 1 },
+                            { text: "Isomers differing as a result of variations in configuration of the -OH and -H on carbon atoms 2, 3 or 4 of glucose are known as:", type: "multiple", options: ["Epimers", "Anomers", "Aldose and ketose isomers", "Enantiomers"], correctAnswer: 0 },
+                            { text: "α-D-glucose and β-D-glucose are:", type: "multiple", options: ["Enantiomers", "Epimers", "Anomers", "Aldose and ketose isomers"], correctAnswer: 2 },
+                            { text: "Sugar found in DNA is:", type: "multiple", options: ["Xylose", "Ribose", "Deoxyribose", "Ribulose"], correctAnswer: 2 },
+                            { text: "Sugar alcohol is:", type: "multiple", options: ["Mannitol", "Trehalose", "Xylulose", "Arabinose"], correctAnswer: 0 },
+                            { text: "Galactose and glucose are:", type: "multiple", options: ["Epimers", "Anomers", "Ketose-aldose isomers", "Enantiomers"], correctAnswer: 0 },
+                            { text: "Constituent unit of inulin is:", type: "multiple", options: ["Glucose", "Fructose", "Mannose", "Galactose"], correctAnswer: 1 },
+                            { text: "The sugar found in milk is:", type: "multiple", options: ["Mannose", "Glucose", "Fructose", "Lactose"], correctAnswer: 3 },
+                            { text: "Sucrose consists of:", type: "multiple", options: ["Glucose + glucose", "Glucose + fructose", "Glucose + galactose", "Glucose + mannose"], correctAnswer: 1 },
+                            { text: "A heteropolysaccharide among the following is:", type: "multiple", options: ["Inulin", "Cellulose", "Heparin", "Dextrin"], correctAnswer: 2 },
+                            { text: "Storage form of carbohydrates in animals:", type: "multiple", options: ["Glycogen", "Starch", "Maltose", "Cellulose"], correctAnswer: 0 },
+                            { text: "The storage form of lipid inside the body is:", type: "multiple", options: ["Glycogen", "Proteins", "Cholesterol", "Triacylglycerol", "Phospholipid"], correctAnswer: 3 },
+                            { text: "Oleic acid is:", type: "multiple", options: ["ω 3", "ω 6", "ω 7", "ω 9", "ω 12"], correctAnswer: 3 },
+                            { text: "The number of double bonds in arachidonic acid is:", type: "multiple", options: ["1", "3", "5", "4"], correctAnswer: 3 },
+                            { text: "Which one of the following is an ω3 fatty acid?", type: "multiple", options: ["Maltose", "Phenylalanine", "Glycogen", "Linolenic acid", "Oleic acid"], correctAnswer: 3 },
+                            { text: "Omega 6 fatty acids are:", type: "multiple", options: ["Fatty acids contain omega substance", "Fatty acids have no double bond", "Fatty acids have a double bond at C6 from the methyl carbon", "Fatty acids have 6 carbons", "Fatty acids have a double bond at C6 from the carboxyl carbon"], correctAnswer: 2 },
+                            { text: "As regards essential fatty acids:", type: "multiple", options: ["They cannot be synthesized in the body and must be taken in the diet", "They contain one double bond", "They are soluble in water", "They have a high melting temperature", "They can be synthesized in the body"], correctAnswer: 0 },
+                            { text: "Non-essential fatty acids are:", type: "multiple", options: ["Synthesized in the body and not needed in the diet", "Not essential for the body", "All are mono and polyunsaturated fatty acids", "Contain a double bond beyond C9", "Arachidonic acid and oleic acid"], correctAnswer: 0 },
+                            { text: "Which of the following phospholipids acts as surfactant?", type: "multiple", options: ["Cephaline", "Phosphatidyl serine", "Phosphatidyl ethanolamine", "Phosphatidyl inositol", "Dipalmitoyl lecithin"], correctAnswer: 4 },
+                            { text: "Among the functions of phospholipids is:", type: "multiple", options: ["Potential source of energy", "Essential component of cell membrane", "Storage form of lipid", "Thermal insulator of the body", "Electric insulator of the body"], correctAnswer: 1 },
+                            { text: "On hydrolysis of phosphatidyl choline it will produce:", type: "multiple", options: ["Glycerol alcohol + 2 fatty acids + phosphate", "Glycerol alcohol + 2 fatty acids + phosphate + ethanolamine", "Glycerol alcohol + 2 fatty acids + phosphate + choline base", "Glycerol alcohol + 1 fatty acid + phosphate + ethanolamine"], correctAnswer: 2 },
+                            { text: "A 7-year-old male child presented with recurrent chest infection and persistent cough. The doctor advised his parents to measure Cl in sputum; the Cl was low, and the diagnosis was confirmed as cystic fibrosis. This condition is most probably due to:", type: "multiple", options: ["Defect in membrane lipid", "Defect in Cl channels", "Defect in membrane cholesterol", "Defect in peripheral membrane protein", "Defect in membrane phospholipids"], correctAnswer: 1 },
+                            { text: "As regards cholesterol:", type: "multiple", options: ["It is an unsaturated fatty acid", "Its normal level is 300-400 mg/dl", "It is present mainly in plant food", "It is an animal steroid present mainly in animal food", "It is the storage form of steroid in the body"], correctAnswer: 3 },
+                            { text: "Storage form of cholesterol is:", type: "multiple", options: ["About 80% of total cholesterol", "Cholesterol ester", "Plant steroid", "Water-soluble form of cholesterol", "Derived from steroid hormones"], correctAnswer: 1 },
+                            { text: "Deficiency of this amino acid in the diet can result in a disease:", type: "multiple", options: ["Glycine", "Tryptophan", "Aspartic", "Tyrosine", "Serine"], correctAnswer: 1 },
+                            { text: "is an aliphatic basic amino acid:", type: "multiple", options: ["Glutamic", "Serine", "Valine", "Cysteine", "Lysine"], correctAnswer: 4 },
+                            { text: "Which one of the following amino acids is essential?", type: "multiple", options: ["Alanine", "Valine", "Tyrosine", "Serine", "Proline"], correctAnswer: 1 },
+                            { text: "Which one of the following is an aromatic amino acid with a polar uncharged side chain?", type: "multiple", options: ["Tyrosine", "Tryptophan", "Phenylalanine", "Proline", "Histidine"], correctAnswer: 0 },
+                            { text: "is an essential amino acid with a polar uncharged side chain:", type: "multiple", options: ["Valine", "Leucine", "Methionine", "Threonine", "Isoleucine"], correctAnswer: 3 },
+                            { text: "Define isoelectric pH:", type: "multiple", options: ["The pH at which an amino acid is converted from D to L form", "The pH at which an amino acid carries a net positive charge", "The pH at which an amino acid carries a net negative charge", "The pH at which an amino acid carries a net zero charge", "The pH at which an amino acid moves toward the cathode"], correctAnswer: 3 },
+                            { text: "Define zwitter ions:", type: "multiple", options: ["Amino acids containing net positive charge", "Amino acids containing net negative charge", "Amino acids carrying both positive and negative charge and moving toward the cathode", "Amino acids carrying both positive and negative charge and not moving in an electric field", "Amino acids carrying both positive and negative charge and moving toward the anode"], correctAnswer: 3 },
+                            { text: "One of the following statements is FALSE regarding the primary structure of a protein:", type: "multiple", options: ["Defined as the number, types, and order of amino acids", "Determines the 2ry, 3ry and quaternary structure of the protein", "Maintained by non-covalent bonds", "Cannot be disrupted by heating or mild acid treatment", "Determined by the nucleotide sequence on DNA"], correctAnswer: 2 },
+                            { text: "Each turn of the α-helix contains the following number of amino acid residues:", type: "multiple", options: ["3.6", "3.0", "4.2", "4.5"], correctAnswer: 0 },
+                            { text: "In proteins, the α-helix and β-pleated sheet are examples of:", type: "multiple", options: ["Primary structure", "Secondary structure", "Tertiary structure", "Quaternary structure"], correctAnswer: 1 },
+                            { text: "Protein denaturation causes all of the following EXCEPT:", type: "multiple", options: ["Loss of protein normal native conformation", "Loss of biological activity of enzymes and hormones", "Loss of antigenicity of the protein", "Loss of one of the essential amino acids", "Proteins of the diet become more easily digested"], correctAnswer: 3 },
+                            { text: "Proteins in cooked foods:", type: "multiple", options: ["Are high biological value proteins", "Are present in their functional conformation", "Lost their peptide bonds", "Are less viscid than their uncooked counterpart", "Are less soluble proteins"], correctAnswer: 4 },
+                            { text: "Which of the following is the major bond in the protein secondary structure?", type: "multiple", options: ["Disulfide bond", "Ionic bond", "Hydrogen bond", "Peptide bond", "Hydrophobic interaction"], correctAnswer: 2 },
+                            { text: "The α-helix is stabilized by which of the following?", type: "multiple", options: ["Interchain hydrogen bonds", "Intrachain hydrogen bonds", "Ionic bonds", "Disulfide bonds", "Hydrophobic interaction"], correctAnswer: 1 },
+                            { text: "The β-pleated sheet is stabilized by which of the following?", type: "multiple", options: ["Interchain hydrogen bonds", "Intrachain hydrogen bonds", "Ionic bonds", "Disulfide bonds", "Both a and b"], correctAnswer: 0 },
+                            { text: "Which of the following is a tripeptide?", type: "multiple", options: ["Anserine", "Oxytocin", "Glutathione", "Kallidin", "Albumin"], correctAnswer: 2 },
+                            { text: "A tripeptide functioning as an important reducing agent in the tissues is:", type: "multiple", options: ["Bradykinin", "Kallidin", "Tyrocidin", "Glutathione", "Endorphin"], correctAnswer: 3 },
+                            { text: "The tertiary structure of a protein describes:", type: "multiple", options: ["The order of amino acids", "Location of disulphide bonds", "Loop regions of proteins", "The ways of protein folding"], correctAnswer: 3 },
+                            { text: "In a protein molecule the disulphide bond is not broken by:", type: "multiple", options: ["Reduction", "Oxidation", "Denaturation", "X-ray diffraction"], correctAnswer: 2 },
+                            { text: "Linker DNA is formed of:", type: "multiple", options: ["50 bp", "146 bp", "5 bp", "1000 bp"], correctAnswer: 0 },
+                            { text: "What is the simplest unit of DNA-protein interaction?", type: "multiple", options: ["Nucleotides", "Nucleosomes", "Nucleosides", "Nucleic acid"], correctAnswer: 1 },
+                            { text: "What is the most common form of DNA?", type: "multiple", options: ["A form", "Z form", "B form", "m form"], correctAnswer: 2 },
+                            { text: "Histone proteins usually have a high proportion of amino acids:", type: "multiple", options: ["Positively-charged", "Negatively-charged", "Hydrophobic", "Aromatic", "Heterocyclic"], correctAnswer: 0 },
+                            { text: "What are the components of a nucleotide?", type: "multiple", options: ["Nitrogenous base", "Nitrogenous base + sugar", "Nitrogenous base + sugar + phosphate", "Purine base + phosphate", "Purine or pyrimidine + sugar"], correctAnswer: 2 },
+                            { text: "Nucleoside contains:", type: "multiple", options: ["Base-sugar", "Base-phosphate", "Base-sugar-phosphate", "Sugar-phosphate"], correctAnswer: 0 },
+                            { text: "The sugar molecule present in a nucleotide is:", type: "multiple", options: ["Triose", "Tetrose", "Pentose", "Hexose"], correctAnswer: 2 },
+                            { text: "Purine base found in RNA is:", type: "multiple", options: ["Cytosine", "Thymine", "Guanine", "Uracil"], correctAnswer: 2 },
+                            { text: "Find the correct statement about the phosphodiester linkage between adjacent nucleotides in nucleic acids:", type: "multiple", options: ["3'-phosphate of one nucleotide joins the 3'-hydroxyl of the next nucleotide", "3'-phosphate of one nucleotide joins the 5'-hydroxyl of the next nucleotide", "5'-phosphate of one nucleotide joins the 5'-hydroxyl of the next nucleotide", "3'-hydroxyl of one nucleotide joins the 5'-phosphate of the next nucleotide"], correctAnswer: 3 },
+                            { text: "As regards tRNA, which of the following statements describes its function?", type: "multiple", options: ["It is the machinery for protein synthesis", "Carrying amino acids to the site of protein synthesis", "It stores the genetic information", "Peptide bond formation"], correctAnswer: 1 },
+                            { text: "Which of the following types represents 80% of total RNA?", type: "multiple", options: ["mRNA", "tRNA", "rRNA", "microRNA"], correctAnswer: 2 },
+                            { text: "Which of the following carries the genetic codes of a gene from the nucleus to the cytosol?", type: "multiple", options: ["tRNA", "Histones", "mRNA", "Ribosomal RNA"], correctAnswer: 2 },
+                            { text: "Which type represents 5% of total RNA?", type: "multiple", options: ["mRNA", "rRNA", "tRNA", "microRNA"], correctAnswer: 0 },
+                            { text: "Which strand grows continuously towards the replication fork?", type: "multiple", options: ["Lagging strand", "DNA strand", "RNA strand", "Replicating strand", "Leading strand"], correctAnswer: 4 },
+                            { text: "DNA polymerase is a template-directed enzyme that synthesizes a new complementary strand from a parent strand, but it requires an existing short nucleotide sequence for its elongation. Which of the following enzymes is required for the synthesis of this primer?", type: "multiple", options: ["Primase/RNA polymerase", "RNA synthase", "DNA synthase", "Helicase", "DNA polymerase"], correctAnswer: 0 },
+                            { text: "In prokaryotes, DNA replication begins at a single site, where the two strands unwind and separate. This ATP-dependent process is catalyzed by a protein called:", type: "multiple", options: ["DnaA protein", "Single strand binding protein", "DNA polymerase", "Topoisomerase", "Primase/RNA polymerase"], correctAnswer: 0 },
+                            { text: "DNA replication occurs in a semi-conservative manner, which means:", type: "multiple", options: ["Two daughter cells, one consisting of double helical parent DNA, the other having newly synthesized DNA", "Two daughter cells each consisting of one parental strand and one newly synthesized strand", "Two daughter cells each consisting of one-half parental and another half newly synthesized strand resulting from crossover", "All of the above", "None of the above"], correctAnswer: 1 },
+                            { text: "Nalidixic acid inhibits:", type: "multiple", options: ["Topoisomerase I", "Topoisomerase II", "Gyrase", "DnaA protein", "Single stranded DNA binding protein"], correctAnswer: 2 },
+                            { text: "Which of the following enzymes has a unique ability to introduce positive and negative supercoiling of the DNA and is the target for antibacterial agents such as nalidixic acid?", type: "multiple", options: ["DnaA protein", "DNA helicase", "DNA gyrase", "DNA polymerase", "Single stranded DNA binding protein"], correctAnswer: 2 },
+                            { text: "What enzyme replaces the RNA primer on the leading strand of prokaryotes with DNA?", type: "multiple", options: ["DNA polymerase III", "Ligase", "DNA polymerase I", "Helicase", "Topoisomerase"], correctAnswer: 2 },
+                            { text: "In eukaryotes, DNA polymerase alpha is a multi-subunit enzyme with different functions. They include:", type: "multiple", options: ["Elongation of the leading strand", "3'-5' exonuclease activity", "Initiation and synthesis of RNA primer", "High processivity", "Synthesis of DNA primer"], correctAnswer: 2 },
+                            { text: "3' 5' exonuclease of DNA polymerase I:", type: "multiple", options: ["Removes RNA primer", "Removes mismatched nucleotide in 5'->3' direction", "Removes mismatched nucleotide in 3'->5' direction", "Removes matched nucleotide in 5'->3' direction", "Removes matched nucleotide in 3'->5' direction"], correctAnswer: 2 },
+                            { text: "In eukaryotes, which of the following DNA polymerases is required for mitochondrial DNA replication?", type: "multiple", options: ["Pol alpha", "Pol beta", "Pol gamma", "Polymerase I", "Pol delta"], correctAnswer: 2 },
+                            { text: "Which of the following is used in prokaryotes as the main enzyme of replication?", type: "multiple", options: ["DNA polymerase I", "DNA polymerase II", "DNA polymerase III", "DNA polymerase α", "DNA polymerase β"], correctAnswer: 2 },
+                            { text: "Which of the following DNA polymerases synthesizes primers in eukaryotic cells?", type: "multiple", options: ["Beta", "Gamma", "Delta", "Alpha", "Epsilon"], correctAnswer: 3 },
+                            { text: "DNA polymerase III holoenzyme possesses:", type: "multiple", options: ["3'5' polymerase activity only", "3'5' endonuclease activity", "3'5' exonuclease activity and 5'->3' polymerase activity", "5'->3' exonuclease activity"], correctAnswer: 2 }
+                        ]
                     }
                 }
             }
@@ -1066,7 +1148,7 @@
             subjectScreen.classList.add('active');
             subjectUserWelcome.textContent = currentUser.username;
 
-            platformMainTitle.textContent = "Medical Ethics";
+            platformMainTitle.textContent = "University Portal";
             platformMainTitle.style.direction = "ltr";
             platformSubTitle.textContent = "Interactive Quiz System";
 
@@ -1443,7 +1525,7 @@
                 return;
             }
 
-            const feedbackMsg = `💬 رأي جديد حول المنصة:\n👤 الطالب: ${currentUser ? currentUser.username : "زائر"}\n📝 الرسالة: ${text}\n⏰ الوقت: ${getFormattedEgyptianDate()}`;
+            const feedbackMsg = `💬 رأي حول المنصة:\n👤 الطالب: ${currentUser ? currentUser.username : "زائر"}\n📝 الرسالة: ${text}\n⏰ الوقت: ${getFormattedEgyptianDate()}`;
             sendToWhatsapp(feedbackMsg);
 
             alert("شكراً لك! تم إرسال رأيك بنجاح لتطوير المنصة.");
