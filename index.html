@@ -4,10 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منصة أخلاقيات الطب - Quiz System</title>
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="منصة أخلاقيات الطب">
+    <title>منصة الامتحانات التفاعلية - Interactive Quiz System</title>
     <style>
         * {
             margin: 0;
@@ -29,34 +26,16 @@
         .container {
             width: 100%;
             max-width: 900px;
-            perspective: 1000px;
         }
 
         .card {
             background: rgba(0, 0, 0, 0.9);
             border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(26, 42, 108, 0.3),
-                0 5px 15px rgba(0, 0, 0, 0.5),
-                inset 0 0 1px rgba(52, 152, 219, 0.8);
+            box-shadow: 0 15px 35px rgba(26, 42, 108, 0.3), 0 5px 15px rgba(0, 0, 0, 0.5);
             padding: 30px;
-            transform-style: preserve-3d;
-            transition: transform 0.5s;
             border: 2px solid #3498db;
             position: relative;
             overflow: hidden;
-        }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: -10px;
-            right: -10px;
-            bottom: -10px;
-            background: linear-gradient(45deg, #1a2a6c, #2c3e50, #3498db);
-            z-index: -1;
-            filter: blur(20px);
-            opacity: 0.3;
         }
 
         .designer-credit {
@@ -69,32 +48,21 @@
             background: rgba(0, 0, 0, 0.8);
             padding: 8px 12px;
             border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
             border: 1px solid #3498db;
-            z-index: 10;
         }
 
-        h1,
-        h2 {
+        h1, h2 {
             color: #3498db;
             text-align: center;
             margin-bottom: 20px;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
         }
 
         h1 {
-            background: linear-gradient(135deg, #1a2a6c, #3498db);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-size: 32px;
+            font-size: 28px;
             margin-top: 10px;
-            font-weight: bold;
         }
 
-        .login-form,
-        .subject-screen,
-        .quiz-container,
-        .welcome-screen {
+        .login-form, .subject-screen, .quiz-container, .welcome-screen {
             display: none;
         }
 
@@ -104,15 +72,8 @@
         }
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .form-group {
@@ -127,8 +88,7 @@
             font-size: 18px;
         }
 
-        input[type="text"],
-        textarea {
+        input[type="text"] {
             width: 100%;
             padding: 15px;
             border: 2px solid #1a2a6c;
@@ -136,27 +96,16 @@
             background: rgba(0, 0, 0, 0.7);
             color: #FFFFFF;
             font-size: 16px;
-            transition: all 0.3s;
         }
 
-        input[type="text"]:focus,
-        textarea:focus {
+        input[type="text"]:focus {
             outline: none;
             border-color: #3498db;
-            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.3);
-            background: rgba(0, 0, 0, 0.9);
         }
 
-        .btn,
-        .option,
-        .quiz-btn,
-        .subject-btn,
-        .feedback-toggle-btn,
-        .download-btn {
-            touch-action: manipulation;
-            -webkit-tap-highlight-color: transparent;
-            user-select: none;
-            -webkit-user-select: none;
+        .btn, .option, .quiz-btn, .subject-btn {
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
         }
 
         .btn {
@@ -165,105 +114,19 @@
             border: none;
             padding: 15px 25px;
             border-radius: 10px;
-            cursor: pointer;
             font-size: 18px;
             font-weight: bold;
-            transition: all 0.2s ease-in-out;
             display: block;
             width: 100%;
             margin-top: 20px;
-            box-shadow: 0 4px 15px rgba(26, 42, 108, 0.5);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .download-buttons-container {
-            display: flex;
-            gap: 15px;
-            margin-top: 15px;
-            margin-bottom: 25px;
-        }
-
-        .download-btn {
-            flex: 1;
-            background: linear-gradient(135deg, #2c3e50 0%, #1a2a6c 100%);
-            color: #FFFFFF;
-            border: 1px solid #3498db;
-            padding: 15px 10px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
             text-align: center;
             text-decoration: none;
-            transition: all 0.2s ease-in-out;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-            display: inline-block;
-        }
-
-        .feedback-toggle-btn {
-            background: linear-gradient(to right, #e67e22, #f39c12);
-            color: #FFFFFF;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-            transition: all 0.2s ease-in-out;
-            display: block;
-            width: 100%;
-            margin-top: 25px;
-            box-shadow: 0 4px 15px rgba(230, 126, 34, 0.4);
-        }
-
-        @media (hover: hover) {
-            .btn:hover {
-                transform: translateY(-3px);
-                box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
-            }
-
-            .download-btn:hover {
-                transform: translateY(-3px);
-                border-color: #ffffff;
-                box-shadow: 0 6px 15px rgba(52, 152, 219, 0.3);
-            }
-
-            .feedback-toggle-btn:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 6px 20px rgba(243, 156, 18, 0.5);
-            }
-
-            .option:hover {
-                background: rgba(26, 42, 108, 0.3);
-                transform: translateX(5px);
-                border-color: #3498db;
-            }
-
-            .quiz-btn:hover,
-            .subject-btn:hover {
-                transform: translateY(-2px);
-                border-color: #3498db;
-            }
-        }
-
-        .btn:active,
-        .quiz-btn:active,
-        .subject-btn:active,
-        .feedback-toggle-btn:active,
-        .download-btn:active {
-            transform: scale(0.98);
-        }
-
-        .question-container {
-            margin-bottom: 30px;
         }
 
         .question-text {
-            font-size: 20px;
+            font-size: 18px;
             margin-bottom: 20px;
             line-height: 1.6;
-            color: #FFFFFF;
             background: rgba(26, 42, 108, 0.2);
             padding: 20px;
             border-radius: 10px;
@@ -281,34 +144,19 @@
             border: 2px solid #1a2a6c;
             border-radius: 8px;
             padding: 15px;
-            cursor: pointer;
-            transition: all 0.2s ease-in-out;
             display: flex;
             align-items: center;
             color: #FFFFFF;
         }
 
-        .option:active {
-            background: rgba(52, 152, 219, 0.15);
-        }
-
         .option.selected {
             background: rgba(52, 152, 219, 0.2);
             border-color: #3498db;
-            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.3);
         }
 
         .option input {
             margin-right: 12px;
-            min-width: 18px;
-            min-height: 18px;
-        }
-
-        .option label {
-            cursor: pointer;
-            width: 100%;
-            text-align: inherit;
-            display: inline-block;
+            transform: scale(1.2);
         }
 
         .navigation {
@@ -319,6 +167,7 @@
 
         .navigation .btn {
             width: 48%;
+            margin-top: 0;
         }
 
         .progress-bar {
@@ -332,7 +181,6 @@
         .progress {
             height: 100%;
             background: linear-gradient(to right, #1a2a6c, #3498db);
-            border-radius: 5px;
             transition: width 0.5s;
         }
 
@@ -342,45 +190,29 @@
             margin-bottom: 10px;
             color: #3498db;
             font-weight: bold;
-            font-size: 16px;
         }
 
-        .fast-correction-panel {
-            background: rgba(26, 42, 108, 0.2);
-            padding: 12px 15px;
-            border-radius: 8px;
+        .quiz-selector, .subject-selector {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
             margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            border: 1px solid rgba(52, 152, 219, 0.4);
         }
 
-        .fast-correction-panel label {
-            margin-bottom: 0;
-            font-size: 15px;
-            color: #FFFFFF;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            width: 100%;
-        }
-
-        .fast-correction-panel input[type="checkbox"] {
-            width: 20px;
-            height: 20px;
-            cursor: pointer;
-        }
-
-        .instant-feedback-msg {
-            margin-top: 15px;
-            padding: 12px;
+        .quiz-btn, .subject-btn {
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid #1a2a6c;
             border-radius: 8px;
-            font-size: 16px;
+            padding: 18px 20px;
+            color: #FFFFFF;
             font-weight: bold;
             text-align: center;
-            display: none;
-            animation: fadeIn 0.3s ease;
+            font-size: 18px;
+        }
+
+        .quiz-btn:hover, .subject-btn:hover, .option:hover {
+            border-color: #3498db;
+            background: rgba(26, 42, 108, 0.3);
         }
 
         .error-message {
@@ -389,61 +221,6 @@
             margin-top: 15px;
             font-weight: bold;
             display: none;
-            background: rgba(231, 76, 60, 0.1);
-            padding: 10px;
-            border-radius: 8px;
-            border: 1px solid #e74c3c;
-            direction: rtl;
-        }
-
-        .welcome-message {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #3498db;
-            font-size: 18px;
-            background: rgba(26, 42, 108, 0.2);
-            padding: 15px;
-            border-radius: 10px;
-        }
-
-        .quiz-selector,
-        .subject-selector {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .quiz-btn,
-        .subject-btn {
-            background: rgba(0, 0, 0, 0.7);
-            border: 2px solid #1a2a6c;
-            border-radius: 8px;
-            padding: 18px 20px;
-            cursor: pointer;
-            transition: all 0.2s ease-in-out;
-            color: #FFFFFF;
-            font-weight: bold;
-            text-align: center;
-            font-size: 18px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        }
-
-        .quiz-btn.active,
-        .subject-btn.active {
-            background: linear-gradient(to right, #1a2a6c, #3498db);
-            color: #FFFFFF;
-            border-color: #3498db;
-        }
-
-        .feedback-section {
-            margin-top: 20px;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            border: 1px dashed #f39c12;
-            display: none;
-            animation: fadeIn 0.3s ease;
         }
 
         .results-summary {
@@ -452,41 +229,7 @@
             background: rgba(0, 0, 0, 0.7);
             border-radius: 10px;
             border-left: 4px solid #3498db;
-        }
-
-        .results-summary h3 {
-            color: #3498db;
-            margin-bottom: 15px;
-            text-align: center;
-        }
-
-        .results-summary p {
-            margin-bottom: 10px;
-            color: #FFFFFF;
-            font-size: 16px;
-        }
-
-        .welcome-screen,
-        .subject-screen {
-            text-align: center;
-            padding: 10px;
-        }
-
-        .user-info {
-            background: rgba(26, 42, 108, 0.2);
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 25px;
-            border-left: 4px solid #3498db;
-        }
-
-        .user-info h2 {
-            color: #3498db;
-            margin-bottom: 10px;
-        }
-
-        .review-container {
-            margin-top: 20px;
+            display: none;
         }
 
         .review-item {
@@ -496,264 +239,66 @@
             background: rgba(0, 0, 0, 0.5);
             border-left: 4px solid #e74c3c;
         }
-
-        .review-content {
-            font-size: 16px;
-            line-height: 1.8;
-            color: #FFFFFF;
-            text-align: inherit;
-        }
-
-        .correct-answer {
-            color: #2ecc71;
-            font-weight: bold;
-        }
-
-        .user-answer {
-            color: #e74c3c;
-            font-weight: bold;
-        }
-
-        .timer-container {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            background: rgba(26, 42, 108, 0.3);
-            padding: 10px 20px;
-            border-radius: 20px;
-            font-weight: bold;
-            color: #3498db;
-            box-shadow: 0 0 10px rgba(52, 152, 219, 0.3);
-            display: none;
-            border: 1px solid #3498db;
-            z-index: 10;
-        }
-
-        .timer-warning {
-            color: #f39c12;
-            animation: pulse 1s infinite;
-        }
-
-        .timer-critical {
-            color: #e74c3c;
-            animation: pulse 0.5s infinite;
-        }
-
-        .pwa-banner {
-            display: none;
-            background: rgba(243, 156, 18, 0.15);
-            border: 1px solid #f39c12;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            text-align: center;
-            animation: fadeIn 0.5s ease;
-            direction: rtl;
-        }
-
-        .pwa-banner p {
-            color: #f39c12;
-            font-weight: bold;
-            margin-bottom: 10px;
-            font-size: 15px;
-        }
-
-        .pwa-btn {
-            background: linear-gradient(to right, #e67e22, #f39c12);
-            color: #fff;
-            border: none;
-            padding: 8px 20px;
-            border-radius: 6px;
-            font-weight: bold;
-            cursor: pointer;
-            font-size: 14px;
-            transition: transform 0.2s;
-        }
-
-        .pwa-btn:active {
-            transform: scale(0.95);
-        }
-
-        @keyframes pulse {
-            0% {
-                opacity: 1;
-            }
-
-            50% {
-                opacity: 0.5;
-            }
-
-            100% {
-                opacity: 1;
-            }
-        }
-
-        .subject-title {
-            text-align: center;
-            color: #3498db;
-            margin-bottom: 20px;
-            font-size: 26px;
-            font-weight: bold;
-            letter-spacing: 1px;
-            margin-top: 10px;
-            direction: ltr;
-        }
-
-        @media (max-width: 600px) {
-            body {
-                padding: 10px;
-            }
-
-            .card {
-                padding: 15px;
-                border-radius: 15px;
-            }
-
-            h1 {
-                font-size: 24px;
-            }
-
-            .subject-title {
-                font-size: 20px;
-                margin-bottom: 10px;
-            }
-
-            .designer-credit {
-                position: static;
-                text-align: center;
-                margin-bottom: 10px;
-                width: 100%;
-                display: block;
-            }
-
-            .timer-container {
-                position: static;
-                text-align: center;
-                margin-bottom: 15px;
-                width: 100%;
-                border-radius: 10px;
-            }
-
-            .quiz-info {
-                flex-direction: column;
-                gap: 5px;
-                align-items: center;
-                font-size: 14px;
-            }
-
-            .question-text {
-                font-size: 17px;
-                padding: 15px;
-                margin-bottom: 15px;
-            }
-
-            .option {
-                padding: 14px 12px;
-                font-size: 15px;
-            }
-
-            .quiz-btn,
-            .subject-btn {
-                padding: 15px;
-                font-size: 16px;
-            }
-
-            .navigation {
-                margin-top: 20px;
-            }
-
-            .download-buttons-container {
-                flex-direction: column;
-                gap: 10px;
-            }
-        }
+        .correct-answer { color: #2ecc71; font-weight: bold; }
+        .user-answer { color: #e74c3c; font-weight: bold; }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <div id="pwaBanner" class="pwa-banner">
-            <p>📱 يمكنك تثبيت المنصة كتطبيق على شاشتك الرئيسية الآن للاستخدام السريع!</p>
-            <button id="pwaInstallBtn" class="pwa-btn">تثبيت التطبيق الآن</button>
-        </div>
-
         <div class="card">
             <div class="designer-credit">Designed by Mohamed Nasser</div>
-            <div class="timer-container" id="timerContainer">
-                Time Remaining: <span id="timerDisplay">00:00</span>
-            </div>
+            <div class="subject-title" id="platformMainTitle">Medical & Interprofessional Skills</div>
+            <h1 id="platformSubTitle">Interactive Quiz Platform</h1>
 
-            <div class="subject-title" id="platformMainTitle">Medical Ethics</div>
-            <h1 id="platformSubTitle">Interactive Quiz System</h1>
-
+            <!-- شاشة تسجيل الدخول -->
             <div id="loginScreen" class="login-form active">
                 <div class="form-group">
-                    <input type="text" id="username" placeholder="اكتب اسمك هنا مثل محمد ناصر محمد"
-                        style="direction: rtl; text-align: right;">
+                    <input type="text" id="username" placeholder="اكتب اسمك الثنائي هنا..." style="direction: rtl; text-align: right;">
                 </div>
-                <button id="loginBtn" class="btn">Start</button>
-                <div id="loginError" class="error-message"></div>
+                <button id="loginBtn" class="btn">Start / دخول</button>
+                <div id="loginError" class="error-message">برجاء كتابة الاسم بشكل صحيح (اسمين على الأقل).</div>
             </div>
 
+            <!-- شاشة اختيار المادة -->
             <div id="subjectScreen" class="subject-screen">
                 <div class="user-info">
                     <h2>Welcome, <span id="subjectUserWelcome"></span>!</h2>
-                    <p style="margin-top: 10px; color:#3498db; font-weight: bold;">اختر مادة المراجعة للبدء:</p>
+                    <p style="margin-top: 10px; color:#3498db; font-weight: bold;">اختر المادة أو المحاضرة للبدء:</p>
                 </div>
                 <div class="subject-selector">
-                    <div class="subject-btn" data-subject="medical_ethics">🩺 Medical Ethics Revision (أخلاقيات الطب)</div>
-                    <div class="subject-btn" data-subject="biochemistry">🧬 Biochemistry Level 1 (L1 - L10 Questions)</div>
+                    <div class="subject-btn" data-subject="all_materials">📂 الامتحان الشامل (جميع الأسئلة مجتمعة)</div>
+                    <div class="subject-btn" data-subject="lec1_2">📚 L1-2: What is history taking</div>
+                    <div class="subject-btn" data-subject="lec3">🤝 L3: Interprofessionalism definition</div>
+                    <div class="subject-btn" data-subject="lec4">🛡️ L4: Safety as a cornerstone I</div>
+                    <div class="subject-btn" data-subject="lec5">🧼 L5: Safety as a cornerstone II</div>
+                    <div class="subject-btn" data-subject="interprofessional_revision">📖 Interprofessional Revision (مراجعة شاملة)</div>
                 </div>
             </div>
 
+            <!-- شاشة الامتحانات الفرعية -->
             <div id="welcomeScreen" class="welcome-screen">
                 <div class="user-info">
                     <h2>Welcome, <span id="userNameWelcome"></span>!</h2>
                 </div>
-
-                <div class="download-buttons-container" id="downloadContainer">
-                    <a id="essayLink" href="#" class="download-btn" download>📝 Revision Notes PDF</a>
-                    <a id="bankLink" href="#" class="download-btn" download>📚 Test Bank</a>
-                </div>
-
-                <div class="quiz-selector" id="welcomeQuizSelector">
-                </div>
-
-                <button id="backToSubjectsBtn" class="btn"
-                    style="background: linear-gradient(to right, #2c3e50, #7f8c8d); margin-top: 15px;">⬅️ تغيير المادة (Back to Subjects)</button>
-
-                <button id="feedbackToggleBtn" class="feedback-toggle-btn">💡 رأيك في المنصة</button>
-
-                <div id="feedbackSection" class="feedback-section">
-                    <textarea id="feedbackText" rows="3" placeholder="اكتب رأيك أو اقتراحك هنا لتطوير المنصة..."
-                        style="direction: rtl; text-align: right;"></textarea>
-                    <button id="sendFeedbackBtn" class="btn" style="margin-top:10px; padding:10px;">إرسال الرأي</button>
-                </div>
+                <div class="quiz-selector" id="welcomeQuizSelector"></div>
+                <button id="backToSubjectsBtn" class="btn" style="background: #7f8c8d; margin-top: 15px;">⬅️ رجوع لاختيار المواد</button>
             </div>
 
+            <!-- شاشة الامتحان التفاعلي -->
             <div id="quizScreen" class="quiz-container">
-                <div class="welcome-message" id="welcomeMessage">Welcome, <span id="userName"></span>!</div>
-
                 <div class="quiz-info">
-                    <span id="quizTitle">Exam 1</span>
+                    <span id="quizTitle">Quiz</span>
                     <span id="questionNumber">Question 1 of 10</span>
                 </div>
 
-                <div class="fast-correction-panel">
-                    <label for="fastCorrectionToggle">
-                        <input type="checkbox" id="fastCorrectionToggle">
-                        Fast Correction (التصحيح السريع)
-                    </label>
-                </div>
-
                 <div class="progress-bar">
-                    <div class="progress" id="progressBar"></div>
+                    <div class="progress" id="progressBar" style="width: 0%;"></div>
                 </div>
 
                 <div class="question-container">
                     <div class="question-text" id="questionText"></div>
                     <div class="options-container" id="optionsContainer"></div>
-                    <div class="instant-feedback-msg" id="instantFeedbackMsg"></div>
                 </div>
 
                 <div class="navigation">
@@ -761,778 +306,346 @@
                     <button id="nextBtn" class="btn">Next</button>
                 </div>
 
-                <div class="results-summary" id="resultsSummary" style="display: none;">
+                <div class="results-summary" id="resultsSummary">
                     <h3>Quiz Results Summary</h3>
                     <p id="scoreText"></p>
                     <p id="correctAnswers"></p>
                     <p id="incorrectAnswers"></p>
                     <div class="review-container" id="reviewContainer"></div>
-
-                    <button id="backToQuizzesBtn" class="btn">Back to Quiz Selection</button>
+                    <button id="backToQuizzesBtn" class="btn" style="margin-top: 15px;">الرجوع للقائمة</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
-
     <script>
-        const firebaseConfig = {
-            databaseURL: "https://law-quiz-system-default-rtdb.firebaseio.com"
-        };
-
-        let database = null;
-        try {
-            if (firebaseConfig.databaseURL && !firebaseConfig.databaseURL.includes("default-rtdb")) {
-                firebase.initializeApp(firebaseConfig);
-                database = firebase.database();
-            }
-        } catch (e) { console.error("Firebase Init Error:", e); }
-
-        const subjectsData = {
-            medical_ethics: {
-                title: "Medical Ethics Revision",
-                essayUrl: "#",
-                bankUrl: "#",
+        const materialsData = {
+            all_materials: {
+                title: "Comprehensive Exam (All Questions)",
                 quizzes: {
-                    quiz1: {
-                        title: "Exam 1 (Questions 1-25)",
-                        questions: [
-                            { text: "What is the first and most essential rule of the Nuremberg Code for human medical research?", type: "multiple", options: ["The patient must give voluntary consent to participate.", "The hospital must pay all living expenses of the patient.", "The doctor makes all decisions without asking the patient.", "Medical experiments may begin without any permission.", "Only university professors are allowed to give treatments."], correctAnswer: 0 },
-                            { text: "How is law different from medical ethics?", type: "multiple", options: ["Laws are unwritten ideas made by philosophers.", "Laws are formal written rules enforced by courts and police.", "Ethics carries mandatory prison sentences for all violations.", "Laws apply only to doctors in hospital clinics.", "Ethics is decided exclusively by government judges."], correctAnswer: 1 },
-                            { text: "What does the principle of patient autonomy mean in medical care?", type: "multiple", options: ["The doctor chooses what is best without asking.", "The patient has the ability to think, decide, and act for themselves.", "Family members make every treatment decision.", "The hospital can force any therapy on the patient.", "Patients must accept whatever doctors recommend."], correctAnswer: 1 },
-                            { text: "A patient has a dangerous, contagious illness but forbids the doctor from telling anyone. When can the doctor break confidentiality?", type: "multiple", options: ["Never, because confidentiality can never be broken.", "When other people are placed at serious risk of harm.", "Whenever the doctor feels tired or annoyed.", "Only if the patient pays an extra consultation fee.", "Whenever friends of the patient ask for information."], correctAnswer: 1 },
-                            { text: "In healthcare resource allocation, what is the exact meaning of equity?", type: "multiple", options: ["Giving every person the exact same resources regardless of need.", "Giving each person what they need so all can reach equal outcomes.", "Giving care only to wealthy patients who pay cash.", "Giving all medicine to only the youngest patients.", "Treating every medical illness with the exact same test."], correctAnswer: 1 },
-                            { text: "A doctor stops an arthritis drug after tests show it is injuring the patient's liver. Which principle guides this action?", type: "multiple", options: ["Patient autonomy", "Non-maleficence", "Social equality", "Financial fidelity", "Legal arbitration"], correctAnswer: 1 },
-                            { text: "What does the principle of beneficence require a physician to do?", type: "multiple", options: ["Act in the best interest of the patient to do good and promote health.", "Follow government orders above patient welfare.", "Ask police officers before starting any surgery.", "Ensure all patients receive the identical hospital bill.", "Refuse to treat patients with unusual personal beliefs."], correctAnswer: 0 },
-                            { text: "An alert, competent adult refuses a blood transfusion for religious reasons. What is the ethically correct response?", type: "multiple", options: ["Give the transfusion by force when the patient sleeps.", "Respect the patient's choice to refuse the treatment.", "Ask a judge to declare the patient mentally incompetent immediately.", "Ask the patient's neighbors to sign the consent form.", "Refuse to provide any comfort care or shelter."], correctAnswer: 1 },
-                            { text: "An ethical dilemma in medicine is best characterized by which of the following scenarios?", type: "multiple", options: ["A situation where a clear administrative law exists, but the physician chooses to commit a criminal offense.", "A circumstance involving two or more competing choices, where each option has good ethical rationale, resulting in conflicting rights, or wishes.", "A clinical error resulting strictly from a deficit in surgical skills or scientific knowledge.", "An institutional disagreement over physician salary and hospital billing rates.", "An objective scenario where only one morally acceptable course of action is available."], correctAnswer: 1 },
-                            { text: "Why is compassion essential when treating a sick person?", type: "multiple", options: ["It replaces the need for medical training and pharmacology.", "Patients respond better when doctors treat the person, not just the disease.", "It guarantees the doctor will never make a clinical error.", "It allows doctors to ignore safety guidelines.", "It forces patients to agree with every medical suggestion."], correctAnswer: 1 },
-                            { text: "Which of the following correctly lists the components of the communication process?", type: "multiple", options: ["Sender, channel, context, diagnosis, receiver", "Sender, message, receiver, treatment, feedback", "Sender, message, channel, receiver, feedback", "Message, listener, diagnosis, channel, feedback", "Sender, receiver, feedback, silence, summary"], correctAnswer: 2 },
-                            { text: "Which component contributes the greatest share of how we communicate?", type: "multiple", options: ["Written words", "Spoken words (verbal content)", "Tone of voice", "Body language", "Pitch and speed of speech"], correctAnswer: 3 },
-                            { text: "Why is communication described as a dialogue rather than a monologue?", type: "multiple", options: ["Only the doctor needs to be sure the message is understood", "It is a mutual two-sided process that includes listening and understanding as well as expressing", "It relies on non-linguistic forms only", "The sender speaks while the receiver stays silent", "It is restricted to verbal exchange between two professionals"], correctAnswer: 1 },
-                            { text: "Which sequence correctly describes the funnel questioning technique?", type: "multiple", options: ["Open questions, probing questions, closed questions, then check understanding", "Closed questions, open questions, probing questions, then check understanding", "Probing questions, closed questions, open questions, then check understanding", "Check understanding, closed questions, probing questions, then open questions", "Open questions, closed questions, check understanding, then probing questions"], correctAnswer: 0 },
-                            { text: "A patient says, 'I have been getting these headaches for a while.' Which is the best probing question to get more detail?", type: "multiple", options: ["Do you have a family history of migraine?", "How can I help you today?", "Have you taken any medicine for it?", "Is the pain severe?", "Can you tell me a bit more about that, and what happened next?"], correctAnswer: 4 },
-                            { text: "You are about to see a new patient. Which is the most appropriate way to begin the consultation?", type: "multiple", options: ["Start the physical examination immediately to save time", "Greet by name, introduce yourself and your role, explain the plan, and ask permission", "Begin with closed questions on family history and introduce yourself later", "Write notes silently without telling the patient, to avoid distraction", "Ask the patient to explain the whole problem before saying who you are"], correctAnswer: 1 },
-                            { text: "A patient tells you his father died of cancer last year. Which response best shows empathy?", type: "multiple", options: ["What type of cancer was it? We need it for your family history.", "Many people die of cancer; try not to dwell on it.", "Let's move on to your surgical history now.", "I am sorry to hear that; it must have been a very difficult time for you.", "At least he did not suffer for long."], correctAnswer: 3 },
-                            { text: "A patient sits hunched over, fidgets and avoids eye contact while saying, 'I'm fine, nothing is bothering me.' What is the best interpretation?", type: "multiple", options: ["The words are reliable and the body language can be ignored", "The patient is simply bored and wants to leave", "The words conflict with non-verbal cues of stress or nervousness; explore gently with open questions", "The patient has a closed mind and needs immediate referral", "The cues confirm the patient is relaxed and cooperative"], correctAnswer: 2 },
-                            { text: "Doctor: 'Do you smoke?' Patient: 'Yes.' Doctor: 'Any chest pain?' Patient: 'Yes.' Doctor: 'Do you drink alcohol?' Patient: 'No.' What is the main weakness of this interview?", type: "multiple", options: ["Overuse of closed questions, which limits information and patient involvement", "Too many open questions, which confuse the patient", "Use of medical jargon the patient cannot understand", "Excessive use of probing questions", "Failure to introduce the patient to the doctor"], correctAnswer: 0 },
-                            { text: "Karma, 16, has diabetes, is losing weight and has rising blood sugars. She insists her insulin is fine and closes up when the nurse asks. Which approach is most appropriate?", type: "multiple", options: ["Confront her with her blood results until she admits missing insulin", "Repeat closed questions until she gives a clear yes or no", "Tell her parents and consultant what is suspected without speaking to her", "Stop raising the subject until she attends appointments again", "Hold a private, unhurried talk using open, non-judgmental questions, listening, silence and empathy"], correctAnswer: 4 },
-                            { text: "Which element is NOT a key requirement for valid consent?", type: "multiple", options: ["Capacity", "Voluntariness", "Disclosure", "Financial status", "Understanding"], correctAnswer: 3 },
-                            { text: "Implied consent is most appropriate for:", type: "multiple", options: ["Major surgery", "Endoscopy", "Inspection and auscultation", "General anesthesia", "Bone marrow aspiration"], correctAnswer: 2 },
-                            { text: "Written consent is required before:", type: "multiple", options: ["Blood pressure measurement", "Inspection", "General anesthesia", "Palpation", "History taking"], correctAnswer: 2 },
-                            { text: "A patient must understand all of the following EXCEPT:", type: "multiple", options: ["Nature of illness", "Risks of procedure", "Alternative treatments", "Physician income", "Prognosis without intervention"], correctAnswer: 3 },
-                            { text: "Failure to disclose essential information before treatment may constitute:", type: "multiple", options: ["Beneficence", "Negligence", "Confidentiality", "Justice", "Fidelity"], correctAnswer: 1 }
-                        ]
-                    },
-                    quiz2: {
-                        title: "Exam 2 (Questions 26-50)",
-                        questions: [
-                            { text: "The age of consent in Egypt is:", type: "multiple", options: ["16", "18", "20", "21", "25"], correctAnswer: 3 },
-                            { text: "A 17-year-old with adequate understanding agrees to treatment. This is best described as:", type: "multiple", options: ["Blanket consent", "Assent", "Coercion", "Proxy consent", "Refusal"], correctAnswer: 1 },
-                            { text: "A patient says 'Doctor, decide what is best for me.' The MOST ethical response is:", type: "multiple", options: ["Make decision without explanation", "Provide basic information and encourage participation", "Refuse treatment", "Ignore wishes", "Ask family only"], correctAnswer: 1 },
-                            { text: "Which scenario requires consent from both husband and wife according to the lecture?", type: "multiple", options: ["Mass immunization", "Pathological autopsy", "Artificial insemination", "Medico-legal autopsy", "Blood sampling"], correctAnswer: 2 },
-                            { text: "Which is an exception to informed consent?", type: "multiple", options: ["Routine examination", "Emergency threatening life", "Elective surgery", "Cosmetic procedure", "Research participation"], correctAnswer: 1 },
-                            { text: "Consent is invalid when it is obtained by:", type: "multiple", options: ["Understanding", "Voluntariness", "Fraud", "Competence", "Disclosure"], correctAnswer: 2 },
-                            { text: "Therapeutic privilege allows a physician to:", type: "multiple", options: ["Ignore consent", "Withhold information to prevent serious harm", "Treat all patients without consent", "Transfer care", "Disclose to media"], correctAnswer: 1 },
-                            { text: "Therapeutic waiver occurs when:", type: "multiple", options: ["Doctor refuses disclosure", "Patient voluntarily gives up right to detailed information", "Court orders treatment", "Family consents", "Patient is unconscious"], correctAnswer: 1 },
-                            { text: "For informed refusal to be legally valid, it should be signed by:", type: "multiple", options: ["Patient only", "Patient and doctor", "Patient doctor and witness", "Doctor and witness", "Family only"], correctAnswer: 2 },
-                            { text: "A competent adult refuses a life-saving blood transfusion for religious reasons. The best action is:", type: "multiple", options: ["Force treatment", "Respect refusal after informing risks", "Seek police order", "Ignore wishes", "Treat secretly"], correctAnswer: 1 },
-                            { text: "A severely malnourished patient with anorexia rejects treatment because nothing is wrong. This patient may be considered:", type: "multiple", options: ["Fully competent", "Incapable of informed refusal", "Legally deceased", "Automatically detained", "Fully autonomous"], correctAnswer: 1 },
-                            { text: "A 4-year-old with urgent fracture reduction arrives without reachable parents. What should the physician do?", type: "multiple", options: ["Wait indefinitely", "Obtain court order first", "Proceed under emergency exception", "Treat only with babysitter consent", "Discharge patient"], correctAnswer: 2 },
-                            { text: "Which statement best describes informed refusal?", type: "multiple", options: ["Patient signs any form", "Doctor explains risks of declining intervention", "Doctor chooses for patient", "Family must always decide", "Only written refusals count"], correctAnswer: 1 },
-                            { text: "A patient does not want medical details and asks the doctor to decide. This illustrates:", type: "multiple", options: ["Fraud", "Therapeutic waiver", "Battery", "Invalid consent", "Coercion"], correctAnswer: 1 },
-                            { text: "Which of the following groups contains factors that are ALL classified specifically as physical barriers to communication?", type: "multiple", options: ["Mistrust, anger, low self-esteem, and fear.", "Medical jargons, lack of speech clarity, and unspecific terminology.", "Time, place, environmental noise, distance, and physical disability.", "Differing personal values, cultural traditions, and societal taboos.", "Gender role expectations, shyness, and personal perceptual filters."], correctAnswer: 2 },
-                            { text: "What must happen for communication to be successful?", type: "multiple", options: ["The doctor speaks without waiting for an answer.", "The receiver understands the message and gives feedback.", "Both people use written letters only.", "The message is sent using a computer.", "The patient memorizes the words silently."], correctAnswer: 1 },
-                            { text: "Which of these is a physical barrier to communication?", type: "multiple", options: ["Anger and fear", "Loud room noise and long distance", "Shyness and low self-esteem", "Different religious beliefs", "Difficult medical jargon"], correctAnswer: 1 },
-                            { text: "A clinic room is very loud and crowded. What should the doctor do first?", type: "multiple", options: ["Talk much faster to finish early.", "Move to a quiet, private room with comfortable seating.", "Tell the patient to stop talking.", "Write down words without explaining them.", "Ask the nurse to finish the visit alone."], correctAnswer: 1 },
-                            { text: "What is the single biggest barrier to communication?", type: "multiple", options: ["Bad room lighting", "Speaking different languages", "Cold room temperature", "Old computer screens", "Wearing a white coat"], correctAnswer: 1 },
-                            { text: "A doctor needs to explain medicine to a patient. How should the doctor speak?", type: "multiple", options: ["Use complex Latin words to sound professional.", "Speak slowly, clearly, and check for understanding.", "Speak very fast so the patient leaves quickly.", "Give orders without letting the patient ask questions.", "Talk loudly from across the hallway."], correctAnswer: 1 },
-                            { text: "A doctor is very angry and stressed after a difficult day. How does this affect communication with patients?", type: "multiple", options: ["It improves the patient's trust.", "It makes it harder to communicate clearly and calmly.", "It has no effect at all.", "It makes the patient understand faster.", "It replaces the need for medical tests."], correctAnswer: 1 },
-                            { text: "What is needed to bridge communication differences between men and women in clinical settings?", type: "multiple", options: ["Assigning patients only to doctors of the exact same gender.", "Patience, attention, and understanding over time.", "Speaking only in written letters.", "Avoiding all female patients in emergency rooms.", "Giving patients immediate fines if they feel shy."], correctAnswer: 1 },
-                            { text: "Why do two people look at the exact same situation and see totally different things?", type: "multiple", options: ["They have different life experiences, values, and beliefs.", "One person is always pretending to be confused.", "It is impossible for human eyes to see colors.", "People only understand people of their exact same age.", "Hospitals make people lose their normal vision."], correctAnswer: 0 },
-                            { text: "A doctor works with families from many different cultural backgrounds. What is the most important rule to remember?", type: "multiple", options: ["Gestures and words can mean different things in different cultures.", "Every culture around the world uses identical body language.", "Doctors should ignore cultural traditions completely.", "Only patients who speak English can understand health advice.", "Culture has no connection to personal health choices."], correctAnswer: 0 },
-                            { text: "What do the letters of the SPIKES protocol stand for, in order?", type: "multiple", options: ["Setting, Invitation, Perception, Knowledge, Emotions, Summary", "Setting, Perception, Knowledge, Invitation, Emotions, Summary", "Summary, Perception, Invitation, Knowledge, Emotions, Setting", "Setting, Perception, Invitation, Knowledge, Emotions, Summary", "Setting, Perception, Invitation, Emotions, Knowledge, Summary"], correctAnswer: 3 }
-                        ]
-                    },
-                    quiz3: {
-                        title: "Exam 3 (Questions 51-71)",
-                        questions: [
-                            { text: "What proportion of patients want to know the truth about their illness?", type: "multiple", options: ["50-90%", "10-20%", "25-30%", "Less than 5%", "100% without exception"], correctAnswer: 0 },
-                            { text: "Why is the phrase 'I'm sorry' considered ambiguous when breaking bad news?", type: "multiple", options: ["It is always treated as an admission of guilt in court", "It is too informal for professionals", "It can mean 'I'm sorry for you' or 'I'm sorry I did this', and is easily misinterpreted", "It gives the patient no information about the diagnosis", "It should never be used with relatives"], correctAnswer: 2 },
-                            { text: "Which statement best explains why breaking bad news is so difficult for doctors?", type: "multiple", options: ["Most patients do not want to know the truth", "Bad news is rarely encountered in practice", "Doctors usually lack the medical knowledge to explain it", "The law forbids telling patients the truth", "Doctors want to be honest without destroying hope, and the recipient is already distressed"], correctAnswer: 4 },
-                            { text: "You are about to break bad news to a patient. Which preparation for the Setting step is most appropriate?", type: "multiple", options: ["Stand near the door to keep the meeting short", "Sit at the patient's level with no barrier, turn off your phone, ensure privacy and ask whether he wants someone with him", "Ask the nurse to tell him the diagnosis first", "Hold the talk in a busy ward corridor", "Sit behind your desk to appear authoritative"], correctAnswer: 1 },
-                            { text: "Which question best assesses the patient's perception, the second step of SPIKES?", type: "multiple", options: ["Would you like me to tell you the details of the diagnosis?", "I can see how upsetting this is for you.", "Do you have any questions for me?", "What do you know about your illness so far?", "Let me summarise the treatment plan."], correctAnswer: 3 },
-                            { text: "A patient with cancer asks, 'Doctor, how long do I have?' and the prognosis is uncertain. What is the best response?", type: "multiple", options: ["Be honest that it is uncertain, share what is known and avoid guessing a number", "Probably 6 months, maybe 7.", "Change the subject to avoid upsetting him", "Don't worry, you will be fine.", "Tell the relatives instead of the patient"], correctAnswer: 0 },
-                            { text: "A patient says, 'Please don't give me the details. Just tell my son and do whatever is needed.' Which analysis is most accurate?", type: "multiple", options: ["The patient lacks capacity and must be referred at once", "The doctor must give every detail because most patients want the truth", "This is the Invitation step: respect his wish, clarify how much he wants to know and whom to involve", "The doctor should ignore the comment and proceed as planned", "He should be sent to psychiatry before any further discussion"], correctAnswer: 2 },
-                            { text: "Before the doctor met the patient, a nurse told him his scan showed cancer. Which analysis best describes the problem?", type: "multiple", options: ["It helped, because the patient was prepared", "It was harmless, because patients want the truth", "It breached only confidentiality", "It was the same as the Invitation step", "It undermined the Setting step, since staff should not volunteer information before the doctor meets the patient, and planned disclosure"], correctAnswer: 4 },
-                            { text: "Doctor 1 warns first, gives news in small chunks, pauses, responds to emotion, summarises and arranges follow-up. Doctor 2 gives the diagnosis, treatment and prognosis in one go to be thorough. Which evaluation is best?", type: "multiple", options: ["Doctor 2 is better because thoroughness reduces distress", "Doctor 1 is better because the approach follows recommended practice and avoids information overload", "Both are equally good", "Doctor 1 is worse because warnings increase anxiety", "Doctor 2 is better because speed is the priority"], correctAnswer: 1 },
-                            { text: "Which statement precisely defines mental capacity in healthcare decision-making?", type: "multiple", options: ["The legal right of physicians to perform invasive tests on uncooperative patients without consent.", "The degree to which a person understands relevant information and appreciates foreseeable consequences.", "The automatic presumption that any patient with a psychiatric diagnosis lacks decision-making ability.", "The requirement that all healthcare decisions must be approved by hospital security personnel.", "The physical stamina of an individual to withstand major surgical procedures and general anesthesia."], correctAnswer: 1 },
-                            { text: "Under the core criteria of competence, a competent patient must be able to perform which three essential functions?", type: "multiple", options: ["Memorize anatomical terms, write medical prescriptions, and supervise nursing staff.", "Understand information, make a decision, and communicate any decision made.", "Afford treatment fees, provide legal identification, and sign a blanket waiver.", "Agree unconditionally with the surgical team, decline alternatives, and follow instructions silently.", "Read Latin terminology, consult judicial courts, and appoint an external advocate."], correctAnswer: 1 },
-                            { text: "The Mental Capacity Act 2005 (MCA) states that a person lacks capacity if they cannot perform at least one of four functional steps. Which is one of these mandatory steps?", type: "multiple", options: ["Pass a comprehensive written clinical examination administered by hospital directors.", "Retain the information relevant to the decision in their mind.", "Provide financial collateral before discussing elective interventions.", "Demonstrate total absence of any physical chronic illness or disability.", "Formulate an advance directive certified exclusively by a judge."], correctAnswer: 1 },
-                            { text: "In the two-stage test of mental capacity, what is evaluated specifically during Stage 1?", type: "multiple", options: ["Whether the person has an impairment of, or disturbance in the functioning of, their mind or brain.", "Whether the person has sufficient financial wealth to cover medical liabilities.", "Whether the treating physician holds a valid postgraduate degree in psychiatry.", "Whether the patient's immediate relatives agree with the treatment plan.", "Whether the patient has previously appointed an independent mental capacity advocate."], correctAnswer: 0 },
-                            { text: "A 64-year-old patient with severe major depression refuses life-saving cardiac surgery, stating they deserve to die. Which area of capacity assessment is compromised?", type: "multiple", options: ["The patient lacks the physical ability to sign an official medical form.", "The decision is substantially based on delusions or severe depression.", "The clinical team forgot to involve hospital security in the interview.", "The patient is legally classified as an emancipated minor under civil code.", "The hospital lacks an appropriate lasting power of attorney registry."], correctAnswer: 1 },
-                            { text: "Who is appropriately qualified to conduct a mental capacity assessment for a patient in healthcare settings?", type: "multiple", options: ["Exclusively a high-court judge presiding in a formal trial.", "A healthcare professional who knows the person well, such as a doctor, nurse, psychologist, or social worker.", "Only an external police investigator assigned to the clinical ward.", "Any hospital visitor present in the waiting room.", "Exclusively the hospital finance officer managing billing records."], correctAnswer: 1 },
-                            { text: "Which of the following medical scenarios represents an acute, potentially reversible cause of mental incompetence?", type: "multiple", options: ["A patient who makes an unconventional choice based on established religious values.", "Severe acute intoxication caused by alcohol or drug misuse leading to cognitive confusion.", "A competent adult who politely requests a second surgical opinion before consenting.", "An educated patient who asks detailed questions about drug side effects.", "A patient who signs an advance directive while fully oriented."], correctAnswer: 1 },
-                            { text: "What is the primary function of a Lasting Power of Attorney (LPA) in healthcare ethics and law?", type: "multiple", options: ["It transfers the doctor's malpractice liability entirely to insurance companies.", "It allows a person (donor) to appoint someone (attorney) to make decisions for them if they lose capacity.", "It automatically invalidates all existing patient rights upon admission to a hospital.", "It orders the immediate cessation of all medical care regardless of diagnosis.", "It mandates that hospital security guards act as surrogate family members."], correctAnswer: 1 },
-                            { text: "In the case of Farida (a 73-year-old Alzheimer patient with severe impairment, rectal bleeding, and fear of needles needing colonoscopy), how should 'best interest' be determined?", type: "multiple", options: ["Discharge the patient immediately without care because her fear makes treatment inconvenient.", "Force physical restraints without assessing her past values, caregiver input, or clinical benefits.", "The clinical team assesses best interests by weighing benefits, risks, past beliefs, and consulting her caregiver and sister.", "Delegate all medical decisions entirely to the local police department.", "Deem her refusal absolute and allow fatal deterioration without any clinical evaluation."], correctAnswer: 2 },
-                            { text: "Which of the following clinical situations involving an incompetent patient legally mandates referral to the Court of Protection?", type: "multiple", options: ["Prescribing standard oral antibiotic therapy for acute bacterial pharyngitis.", "Withdrawing artificial nutrition and hydration from a person in a permanent vegetative state.", "Performing routine venipuncture to monitor baseline serum electrolyte levels.", "Applying a simple sterile dry gauze dressing to a superficial dermal abrasion.", "Administering seasonal influenza immunization during routine outpatient clinics."], correctAnswer: 1 }
-                        ]
-                    },
-                    comprehensive: {
-                        title: "Exam 4 (Comprehensive - All 71 Questions)",
-                        questions: []
+                    all: {
+                        title: "الامتحان الشامل لكل الأسئلة",
+                        questions: [] // سيتم دمجها برمجياً
                     }
                 }
             },
-            biochemistry: {
-                title: "Biochemistry Level 1 (L1 - L10)",
-                essayUrl: "#",
-                bankUrl: "#",
+            lec1_2: {
+                title: "L1-2. What is history taking",
                 quizzes: {
-                    biochem_all: {
-                        title: "Biochemistry Complete Question Bank (L1-L10)",
+                    q1: {
+                        title: "أسئلة مراجعة L1-2",
                         questions: [
-                            { text: "The aldose sugar is:", type: "multiple", options: ["Glyceraldehyde", "Ribulose", "Erythrulose", "Dihydroxyacetone", "Xylulose"], correctAnswer: 0 },
-                            { text: "A pentose sugar is:", type: "multiple", options: ["Dihydroxyacetone", "Ribulose", "Erythrose", "Glucose", "Fructose"], correctAnswer: 1 },
-                            { text: "Isomers differing as a result of variations in configuration of the -OH and -H on carbon atoms 2, 3 or 4 of glucose are known as:", type: "multiple", options: ["Epimers", "Anomers", "Aldose and ketose isomers", "Enantiomers"], correctAnswer: 0 },
-                            { text: "α-D-glucose and β-D-glucose are:", type: "multiple", options: ["Enantiomers", "Epimers", "Anomers", "Aldose and ketose isomers"], correctAnswer: 2 },
-                            { text: "Sugar found in DNA is:", type: "multiple", options: ["Xylose", "Ribose", "Deoxyribose", "Ribulose"], correctAnswer: 2 },
-                            { text: "Sugar alcohol is:", type: "multiple", options: ["Mannitol", "Trehalose", "Xylulose", "Arabinose"], correctAnswer: 0 },
-                            { text: "Galactose and glucose are:", type: "multiple", options: ["Epimers", "Anomers", "Ketose-aldose isomers", "Enantiomers"], correctAnswer: 0 },
-                            { text: "Constituent unit of inulin is:", type: "multiple", options: ["Glucose", "Fructose", "Mannose", "Galactose"], correctAnswer: 1 },
-                            { text: "The sugar found in milk is:", type: "multiple", options: ["Mannose", "Glucose", "Fructose", "Lactose"], correctAnswer: 3 },
-                            { text: "Sucrose consists of:", type: "multiple", options: ["Glucose + glucose", "Glucose + fructose", "Glucose + galactose", "Glucose + mannose"], correctAnswer: 1 },
-                            { text: "A heteropolysaccharide among the following is:", type: "multiple", options: ["Inulin", "Cellulose", "Heparin", "Dextrin"], correctAnswer: 2 },
-                            { text: "Storage form of carbohydrates in animals:", type: "multiple", options: ["Glycogen", "Starch", "Maltose", "Cellulose"], correctAnswer: 0 },
-                            { text: "The storage form of lipid inside the body is:", type: "multiple", options: ["Glycogen", "Proteins", "Cholesterol", "Triacylglycerol", "Phospholipid"], correctAnswer: 3 },
-                            { text: "Oleic acid is:", type: "multiple", options: ["ω 3", "ω 6", "ω 7", "ω 9", "ω 12"], correctAnswer: 3 },
-                            { text: "The number of double bonds in arachidonic acid is:", type: "multiple", options: ["1", "3", "5", "4"], correctAnswer: 3 },
-                            { text: "Which one of the following is an ω3 fatty acid?", type: "multiple", options: ["Maltose", "Phenylalanine", "Glycogen", "Linolenic acid", "Oleic acid"], correctAnswer: 3 },
-                            { text: "Omega 6 fatty acids are:", type: "multiple", options: ["Fatty acids contain omega substance", "Fatty acids have no double bond", "Fatty acids have a double bond at C6 from the methyl carbon", "Fatty acids have 6 carbons", "Fatty acids have a double bond at C6 from the carboxyl carbon"], correctAnswer: 2 },
-                            { text: "As regards essential fatty acids:", type: "multiple", options: ["They cannot be synthesized in the body and must be taken in the diet", "They contain one double bond", "They are soluble in water", "They have a high melting temperature", "They can be synthesized in the body"], correctAnswer: 0 },
-                            { text: "Non-essential fatty acids are:", type: "multiple", options: ["Synthesized in the body and not needed in the diet", "Not essential for the body", "All are mono and polyunsaturated fatty acids", "Contain a double bond beyond C9", "Arachidonic acid and oleic acid"], correctAnswer: 0 },
-                            { text: "Which of the following phospholipids acts as surfactant?", type: "multiple", options: ["Cephaline", "Phosphatidyl serine", "Phosphatidyl ethanolamine", "Phosphatidyl inositol", "Dipalmitoyl lecithin"], correctAnswer: 4 },
-                            { text: "Among the functions of phospholipids is:", type: "multiple", options: ["Potential source of energy", "Essential component of cell membrane", "Storage form of lipid", "Thermal insulator of the body", "Electric insulator of the body"], correctAnswer: 1 },
-                            { text: "On hydrolysis of phosphatidyl choline it will produce:", type: "multiple", options: ["Glycerol alcohol + 2 fatty acids + phosphate", "Glycerol alcohol + 2 fatty acids + phosphate + ethanolamine", "Glycerol alcohol + 2 fatty acids + phosphate + choline base", "Glycerol alcohol + 1 fatty acid + phosphate + ethanolamine"], correctAnswer: 2 },
-                            { text: "A 7-year-old male child presented with recurrent chest infection and persistent cough. The doctor advised his parents to measure Cl in sputum; the Cl was low, and the diagnosis was confirmed as cystic fibrosis. This condition is most probably due to:", type: "multiple", options: ["Defect in membrane lipid", "Defect in Cl channels", "Defect in membrane cholesterol", "Defect in peripheral membrane protein", "Defect in membrane phospholipids"], correctAnswer: 1 },
-                            { text: "As regards cholesterol:", type: "multiple", options: ["It is an unsaturated fatty acid", "Its normal level is 300-400 mg/dl", "It is present mainly in plant food", "It is an animal steroid present mainly in animal food", "It is the storage form of steroid in the body"], correctAnswer: 3 },
-                            { text: "Storage form of cholesterol is:", type: "multiple", options: ["About 80% of total cholesterol", "Cholesterol ester", "Plant steroid", "Water-soluble form of cholesterol", "Derived from steroid hormones"], correctAnswer: 1 },
-                            { text: "Deficiency of this amino acid in the diet can result in a disease:", type: "multiple", options: ["Glycine", "Tryptophan", "Aspartic", "Tyrosine", "Serine"], correctAnswer: 1 },
-                            { text: "is an aliphatic basic amino acid:", type: "multiple", options: ["Glutamic", "Serine", "Valine", "Cysteine", "Lysine"], correctAnswer: 4 },
-                            { text: "Which one of the following amino acids is essential?", type: "multiple", options: ["Alanine", "Valine", "Tyrosine", "Serine", "Proline"], correctAnswer: 1 },
-                            { text: "Which one of the following is an aromatic amino acid with a polar uncharged side chain?", type: "multiple", options: ["Tyrosine", "Tryptophan", "Phenylalanine", "Proline", "Histidine"], correctAnswer: 0 },
-                            { text: "is an essential amino acid with a polar uncharged side chain:", type: "multiple", options: ["Valine", "Leucine", "Methionine", "Threonine", "Isoleucine"], correctAnswer: 3 },
-                            { text: "Define isoelectric pH:", type: "multiple", options: ["The pH at which an amino acid is converted from D to L form", "The pH at which an amino acid carries a net positive charge", "The pH at which an amino acid carries a net negative charge", "The pH at which an amino acid carries a net zero charge", "The pH at which an amino acid moves toward the cathode"], correctAnswer: 3 },
-                            { text: "Define zwitter ions:", type: "multiple", options: ["Amino acids containing net positive charge", "Amino acids containing net negative charge", "Amino acids carrying both positive and negative charge and moving toward the cathode", "Amino acids carrying both positive and negative charge and not moving in an electric field", "Amino acids carrying both positive and negative charge and moving toward the anode"], correctAnswer: 3 },
-                            { text: "One of the following statements is FALSE regarding the primary structure of a protein:", type: "multiple", options: ["Defined as the number, types, and order of amino acids", "Determines the 2ry, 3ry and quaternary structure of the protein", "Maintained by non-covalent bonds", "Cannot be disrupted by heating or mild acid treatment", "Determined by the nucleotide sequence on DNA"], correctAnswer: 2 },
-                            { text: "Each turn of the α-helix contains the following number of amino acid residues:", type: "multiple", options: ["3.6", "3.0", "4.2", "4.5"], correctAnswer: 0 },
-                            { text: "In proteins, the α-helix and β-pleated sheet are examples of:", type: "multiple", options: ["Primary structure", "Secondary structure", "Tertiary structure", "Quaternary structure"], correctAnswer: 1 },
-                            { text: "Protein denaturation causes all of the following EXCEPT:", type: "multiple", options: ["Loss of protein normal native conformation", "Loss of biological activity of enzymes and hormones", "Loss of antigenicity of the protein", "Loss of one of the essential amino acids", "Proteins of the diet become more easily digested"], correctAnswer: 3 },
-                            { text: "Proteins in cooked foods:", type: "multiple", options: ["Are high biological value proteins", "Are present in their functional conformation", "Lost their peptide bonds", "Are less viscid than their uncooked counterpart", "Are less soluble proteins"], correctAnswer: 4 },
-                            { text: "Which of the following is the major bond in the protein secondary structure?", type: "multiple", options: ["Disulfide bond", "Ionic bond", "Hydrogen bond", "Peptide bond", "Hydrophobic interaction"], correctAnswer: 2 },
-                            { text: "The α-helix is stabilized by which of the following?", type: "multiple", options: ["Interchain hydrogen bonds", "Intrachain hydrogen bonds", "Ionic bonds", "Disulfide bonds", "Hydrophobic interaction"], correctAnswer: 1 },
-                            { text: "The β-pleated sheet is stabilized by which of the following?", type: "multiple", options: ["Interchain hydrogen bonds", "Intrachain hydrogen bonds", "Ionic bonds", "Disulfide bonds", "Both a and b"], correctAnswer: 0 },
-                            { text: "Which of the following is a tripeptide?", type: "multiple", options: ["Anserine", "Oxytocin", "Glutathione", "Kallidin", "Albumin"], correctAnswer: 2 },
-                            { text: "A tripeptide functioning as an important reducing agent in the tissues is:", type: "multiple", options: ["Bradykinin", "Kallidin", "Tyrocidin", "Glutathione", "Endorphin"], correctAnswer: 3 },
-                            { text: "The tertiary structure of a protein describes:", type: "multiple", options: ["The order of amino acids", "Location of disulphide bonds", "Loop regions of proteins", "The ways of protein folding"], correctAnswer: 3 },
-                            { text: "In a protein molecule the disulphide bond is not broken by:", type: "multiple", options: ["Reduction", "Oxidation", "Denaturation", "X-ray diffraction"], correctAnswer: 2 },
-                            { text: "Linker DNA is formed of:", type: "multiple", options: ["50 bp", "146 bp", "5 bp", "1000 bp"], correctAnswer: 0 },
-                            { text: "What is the simplest unit of DNA-protein interaction?", type: "multiple", options: ["Nucleotides", "Nucleosomes", "Nucleosides", "Nucleic acid"], correctAnswer: 1 },
-                            { text: "What is the most common form of DNA?", type: "multiple", options: ["A form", "Z form", "B form", "m form"], correctAnswer: 2 },
-                            { text: "Histone proteins usually have a high proportion of amino acids:", type: "multiple", options: ["Positively-charged", "Negatively-charged", "Hydrophobic", "Aromatic", "Heterocyclic"], correctAnswer: 0 },
-                            { text: "What are the components of a nucleotide?", type: "multiple", options: ["Nitrogenous base", "Nitrogenous base + sugar", "Nitrogenous base + sugar + phosphate", "Purine base + phosphate", "Purine or pyrimidine + sugar"], correctAnswer: 2 },
-                            { text: "Nucleoside contains:", type: "multiple", options: ["Base-sugar", "Base-phosphate", "Base-sugar-phosphate", "Sugar-phosphate"], correctAnswer: 0 },
-                            { text: "The sugar molecule present in a nucleotide is:", type: "multiple", options: ["Triose", "Tetrose", "Pentose", "Hexose"], correctAnswer: 2 },
-                            { text: "Purine base found in RNA is:", type: "multiple", options: ["Cytosine", "Thymine", "Guanine", "Uracil"], correctAnswer: 2 },
-                            { text: "Find the correct statement about the phosphodiester linkage between adjacent nucleotides in nucleic acids:", type: "multiple", options: ["3'-phosphate of one nucleotide joins the 3'-hydroxyl of the next nucleotide", "3'-phosphate of one nucleotide joins the 5'-hydroxyl of the next nucleotide", "5'-phosphate of one nucleotide joins the 5'-hydroxyl of the next nucleotide", "3'-hydroxyl of one nucleotide joins the 5'-phosphate of the next nucleotide"], correctAnswer: 3 },
-                            { text: "As regards tRNA, which of the following statements describes its function?", type: "multiple", options: ["It is the machinery for protein synthesis", "Carrying amino acids to the site of protein synthesis", "It stores the genetic information", "Peptide bond formation"], correctAnswer: 1 },
-                            { text: "Which of the following types represents 80% of total RNA?", type: "multiple", options: ["mRNA", "tRNA", "rRNA", "microRNA"], correctAnswer: 2 },
-                            { text: "Which of the following carries the genetic codes of a gene from the nucleus to the cytosol?", type: "multiple", options: ["tRNA", "Histones", "mRNA", "Ribosomal RNA"], correctAnswer: 2 },
-                            { text: "Which type represents 5% of total RNA?", type: "multiple", options: ["mRNA", "rRNA", "tRNA", "microRNA"], correctAnswer: 0 },
-                            { text: "Which strand grows continuously towards the replication fork?", type: "multiple", options: ["Lagging strand", "DNA strand", "RNA strand", "Replicating strand", "Leading strand"], correctAnswer: 4 },
-                            { text: "DNA polymerase is a template-directed enzyme that synthesizes a new complementary strand from a parent strand, but it requires an existing short nucleotide sequence for its elongation. Which of the following enzymes is required for the synthesis of this primer?", type: "multiple", options: ["Primase/RNA polymerase", "RNA synthase", "DNA synthase", "Helicase", "DNA polymerase"], correctAnswer: 0 },
-                            { text: "In prokaryotes, DNA replication begins at a single site, where the two strands unwind and separate. This ATP-dependent process is catalyzed by a protein called:", type: "multiple", options: ["DnaA protein", "Single strand binding protein", "DNA polymerase", "Topoisomerase", "Primase/RNA polymerase"], correctAnswer: 0 },
-                            { text: "DNA replication occurs in a semi-conservative manner, which means:", type: "multiple", options: ["Two daughter cells, one consisting of double helical parent DNA, the other having newly synthesized DNA", "Two daughter cells each consisting of one parental strand and one newly synthesized strand", "Two daughter cells each consisting of one-half parental and another half newly synthesized strand resulting from crossover", "All of the above", "None of the above"], correctAnswer: 1 },
-                            { text: "Nalidixic acid inhibits:", type: "multiple", options: ["Topoisomerase I", "Topoisomerase II", "Gyrase", "DnaA protein", "Single stranded DNA binding protein"], correctAnswer: 2 },
-                            { text: "Which of the following enzymes has a unique ability to introduce positive and negative supercoiling of the DNA and is the target for antibacterial agents such as nalidixic acid?", type: "multiple", options: ["DnaA protein", "DNA helicase", "DNA gyrase", "DNA polymerase", "Single stranded DNA binding protein"], correctAnswer: 2 },
-                            { text: "What enzyme replaces the RNA primer on the leading strand of prokaryotes with DNA?", type: "multiple", options: ["DNA polymerase III", "Ligase", "DNA polymerase I", "Helicase", "Topoisomerase"], correctAnswer: 2 },
-                            { text: "In eukaryotes, DNA polymerase alpha is a multi-subunit enzyme with different functions. They include:", type: "multiple", options: ["Elongation of the leading strand", "3'-5' exonuclease activity", "Initiation and synthesis of RNA primer", "High processivity", "Synthesis of DNA primer"], correctAnswer: 2 },
-                            { text: "3' 5' exonuclease of DNA polymerase I:", type: "multiple", options: ["Removes RNA primer", "Removes mismatched nucleotide in 5'->3' direction", "Removes mismatched nucleotide in 3'->5' direction", "Removes matched nucleotide in 5'->3' direction", "Removes matched nucleotide in 3'->5' direction"], correctAnswer: 2 },
-                            { text: "In eukaryotes, which of the following DNA polymerases is required for mitochondrial DNA replication?", type: "multiple", options: ["Pol alpha", "Pol beta", "Pol gamma", "Polymerase I", "Pol delta"], correctAnswer: 2 },
-                            { text: "Which of the following is used in prokaryotes as the main enzyme of replication?", type: "multiple", options: ["DNA polymerase I", "DNA polymerase II", "DNA polymerase III", "DNA polymerase α", "DNA polymerase β"], correctAnswer: 2 },
-                            { text: "Which of the following DNA polymerases synthesizes primers in eukaryotic cells?", type: "multiple", options: ["Beta", "Gamma", "Delta", "Alpha", "Epsilon"], correctAnswer: 3 },
-                            { text: "DNA polymerase III holoenzyme possesses:", type: "multiple", options: ["3'5' polymerase activity only", "3'5' endonuclease activity", "3'5' exonuclease activity and 5'->3' polymerase activity", "5'->3' exonuclease activity"], correctAnswer: 2 }
+                            { text: "History taking is primarily intended to:", options: ["Obtain information useful for diagnosis and care", "Replace all physical examination", "Avoid speaking to the patient", "Record only investigation results"], correctAnswer: 0 },
+                            { text: "Which is NOT a component of history taking itself?", options: ["Recording personal information", "Measuring blood pressure with a sphygmomanometer", "Asking about children", "Recording previous surgery"], correctAnswer: 1 },
+                            { text: "The chief complaint should be recorded:", options: ["Only as the doctor's diagnosis", "Without its onset or duration", "In the patient's own words with duration", "Only in medical jargon"], correctAnswer: 2 },
+                            { text: "Which is an appropriate opening question?", options: ["You have angina, don't you?", "You have no other symptoms, correct?", "Why did you ignore your symptoms?", "What brought you here today?"], correctAnswer: 3 },
+                            { text: "Which question type should generally be avoided because it biases the answer?", options: ["Leading questions", "Open questions", "Neutral questions", "Focused clarifying questions"], correctAnswer: 0 },
+                            { text: "In SOCRATES, R stands for:", options: ["Recovery", "Radiation", "Religion", "Respiration"], correctAnswer: 1 },
+                            { text: "In the lecture's SOCRATES expansion, A and E refer to:", options: ["Age and ethnicity", "Appetite and examination", "Alleviating and exacerbating factors", "Allergy and edema"], correctAnswer: 2 },
+                            { text: "Which symptom is NOT primarily gastrointestinal?", options: ["Heartburn", "Abdominal pain", "Vomiting", "Orthopnea"], correctAnswer: 3 },
+                            { text: "Which is a cardiovascular symptom?", options: ["Chest pain", "Hematemesis", "Painful swallowing", "Change in bowel habit"], correctAnswer: 0 },
+                            { text: "The lecture lists all of the following as female-predominant associations EXCEPT:", options: ["Hypothyroidism", "COPD", "SLE", "Cholecystitis"], correctAnswer: 1 },
+                            { text: "The lecture's male-predominant list does NOT include:", options: ["COPD", "Ischemic heart disease", "Hypothyroidism", "Carcinomas"], correctAnswer: 2 },
+                            { text: "Which is NOT in the lecture's list of diseases common in children?", options: ["Hemophilia", "Acute leukemia", "Poliomyelitis", "Carcinomas"], correctAnswer: 3 },
+                            { text: "A battery-factory worker's anemia and peripheral neuropathy should prompt questions about:", options: ["Lead exposure", "Only marital status", "Only family size", "Only dietary preferences"], correctAnswer: 0 },
+                            { text: "Consanguinity is relevant to family history because it can:", options: ["Exclude every genetic disorder", "Increase the likelihood of some inherited recessive disorders", "Replace the need for a pedigree", "Prove a particular diagnosis by itself"], correctAnswer: 1 },
+                            { text: "Which belongs specifically in past surgical/anesthetic history?", options: ["Only the current chief complaint", "Only the patient's occupation", "Previous operations, transfusions and anesthesia complications", "Only today's measured temperature"], correctAnswer: 2 },
+                            { text: "All the following are items for valid history taking except:", options: ["Sphygmomanometer use for blood pressure measurement", "Personal Information", "Questioning about the offspring", "Writing the previous surgical operations done."], correctAnswer: 0 },
+                            { text: "The following are diseases common in female except:", options: ["Hypothyroidism", "SLE", "Cholecystitis", "COPD"], correctAnswer: 3 },
+                            { text: "The following are diseases common in males except:", options: ["COPD", "IHD", "Carcinomas", "Hypothyroidism"], correctAnswer: 3 },
+                            { text: "The following are diseases common in children Except:", options: ["Carcinomas", "Hemophilia", "Acute Leukemia", "Poliomyelitis"], correctAnswer: 0 },
+                            { text: "The following can be gastro-intestinal symptoms except:", options: ["Heartburn", "Abdominal Pain", "Vomiting", "Orthopnea"], correctAnswer: 3 }
+                        ]
+                    }
+                }
+            },
+            lec3: {
+                title: "L3. Interprofessionalism definition",
+                quizzes: {
+                    q1: {
+                        title: "أسئلة مراجعة L3",
+                        questions: [
+                            { text: "Medical, nursing and pharmacy students learn about, from and with each other. This is:", options: ["Interprofessional education", "Only shared decision-making", "Only patient-centered practice", "A diagnostic investigation"], correctAnswer: 0 },
+                            { text: "Different health professions delivering coordinated care with patients and families demonstrates:", options: ["Learning alone within one profession", "Interprofessional practice", "A unilateral decision without patient involvement", "Only an individual technical skill"], correctAnswer: 1 },
+                            { text: "What is the foundation of effective interprofessional practice in the lecture?", options: ["Professional rivalry", "Unshared terminology", "Effective communication", "Working without feedback"], correctAnswer: 2 },
+                            { text: "Mutual respect and shared values belong to which core competency?", options: ["Only investigation facilities", "Only technical equipment", "Only treatment cost", "Values and ethics"], correctAnswer: 3 },
+                            { text: "Recognizing one's limits and another profession's expertise illustrates:", options: ["Roles and responsibilities", "Only privacy policy", "Only personal ambition", "Only clinical examination"], correctAnswer: 0 },
+                            { text: "A shared understandable lexicon primarily improves:", options: ["Only hospital architecture", "Interprofessional communication", "Only staff uniforms", "Only appointment billing"], correctAnswer: 1 },
+                            { text: "Coordinating services to avoid duplication is an example of:", options: ["Fragmentation", "Professional isolation", "Teams and teamwork", "Unnecessary repetition"], correctAnswer: 2 },
+                            { text: "Which is NOT one of the four interprofessional competencies?", options: ["Values/ethics", "Roles/responsibilities", "Communication", "Competition for exclusive control"], correctAnswer: 3 },
+                            { text: "The Triple Aim includes better individual care, lower cost and:", options: ["Improved population health", "More unnecessary admissions", "Longer delays", "Reduced patient involvement"], correctAnswer: 0 },
+                            { text: "Which STEEEP dimension minimizes waits and delays?", options: ["Equitable", "Timely", "Efficient", "Patient-centered"], correctAnswer: 1 },
+                            { text: "Choosing an intervention with demonstrated evidence of benefit best illustrates:", options: ["Wasteful care", "Professional isolation", "Effective care", "Unnecessary delay"], correctAnswer: 2 },
+                            { text: "Avoiding unnecessary waste and using resources cost-effectively illustrates:", options: ["Only equal treatment volumes", "Only a favorable test result", "Only fast speech", "Efficient care"], correctAnswer: 3 },
+                            { text: "Respecting individual preferences, needs and values is:", options: ["Patient-centered care", "Automatic clinician-only decision-making", "Duplication of services", "Discrimination"], correctAnswer: 0 },
+                            { text: "Clinicians and patients sharing evidence when choosing tests and treatments is:", options: ["A replacement for evidence", "Shared decision-making", "Only an administrative handover", "A decision by the employer"], correctAnswer: 1 },
+                            { text: "Which patient especially benefits from interprofessional collaboration?", options: ["Only healthy staff attending a meeting", "Only a person needing no care", "An older patient with multiple chronic conditions", "No patient with complex disease"], correctAnswer: 2 }
+                        ]
+                    }
+                }
+            },
+            lec4: {
+                title: "L4. Safety as a cornerstone I",
+                quizzes: {
+                    q1: {
+                        title: "أسئلة مراجعة L4",
+                        questions: [
+                            { text: "The lecture's teaching threshold for hospital-acquired infection is onset:", options: ["At least 48 hours after admission", "Always before admission", "Only within the first minute", "Only after 10 years"], correctAnswer: 0 },
+                            { text: "Jasmine has fever, wound redness, pain and pus after hip replacement. The likely HAI type is:", options: ["Only an uncomplicated drug side effect", "Surgical-site infection", "A normal healing sign in every case", "A genetic disorder"], correctAnswer: 1 },
+                            { text: "Which is an animate exogenous source of HAI?", options: ["The patient's own intestinal flora", "Intravenous fluid", "Other patients", "A ventilator surface"], correctAnswer: 2 },
+                            { text: "An endogenous source is:", options: ["A contaminated hospital water system", "Another patient's flora", "A staff member's contaminated hands", "The patient's own flora"], correctAnswer: 3 },
+                            { text: "The most important vehicle of HAI transmission emphasized in the lecture is:", options: ["Hands", "Only food", "Only aerosols", "Only insects"], correctAnswer: 0 },
+                            { text: "Which is a central-line-related HAI category?", options: ["CAUTI", "CLABSI", "VAP", "Migraine"], correctAnswer: 1 },
+                            { text: "Which group is classically associated with airborne precautions?", options: ["Only influenza and mumps", "Only MRSA and C. difficile", "TB, measles and varicella", "Only food poisoning"], correctAnswer: 2 },
+                            { text: "When should a respirator for airborne precautions be donned?", options: ["Only after leaving the room", "Only after touching the patient", "Only if symptoms develop in the worker", "Before entering the patient's room"], correctAnswer: 3 },
+                            { text: "MRSA and C. difficile are lecture examples for:", options: ["Contact precautions", "No precautions", "Protective isolation alone", "Only vector control"], correctAnswer: 0 },
+                            { text: "Positive-pressure HEPA-filtered protective environments are intended mainly to:", options: ["Contain infectious air from all airborne cases", "Protect selected highly susceptible patients from environmental infection", "Replace hand hygiene", "Allow staff to omit PPE in every situation"], correctAnswer: 1 },
+                            { text: "Which increases HAI susceptibility?", options: ["Always having a short consultation", "Clear communication alone", "Immune compromise and prolonged hospital stay", "Use of a readable identity label"], correctAnswer: 2 },
+                            { text: "Which is the correct sequence in the chain of infection?", options: ["Host → treatment → billing → discharge", "Reservoir cure vaccination diagnosis", "Portal of entry → discharge → hospital fee", "Agent → reservoir → portal of exit → transmission → portal of entry → susceptible host"], correctAnswer: 3 },
+                            { text: "An HAI outbreak is:", options: ["More cases of a specific healthcare-acquired infection than normally expected", "Every isolated fever regardless of cause", "Only two different noninfectious diseases", "Only a positive environmental sample without context"], correctAnswer: 0 },
+                            { text: "Which is a molecular typing method listed in the lecture?", options: ["Only visual inspection", "Pulsed-field gel electrophoresis", "Only bed occupancy counting", "Only temperature measurement"], correctAnswer: 1 },
+                            { text: "The first organizational step in the lecture's outbreak flowchart is to:", options: ["Immediately announce patient names publicly", "Close every hospital permanently", "Notify the Director of Infection Control", "Give prophylaxis to everyone without assessment"], correctAnswer: 2 },
+                            { text: "Animate exogenous source of HAI includes:", options: ["Hospital environment", "Intravenous fluids", "Medical devices", "Other patients flora"], correctAnswer: 3 },
+                            { text: "The most common mode of transmission of health care associated infection is:", options: ["Hands", "Droplet", "Airborne", "Food"], correctAnswer: 0 },
+                            { text: "For airborne precautions, HCWs use disposable respirator:", options: ["when dealing with patient", "After exit from room", "Before room entry", "Only beside the patient bed"], correctAnswer: 2 }
+                        ]
+                    }
+                }
+            },
+            lec5: {
+                title: "L5. Safety as a cornerstone II",
+                quizzes: {
+                    q1: {
+                        title: "أسئلة مراجعة L5",
+                        questions: [
+                            { text: "Which is included in the term hand hygiene?", options: ["Handwashing, antiseptic hand rub and surgical hand antisepsis", "Only wearing gloves", "Only changing a gown", "Only cleaning the floor"], correctAnswer: 0 },
+                            { text: "Which statement about transient hand organisms is correct?", options: ["They are never transmitted", "They can be acquired through contact and contribute to transmission", "They eliminate the need for hygiene", "They exist only in the bloodstream"], correctAnswer: 1 },
+                            { text: "Before a clean or aseptic procedure, hand hygiene is:", options: ["Unnecessary if the patient looks healthy", "Needed only after the procedure", "One of the WHO five moments", "Replaced automatically by a face shield"], correctAnswer: 2 },
+                            { text: "After touching only the patient's surroundings, hand hygiene is:", options: ["Never needed", "Needed only if there was direct patient touch", "Replaced by closing the door", "Still an indicated WHO moment"], correctAnswer: 3 },
+                            { text: "For an antiseptic hand rub, the hands should be rubbed:", options: ["Over all surfaces until dry using the appropriate volume", "Only on the fingertips for one second", "Until they remain visibly wet inside gloves", "Without considering product instructions"], correctAnswer: 0 },
+                            { text: "Which usually calls for soap and water rather than hand rub alone?", options: ["Every phone call regardless of exposure", "Visibly dirty or soiled hands", "Only a need to save time", "A clean intact glove package"], correctAnswer: 1 },
+                            { text: "WHO's usual duration for the complete healthcare handwashing procedure is:", options: ["1-2 seconds", "5-10 seconds", "40-60 seconds", "Exactly 3 minutes for all routine washing"], correctAnswer: 2 },
+                            { text: "Which is a standard isolation PPE donning sequence?", options: ["Gloves → gown → mask → eye protection", "Mask → gloves → eye protection → gown", "Eye protection → gloves → gown → mask", "Gown → mask/respirator → eye protection → gloves"], correctAnswer: 3 },
+                            { text: "Which PPE item should be donned last in the lecture's isolation sequence?", options: ["Gloves", "Gown", "Mask", "Goggles"], correctAnswer: 0 },
+                            { text: "Gloves should extend:", options: ["Only to the fingertips", "Over the isolation-gown cuffs", "Under the palm without covering the wrist", "Over the eyes"], correctAnswer: 1 },
+                            { text: "When removing a used mask, handle:", options: ["The outer front only", "The center fabric with bare fingertips", "The ties or elastics, avoiding the contaminated front", "Any surface without hand hygiene afterwards"], correctAnswer: 2 },
+                            { text: "The common isolation doffing example begins with:", options: ["The clean hand towel", "A new pair of gloves", "The patient's bedding", "Gloves"], correctAnswer: 3 },
+                            { text: "Used sharps should be discarded into a container that is:", options: ["Puncture-resistant, leak-resistant, labeled and close to the point of use", "Open, fragile and far from the procedure", "An ordinary paper bag", "An unmarked drink bottle"], correctAnswer: 0 },
+                            { text: "The lecture's maximum sharps-container fill level is approximately:", options: ["Completely overfilled", "Three-quarters full", "One-quarter in every situation", "No limit if needles are small"], correctAnswer: 1 },
+                            { text: "If recapping is genuinely required, the safer method is:", options: ["Holding the cap in the other hand", "Passing an exposed needle to a colleague", "An approved one-handed scoop or mechanical device", "Bending the needle with bare hands"], correctAnswer: 2 }
+                        ]
+                    }
+                }
+            },
+            interprofessional_revision: {
+                title: "Interprofessional Revision",
+                quizzes: {
+                    q1: {
+                        title: "أسئلة مراجعة Interprofessionalism",
+                        questions: [
+                            { text: "According to the World Health Organization (WHO), what is the definition of interprofessional practice?", options: ["Doctors giving authoritative clinical instructions to junior healthcare assistants.", "Multiple health workers from different professional backgrounds working together with patients, families, caregivers, and communities to deliver the highest quality of care.", "Physicians consulting legal attorneys prior to outpatient medication prescribing.", "Hospital administrative staff operating specialized surgical ward equipment."], correctAnswer: 1 },
+                            { text: "Which statement captures the core mechanism and educational purpose of Interprofessional Education (IPE)?", options: ["Students from separate medical faculties attend isolated lectures in separate buildings.", "Students from two or more professions learn about, from, and with each other to enable effective collaboration and improve health outcomes.", "Medical students memorize pharmaceutical drug pricing guides independently.", "A single professor lectures medical students on basic hospital licensing statutes."], correctAnswer: 1 },
+                            { text: "What represents the essential foundation of effective interprofessional practice?", options: ["Effective communication", "High-cost commercial software", "Strict judicial oversight", "Mandatory paper prescriptions"], correctAnswer: 0 },
+                            { text: "Under the STEEEP quality model, high-quality healthcare must be:", options: ["Safe, Timely, Effective, Efficient, Equitable, and Patient-centered", "Standardized, Technical, Expensive, Experimental, Exclusive, and Private", "Strict, Theoretical, Economic, Emergency-focused, Enforced, and Physician-centered", "Sequential, Timed, Evaluated, Electronic, Extended, and Protocol-driven"], correctAnswer: 0 },
+                            { text: "Within the STEEEP quality framework, how is 'Safe healthcare' defined?", options: ["Minimizing healthcare costs by eliminating diagnostic imaging tests.", "Reduction of risk and minimization of harm to patients from care intended to help them.", "Providing identical clinical treatments to all patients regardless of personal need.", "Ensuring care does not vary based on socioeconomic background."], correctAnswer: 1 },
+                            { text: "Which clinical objective corresponds specifically to the 'Timely' domain of the STEEEP model?", options: ["Minimizing wait times and sometimes harmful delays for both patients and healthcare providers.", "Avoiding financial waste of hospital surgical equipment and energy.", "Providing healthcare strictly based on laboratory research trials.", "Adhering to strict traditional physician-led hierarchies."], correctAnswer: 0 },
+                            { text: "In the STEEEP framework, what is the core characteristic of 'Effective healthcare'?", options: ["Using innovative treatments before conducting safety research.", "Adhering to evidence-based medicine: selecting methods with proven benefits and avoiding unproven care.", "Allowing patients to select experimental therapies without physician advice.", "Discharging patients immediately following triage."], correctAnswer: 1 },
+                            { text: "How does the STEEEP framework define 'Efficient healthcare'?", options: ["Refusing to order follow-up tests for chronic medical conditions.", "Cost-effective care that avoids waste of equipment, supplies, ideas, and energy.", "Ensuring care varies according to patient geographic residence.", "Limiting consultations strictly to five minutes per patient."], correctAnswer: 1 },
+                            { text: "Which statement accurately describes 'Equitable healthcare' according to the STEEEP model?", options: ["Providing identical treatments regardless of underlying pathophysiology.", "Ensuring everyone has a fair opportunity to attain their full health without discrimination based on gender, race, or socioeconomic status.", "Prioritizing treatment for patients living in urban centers.", "Offering specialty care only to individuals with private health insurance."], correctAnswer: 1 },
+                            { text: "What is the defining principle of 'Patient-centered care' in the STEEEP quality model?", options: ["Allowing family members to overrule a competent patient's wishes.", "Providing care that is respectful of and responsive to individual patient preferences, needs, and values, ensuring patient values guide all decisions.", "Excluding patients from clinical decision-making to reduce anxiety.", "Prioritizing hospital protocol over individual cultural preferences in non-emergencies."], correctAnswer: 1 },
+                            { text: "Which clinical process best illustrates 'Shared decision-making' in healthcare practice?", options: ["A surgeon orders a procedure without explaining alternative options.", "Clinicians and patients share the best available clinical evidence to make collaborative decisions about tests, treatments, and care plans.", "A patient makes diagnostic choices without consulting medical providers.", "Hospital administrators determine clinical treatment protocols independently."], correctAnswer: 1 },
+                            { text: "Interprofessional practice is mandatory for which clinical groups?", options: ["Complicated cases, patients with chronic disease, and geriatric patients", "Healthy young adults presenting for routine employment check-ups", "Patients with minor superficial skin abrasions", "Outpatients requiring single-dose pain medications"], correctAnswer: 0 },
+                            { text: "The Institute for Healthcare Improvement (IHI) Triple Aim framework consists of:", options: ["Providing better care for each patient, reducing per capita cost, and improving population health", "Increasing hospital revenue, expanding clinical bed capacity, and training more surgeons", "Maximizing prescription drug sales, shortening nursing shifts, and privatizing clinics", "Standardizing surgical equipment, eliminating outpatient visits, and centralizing labs"], correctAnswer: 0 },
+                            { text: "How does interprofessional collaborative practice enhance the Triple Aim of healthcare?", options: ["By eliminating the need for nursing documentation in emergency wards.", "By increasing knowledge/skills, reducing medical errors/mortality, accelerating treatment, reducing costs, and improving staff relationships.", "By replacing specialized medical training with general administration.", "By mandating that all patient care decisions be arbitrated by judicial courts."], correctAnswer: 1 },
+                            { text: "What are the four recognized core competencies for interprofessional practice?", options: ["Ethics, Roles, Interprofessional Communication, and Teamwork", "Clinical diagnosis, Surgical technique, Pharmacology, and Pathology", "Financial billing, Legal arbitration, Marketing, and Facility management", "Inspection, Palpation, Percussion, and Auscultation"], correctAnswer: 0 },
+                            { text: "A surgical team holds a pre-op meeting where nurses, surgeons, and anesthesiologists openly voice safety concerns in a climate of mutual respect. Which competency is directly reflected?", options: ["Values and Ethics for interprofessional practice", "Therapeutic waiver privilege", "Statutory legal immunity", "Distributive organ rationing"], correctAnswer: 0 },
+                            { text: "A primary physician caring for an elderly diabetic patient with chronic foot ulcers consults a surgeon, a diabetes educator, and a clinical pharmacist, acknowledging the boundaries of their own expertise. This demonstrates:", options: ["A failure of basic medical training.", "Roles and responsibilities: respecting roles, recognizing limitations, and understanding team capabilities.", "Violation of patient confidentiality guidelines.", "Abandonment of clinical responsibility."], correctAnswer: 1 },
+                            { text: "Why does effective interprofessional communication emphasize using a 'shared lexicon' (common terminology)?", options: ["To prevent patients from understanding clinical discussions.", "Because clear communication with a shared lexicon improves team functioning, whereas poor communication disrupts teamwork.", "To ensure only physicians are allowed to speak during rounds.", "To replace written medical records with verbal handoffs."], correctAnswer: 1 },
+                            { text: "Which set of clinical and systemic benefits has been directly linked to effective interprofessional teamwork?", options: ["Increased emergency readmissions and fragmented services.", "Avoidance of service duplication, fewer out-of-hours visits, reduced hospital length of stay, fewer ER admissions, and lower costs.", "Longer hospital stays and higher consultation fees.", "Elimination of all outpatient clinical appointments."], correctAnswer: 1 },
+                            { text: "A 53-year-old man arrives at the emergency room after a major motor vehicle accident with impaired consciousness, diabetic history, and substance use. Which team configuration represents the optimal interprofessional care team?", options: ["A single trauma surgeon managing all surgical, toxicological, nursing, and metabolic needs alone.", "Emergency physician, trauma surgeon, emergency nurses, clinical pharmacist, radiologist/radiographer, and social worker/addiction counselor.", "Hospital billing clerk, security officer, and pharmacy cashier.", "Administrative hospital board directors and legal counsel."], correctAnswer: 1 },
+                            { text: "According to the National Academy of Sciences (2015), what is the definition of a team in healthcare?", options: ["Any informal assembly of healthcare workers gathered in a hospital corridor.", "Two or more individuals brought together by an organization, interacting face-to-face or virtually on institutional goals with assigned roles and responsibilities.", "A single physician who dictates orders to junior staff without delegation.", "All hospital staff sharing identical clinical duties without role distinctions."], correctAnswer: 1 },
+                            { text: "Which of the following characteristics is typically observed during the 'Forming' stage of team development?", options: ["Peak operational efficiency and autonomy.", "Intense personal conflict and struggle over leadership.", "Team members are identified, group goals are set, and the baseline trust level is low.", "Completion of assigned tasks and team dissolution."], correctAnswer: 2 },
+                            { text: "Why is the 'Storming' stage considered the most difficult phase of team development?", options: ["Team members have already completed all clinical tasks.", "Roles are specified and communication patterns establish, but tension and conflicts develop.", "Mutual trust is already established, preventing debate.", "Hospital regulations prohibit doctors from speaking in this stage."], correctAnswer: 1 },
+                            { text: "What is the key defining feature of the 'Norming' stage in Tuckman and Jensen's model?", options: ["Trust is established, members rely on abilities, and disagree openly with mutual respect.", "Severe hostility and complete breakdown of clinical workflow.", "Members meet for the very first time with zero knowledge of teammates.", "The team finishes its mission and disbands for rest."], correctAnswer: 0 },
+                            { text: "Which statement best summarizes the 'Performing' stage of group development?", options: ["Setting initial goals while remaining suspicious of colleagues.", "Productive work is performed with high efficiency.", "Disbanding the healthcare team after finishing a clinical shift.", "Struggling to define basic communication channels."], correctAnswer: 1 },
+                            { text: "What takes place during the 'Adjourning' stage of team development?", options: ["Initial identification of member clinical specialties.", "Completing the task and breaking up the team for rest or transition.", "Escalating interpersonal disputes to hospital management.", "Formulating standard operating protocols and clinical guidelines."], correctAnswer: 1 },
+                            { text: "Which of the following is one of the core elements of an effective healthcare team?", options: ["Role clarity to reduce duplication of effort.", "Strict hierarchical dominance by the most senior physician.", "Avoiding open discussion of medical errors.", "Assigning identical tasks to all members simultaneously."], correctAnswer: 0 },
+                            { text: "What does the clinical communication acronym 'SBAR' stand for?", options: ["Standardization, Briefing, Action, Resolution", "Situation, Background, Assessment, Recommendation", "Safety, Biology, Anatomy, Rehabilitation", "Supervision, Baseline, Analysis, Referral"], correctAnswer: 1 },
+                            { text: "Undergraduate medical, nursing and pharmacy students are attending regular meeting to learn about, from and with each other to prepare themselves for future interprofessional teams. Which of the following describes this situation?", options: ["Teamwork.", "Shared decision making", "Patient centered practice", "Interprofessional education"], correctAnswer: 3 },
+                            { text: "Among the four competencies of interprofessional practice, which one stands for working with individuals of other professions to maintain a climate of mutual respect?", options: ["Ethics", "Teamwork", "Responsibility", "Communication"], correctAnswer: 0 },
+                            { text: "What is most effective element that enhances patients' outcome in interprofessional collaboration?", options: ["Foundational Knowledge.", "Clinical skills.", "Treatment facilities.", "Communication skills."], correctAnswer: 3 },
+                            { text: "Which of following stages of team development leadership is very important?", options: ["Forming.", "Storming", "Norming", "Performing"], correctAnswer: 1 },
+                            { text: "When you try to resolve a conflict within your team, which of the following statements is suitable?", options: ["I am uncomfortable Mr. X is getting worse with his breathing", "Mr. X complaining of dyspnea with history of bronchial asthma", "I think a bronchodilator medication every 12 hours is required", "I recommend Mr. X is in urgent need for mechanical ventilation"], correctAnswer: 0 },
+                            { text: "\"I'm calling about a 60-year-old man who is admitted to internal medicine unit with uncontrolled hypertension. His is getting worse and he has started to complain of headache\". According to SBAR strategy, this statement represents which of the following?", options: ["Situation", "Background", "Assessment", "Recommendation"], correctAnswer: 0 }
                         ]
                     }
                 }
             }
         };
 
-        function setupComprehensiveQuizzes() {
-            subjectsData.medical_ethics.quizzes.comprehensive.questions = [
-                ...subjectsData.medical_ethics.quizzes.quiz1.questions,
-                ...subjectsData.medical_ethics.quizzes.quiz2.questions,
-                ...subjectsData.medical_ethics.quizzes.quiz3.questions
-            ];
+        // تجميع كل الأسئلة في الامتحان الشامل تلقائياً
+        function buildComprehensiveExam() {
+            let all = [];
+            for (let key in materialsData) {
+                if (key !== 'all_materials') {
+                    for (let qKey in materialsData[key].quizzes) {
+                        all = all.concat(materialsData[key].quizzes[qKey].questions);
+                    }
+                }
+            }
+            materialsData.all_materials.quizzes.all.questions = all;
         }
-        setupComprehensiveQuizzes();
-
-        const WAWP_CONFIG = {
-            baseUrl: "https://api.wawp.net/v2/send/text",
-            accessToken: "stCzuWY5xqZH3g",
-            instanceId: "9128F9C87561",
-            chatId: "+201108256006"
-        };
+        buildComprehensiveExam();
 
         let currentUser = null;
-        let selectedSubject = "medical_ethics";
-        let currentQuiz = "quiz1";
+        let selectedMaterial = null;
+        let currentQuizKey = null;
+        let currentQuestions = [];
         let currentQuestionIndex = 0;
         let userAnswers = {};
-        let quizResults = {};
-        let shuffledQuestions = [];
-        let timer = null;
-        let totalTimeLeft = 0;
-        let isFeedbackState = false;
-        let deferredPrompt;
 
         const loginScreen = document.getElementById('loginScreen');
         const subjectScreen = document.getElementById('subjectScreen');
         const welcomeScreen = document.getElementById('welcomeScreen');
         const quizScreen = document.getElementById('quizScreen');
-        const loginBtn = document.getElementById('loginBtn');
-        const usernameInput = document.getElementById('username');
-        const loginError = document.getElementById('loginError');
-        const subjectUserWelcome = document.getElementById('subjectUserWelcome');
-        const userNameWelcome = document.getElementById('userNameWelcome');
-        const welcomeMessage = document.getElementById('welcomeMessage');
-        const userNameSpan = document.getElementById('userName');
-        const platformMainTitle = document.getElementById('platformMainTitle');
-        const platformSubTitle = document.getElementById('platformSubTitle');
-        const quizTitle = document.getElementById('quizTitle');
-        const questionNumber = document.getElementById('questionNumber');
-        const progressBar = document.getElementById('progressBar');
-        const questionText = document.getElementById('questionText');
-        const optionsContainer = document.getElementById('optionsContainer');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        const welcomeQuizSelector = document.getElementById('welcomeQuizSelector');
-        const resultsSummary = document.getElementById('resultsSummary');
-        const scoreText = document.getElementById('scoreText');
-        const correctAnswers = document.getElementById('correctAnswers');
-        const incorrectAnswers = document.getElementById('incorrectAnswers');
-        const reviewContainer = document.getElementById('reviewContainer');
-        const backToQuizzesBtn = document.getElementById('backToQuizzesBtn');
-        const backToSubjectsBtn = document.getElementById('backToSubjectsBtn');
-        const timerContainer = document.getElementById('timerContainer');
-        const timerDisplay = document.getElementById('timerDisplay');
-        const fastCorrectionToggle = document.getElementById('fastCorrectionToggle');
-        const instantFeedbackMsg = document.getElementById('instantFeedbackMsg');
-        const feedbackToggleBtn = document.getElementById('feedbackToggleBtn');
-        const feedbackSection = document.getElementById('feedbackSection');
-        const feedbackText = document.getElementById('feedbackText');
-        const sendFeedbackBtn = document.getElementById('sendFeedbackBtn');
-        const pwaBanner = document.getElementById('pwaBanner');
-        const pwaInstallBtn = document.getElementById('pwaInstallBtn');
-        const essayLink = document.getElementById('essayLink');
-        const bankLink = document.getElementById('bankLink');
-
-        loginBtn.addEventListener('click', handleLogin);
-        prevBtn.addEventListener('click', goToPreviousQuestion);
-        nextBtn.addEventListener('click', goToNextQuestion);
-        backToQuizzesBtn.addEventListener('click', backToQuizzes);
-        backToSubjectsBtn.addEventListener('click', showSubjectSelection);
-
-        feedbackToggleBtn.addEventListener('click', () => {
-            feedbackSection.style.display = feedbackSection.style.display === 'block' ? 'none' : 'block';
-        });
-
-        sendFeedbackBtn.addEventListener('click', sendFeedbackToWhatsapp);
-
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            pwaBanner.style.display = 'block';
-        });
-
-        pwaInstallBtn.addEventListener('click', () => {
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                deferredPrompt.userChoice.then((choiceResult) => {
-                    pwaBanner.style.display = 'none';
-                    deferredPrompt = null;
-                });
-            }
-        });
-
-        window.addEventListener('DOMContentLoaded', () => {
-            const savedName = localStorage.getItem('quiz_username');
-            if (savedName) {
-                currentUser = { username: savedName };
-                loginScreen.classList.remove('active');
-                showSubjectSelection();
-
-                const loginAlertMsg = `🔔 إشعار دخول فوري للمنصة\n👤 اسم الطالب: ${currentUser.username}\n⏰ وقت الدخول: ${getFormattedEgyptianDate()}`;
-                sendToWhatsapp(loginAlertMsg);
-
-                if (database) {
-                    const todayStr = new Date().toISOString().split('T')[0];
-                    database.ref('logs/' + todayStr + '/' + currentUser.username + '_' + new Date().getTime()).set({
-                        studentName: currentUser.username,
-                        action: "دخول تلقائي للمنصة",
-                        time: getFormattedEgyptianDate()
-                    });
-                }
-            }
-        });
-
-        if (usernameInput) {
-            usernameInput.addEventListener('keypress', function (e) {
-                if (e.key === 'Enter') handleLogin();
-            });
-        }
-
-        function getFormattedEgyptianDate() {
-            return new Date().toLocaleString('ar-EG', { hour12: true });
-        }
-
-        function validateUsername(name) {
-            name = name.trim();
-            if (name.length < 5) return "الاسم قصير جداً! يجب أن يكون اسماً ثنائياً حقيقياً.";
-            const allowedPattern = /^[a-zA-Z\u0600-\u06FF\s]+$/;
-            if (!allowedPattern.test(name)) return "غير مسموح بالأرقام أو الرموز العشوائية! اكتب حروفاً فقط.";
-            const parts = name.split(/\s+/);
-            if (parts.length < 2 || parts[0].length < 2 || parts[1].length < 2) return "برجاء كتابة اسمك الثنائي الحقيقي (الاسم واسم الأب الأول على الأقل).";
-            const repetitionPattern = /([\u0600-\u06FFa-zA-Z])\1{3,}/;
-            if (repetitionPattern.test(name)) return "تم كشف تكرار عشوائي للحروف! برجاء كتابة اسمك بشكل صحيح.";
-            return null;
-        }
-
-        function handleLogin() {
-            const rawName = usernameInput.value;
-            const errorReason = validateUsername(rawName);
-
-            if (errorReason) {
-                loginError.textContent = errorReason;
-                loginError.style.display = 'block';
+        
+        document.getElementById('loginBtn').addEventListener('click', () => {
+            const name = document.getElementById('username').value.trim();
+            if (name.split(' ').length < 2) {
+                document.getElementById('loginError').style.display = 'block';
                 return;
             }
-
-            const cleanName = rawName.trim().replace(/\s+/g, ' ');
-            currentUser = { username: cleanName };
-            localStorage.setItem('quiz_username', cleanName);
-
-            loginError.style.display = 'none';
+            currentUser = name;
             loginScreen.classList.remove('active');
-
-            const loginAlertMsg = `🔔 إشعار دخول فوري للمنصة\n👤 اسم الطالب: ${currentUser.username}\n⏰ وقت الدخول: ${getFormattedEgyptianDate()}`;
-            sendToWhatsapp(loginAlertMsg);
-
-            if (database) {
-                const todayStr = new Date().toISOString().split('T')[0];
-                database.ref('logs/' + todayStr + '/' + currentUser.username + '_' + new Date().getTime()).set({
-                    studentName: currentUser.username,
-                    action: "تسجيل دخول جديد",
-                    time: getFormattedEgyptianDate()
-                });
-            }
-
-            showSubjectSelection();
-        }
-
-        function showSubjectSelection() {
-            welcomeScreen.classList.remove('active');
-            quizScreen.classList.remove('active');
             subjectScreen.classList.add('active');
-            subjectUserWelcome.textContent = currentUser.username;
+            document.getElementById('subjectUserWelcome').textContent = currentUser;
+        });
 
-            platformMainTitle.textContent = "University Portal";
-            platformMainTitle.style.direction = "ltr";
-            platformSubTitle.textContent = "Interactive Quiz System";
-
-            initializeSubjectButtons();
-        }
-
-        function initializeSubjectButtons() {
-            document.querySelectorAll('.subject-btn').forEach(btn => {
-                btn.replaceWith(btn.cloneNode(true));
+        document.querySelectorAll('.subject-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                selectedMaterial = this.dataset.subject;
+                subjectScreen.classList.remove('active');
+                
+                if (selectedMaterial === 'all_materials') {
+                    currentQuizKey = 'all';
+                    currentQuestions = materialsData.all_materials.quizzes.all.questions;
+                    startQuiz();
+                } else {
+                    welcomeScreen.classList.add('active');
+                    document.getElementById('userNameWelcome').textContent = currentUser;
+                    const selector = document.getElementById('welcomeQuizSelector');
+                    selector.innerHTML = '';
+                    const quizzes = materialsData[selectedMaterial].quizzes;
+                    for (let qKey in quizzes) {
+                        const qBtn = document.createElement('div');
+                        qBtn.className = 'quiz-btn';
+                        qBtn.textContent = quizzes[qKey].title;
+                        qBtn.addEventListener('click', () => {
+                            currentQuizKey = qKey;
+                            currentQuestions = quizzes[qKey].questions;
+                            welcomeScreen.classList.remove('active');
+                            startQuiz();
+                        });
+                        selector.appendChild(qBtn);
+                    }
+                }
             });
+        });
 
-            document.querySelectorAll('.subject-btn').forEach(btn => {
-                btn.addEventListener('click', function () {
-                    document.querySelectorAll('.subject-btn').forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    selectedSubject = this.dataset.subject;
-
-                    setTimeout(() => {
-                        showQuizSelection();
-                    }, 150);
-                });
-            });
-        }
-
-        function showQuizSelection() {
-            subjectScreen.classList.remove('active');
-            welcomeScreen.classList.add('active');
-            userNameWelcome.textContent = currentUser.username;
-
-            const subject = subjectsData[selectedSubject];
-            platformMainTitle.textContent = subject.title;
-            platformSubTitle.textContent = "Quiz Selection";
-
-            essayLink.href = subject.essayUrl;
-            bankLink.href = subject.bankUrl;
-
-            welcomeQuizSelector.innerHTML = '';
-            Object.keys(subject.quizzes).forEach(quizKey => {
-                const quiz = subject.quizzes[quizKey];
-                const btn = document.createElement('div');
-                btn.className = 'quiz-btn';
-                btn.dataset.quiz = quizKey;
-                btn.textContent = quiz.title;
-                welcomeQuizSelector.appendChild(btn);
-            });
-
-            initializeQuizSelector();
-        }
-
-        function initializeQuizSelector() {
-            welcomeQuizSelector.querySelectorAll('.quiz-btn').forEach(btn => {
-                btn.addEventListener('click', function () {
-                    welcomeQuizSelector.querySelectorAll('.quiz-btn').forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    currentQuiz = this.dataset.quiz;
-
-                    setTimeout(() => {
-                        startQuiz();
-                    }, 150);
-                });
-            });
-        }
+        document.getElementById('backToSubjectsBtn').addEventListener('click', () => {
+            welcomeScreen.classList.remove('active');
+            subjectScreen.classList.add('active');
+        });
 
         function startQuiz() {
-            welcomeScreen.classList.remove('active');
             quizScreen.classList.add('active');
-            userNameSpan.textContent = currentUser.username;
-            timerContainer.style.display = 'block';
-
-            shuffleAndFormatQuestions();
-
-            totalTimeLeft = shuffledQuestions.length * 120;
-
-            startTotalTimer();
+            currentQuestionIndex = 0;
+            userAnswers = {};
             loadQuestion();
         }
 
-        function shuffleAndFormatQuestions() {
-            const originalQuestions = subjectsData[selectedSubject].quizzes[currentQuiz].questions;
-            let mcqQuestions = originalQuestions.map(q => JSON.parse(JSON.stringify(q)));
-
-            for (let i = mcqQuestions.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [mcqQuestions[i], mcqQuestions[j]] = [mcqQuestions[j], mcqQuestions[i]];
-            }
-
-            mcqQuestions.forEach(question => {
-                const originalOptions = [...question.options];
-                const correctAnswerText = originalOptions[question.correctAnswer];
-
-                for (let i = originalOptions.length - 1; i > 0; i--) {
-                    const j = Math.floor(Math.random() * (i + 1));
-                    [originalOptions[i], originalOptions[j]] = [originalOptions[j], originalOptions[i]];
-                }
-
-                question.correctAnswer = originalOptions.indexOf(correctAnswerText);
-                question.options = originalOptions;
-            });
-
-            shuffledQuestions = [...mcqQuestions];
-
-            currentQuestionIndex = 0;
-            userAnswers = {};
-        }
-
-        function startTotalTimer() {
-            updateTotalTimerDisplay();
-            if (timer) clearInterval(timer);
-            timer = setInterval(function () {
-                totalTimeLeft--;
-                updateTotalTimerDisplay();
-                if (totalTimeLeft <= 0) {
-                    clearInterval(timer);
-                    calculateResults();
-                    showResults();
-                }
-            }, 1000);
-        }
-
-        function updateTotalTimerDisplay() {
-            const minutes = Math.floor(totalTimeLeft / 60);
-            const seconds = totalTimeLeft % 60;
-            timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-
-            if (totalTimeLeft <= 60) {
-                timerDisplay.className = 'timer-critical';
-            } else if (totalTimeLeft <= 300) {
-                timerDisplay.className = 'timer-warning';
-            } else {
-                timerDisplay.className = '';
-            }
-        }
-
         function loadQuestion() {
-            isFeedbackState = false;
-            instantFeedbackMsg.style.display = "none";
-            instantFeedbackMsg.innerHTML = "";
+            const q = currentQuestions[currentQuestionIndex];
+            document.getElementById('quizTitle').textContent = materialsData[selectedMaterial || 'all_materials'].title;
+            document.getElementById('questionNumber').textContent = `Question ${currentQuestionIndex + 1} of ${currentQuestions.length}`;
+            document.getElementById('progressBar').style.width = `${((currentQuestionIndex + 1) / currentQuestions.length) * 100}%`;
+            document.getElementById('questionText').textContent = q.text;
 
-            if (shuffledQuestions.length === 0) {
-                questionText.textContent = "لا توجد أسئلة متوفرة في هذا الاختبار حالياً.";
-                optionsContainer.innerHTML = '';
-                nextBtn.style.display = 'none';
-                return;
-            } else {
-                nextBtn.style.display = 'block';
-            }
-
-            const quiz = subjectsData[selectedSubject].quizzes[currentQuiz];
-            const question = shuffledQuestions[currentQuestionIndex];
-
-            quizTitle.textContent = quiz.title;
-            questionNumber.textContent = `Question ${currentQuestionIndex + 1} of ${shuffledQuestions.length} (MCQ)`;
-            progressBar.style.width = `${((currentQuestionIndex + 1) / shuffledQuestions.length) * 100}%`;
-
-            questionText.textContent = question.text;
-            optionsContainer.innerHTML = '';
-
-            question.options.forEach((option, index) => {
-                const optionElement = document.createElement('div');
-                optionElement.className = 'option';
-                optionElement.style.pointerEvents = 'auto';
-                if (userAnswers[currentQuestionIndex] === index) {
-                    optionElement.classList.add('selected');
-                }
-
-                optionElement.innerHTML = `
-                    <input type="radio" name="option" id="option${index}" value="${index}" 
-                           ${userAnswers[currentQuestionIndex] === index ? 'checked' : ''}>
-                    <label for="option${index}">${option}</label>
-                `;
-
-                optionElement.addEventListener('click', () => selectOption(index));
-                optionsContainer.appendChild(optionElement);
+            const container = document.getElementById('optionsContainer');
+            container.innerHTML = '';
+            q.options.forEach((opt, idx) => {
+                const optDiv = document.createElement('div');
+                optDiv.className = 'option' + (userAnswers[currentQuestionIndex] === idx ? ' selected' : '');
+                optDiv.innerHTML = `<input type="radio" name="opt" ${userAnswers[currentQuestionIndex] === idx ? 'checked' : ''}> <label>${opt}</label>`;
+                optDiv.addEventListener('click', () => {
+                    userAnswers[currentQuestionIndex] = idx;
+                    document.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+                    optDiv.classList.add('selected');
+                    optDiv.querySelector('input').checked = true;
+                });
+                container.appendChild(optDiv);
             });
 
-            prevBtn.disabled = currentQuestionIndex === 0;
-            nextBtn.textContent = currentQuestionIndex === shuffledQuestions.length - 1 ? 'Finish' : 'Next';
-            resultsSummary.style.display = 'none';
+            document.getElementById('prevBtn').style.display = currentQuestionIndex === 0 ? 'none' : 'block';
+            document.getElementById('nextBtn').textContent = currentQuestionIndex === currentQuestions.length - 1 ? 'Finish' : 'Next';
+            document.getElementById('resultsSummary').style.display = 'none';
         }
 
-        function selectOption(index) {
-            if (isFeedbackState) return;
-            userAnswers[currentQuestionIndex] = index;
-
-            const options = optionsContainer.children;
-            for (let i = 0; i < options.length; i++) {
-                options[i].classList.remove('selected');
-                options[i].querySelector('input').checked = false;
-            }
-            options[index].classList.add('selected');
-            options[index].querySelector('input').checked = true;
-        }
-
-        function goToPreviousQuestion() {
+        document.getElementById('prevBtn').addEventListener('click', () => {
             if (currentQuestionIndex > 0) {
                 currentQuestionIndex--;
                 loadQuestion();
             }
-        }
+        });
 
-        function goToNextQuestion() {
-            if (shuffledQuestions.length === 0) return;
-
-            const question = shuffledQuestions[currentQuestionIndex];
-            const selectedAnswer = userAnswers[currentQuestionIndex];
-
-            if (selectedAnswer === undefined) {
-                alert("Please select an answer first!");
+        document.getElementById('nextBtn').addEventListener('click', () => {
+            if (userAnswers[currentQuestionIndex] === undefined) {
+                alert("برجاء اختيار إجابة أولاً!");
                 return;
             }
-
-            const isFastCorrection = fastCorrectionToggle.checked;
-
-            if (isFastCorrection) {
-                if (!isFeedbackState) {
-                    Array.from(optionsContainer.children).forEach(opt => opt.style.pointerEvents = 'none');
-
-                    if (selectedAnswer === question.correctAnswer) {
-                        highlightOptionsInstant(question, selectedAnswer);
-                        instantFeedbackMsg.style.display = "block";
-                        instantFeedbackMsg.style.background = "rgba(46, 204, 113, 0.2)";
-                        instantFeedbackMsg.style.color = "#2ecc71";
-                        instantFeedbackMsg.innerHTML = "✓ Correct Answer! Auto-advancing...";
-
-                        setTimeout(() => {
-                            advanceOrFinish();
-                        }, 1500);
-                    } else {
-                        isFeedbackState = true;
-                        highlightOptionsInstant(question, selectedAnswer);
-                        instantFeedbackMsg.style.display = "block";
-                        instantFeedbackMsg.style.background = "rgba(231, 76, 60, 0.2)";
-                        instantFeedbackMsg.style.color = "#e74c3c";
-                        instantFeedbackMsg.innerHTML = `✗ Incorrect Answer!<br><span style="color:#2ecc71">Correct Answer is: ${question.options[question.correctAnswer]}</span>`;
-                        nextBtn.textContent = currentQuestionIndex === shuffledQuestions.length - 1 ? 'Finish' : 'Continue';
-                    }
-                } else {
-                    isFeedbackState = false;
-                    advanceOrFinish();
-                }
-            } else {
-                advanceOrFinish();
-            }
-        }
-
-        function highlightOptionsInstant(question, selectedAnswer) {
-            const options = optionsContainer.children;
-            for (let i = 0; i < options.length; i++) {
-                if (i === question.correctAnswer) {
-                    options[i].style.borderColor = '#2ecc71';
-                    options[i].style.background = 'rgba(46, 204, 113, 0.2)';
-                } else if (i === selectedAnswer) {
-                    options[i].style.borderColor = '#e74c3c';
-                    options[i].style.background = 'rgba(231, 76, 60, 0.2)';
-                }
-            }
-        }
-
-        function advanceOrFinish() {
-            if (currentQuestionIndex < shuffledQuestions.length - 1) {
+            if (currentQuestionIndex < currentQuestions.length - 1) {
                 currentQuestionIndex++;
                 loadQuestion();
             } else {
-                if (timer) clearInterval(timer);
-                calculateResults();
                 showResults();
             }
-        }
-
-        function calculateResults() {
-            let correctCount = 0;
-            shuffledQuestions.forEach((question, index) => {
-                if (userAnswers[index] === question.correctAnswer) {
-                    correctCount++;
-                }
-            });
-
-            quizResults[currentQuiz] = {
-                correct: correctCount,
-                total: shuffledQuestions.length,
-                percentage: shuffledQuestions.length > 0 ? Math.round((correctCount / shuffledQuestions.length) * 100) : 0
-            };
-        }
+        });
 
         function showResults() {
-            const results = quizResults[currentQuiz];
-            const quiz = subjectsData[selectedSubject].quizzes[currentQuiz];
-            const subjectName = subjectsData[selectedSubject].title;
+            let correct = 0;
+            currentQuestions.forEach((q, idx) => {
+                if (userAnswers[idx] === q.correctAnswer) correct++;
+            });
 
-            scoreText.textContent = `Score: ${results.percentage}% (${results.correct} out of ${results.total})`;
-            correctAnswers.textContent = `Correct Answers: ${results.correct}`;
-            incorrectAnswers.textContent = `Incorrect Answers: ${results.total - results.correct}`;
+            document.getElementById('scoreText').textContent = `النتيجة النهائية: ${Math.round((correct / currentQuestions.length) * 100)}%`;
+            document.getElementById('correctAnswers').textContent = `الإجابات الصحيحة: ${correct}`;
+            document.getElementById('incorrectAnswers').textContent = `الإجابات الخاطئة: ${currentQuestions.length - correct}`;
 
-            const quizAlertMsg = `📊 نتيجة امتحان:\n👤 الطالب: ${currentUser.username}\n📚 المادة: ${subjectName}\n📝 الامتحان: ${quiz.title}\n🎯 النتيجة: ${results.percentage}%\n⏰ الوقت: ${getFormattedEgyptianDate()}`;
-            sendToWhatsapp(quizAlertMsg);
-
-            if (database) {
-                const todayStr = new Date().toISOString().split('T')[0];
-                database.ref('logs/' + todayStr + '/' + currentUser.username + '_' + new Date().getTime()).set({
-                    studentName: currentUser.username,
-                    action: `إتمام امتحان (${subjectName} - ${quiz.title})`,
-                    result: `النتيجة: ${results.percentage}%`,
-                    time: getFormattedEgyptianDate()
-                });
-            }
-
-            reviewContainer.innerHTML = '<h3 style="text-align:center; color:#3498db; margin-bottom:15px;">Question Review</h3>';
-
-            let hasWrongAnswers = false;
-            shuffledQuestions.forEach((question, index) => {
-                const isCorrect = userAnswers[index] === question.correctAnswer;
-                if (!isCorrect) {
-                    hasWrongAnswers = true;
-                    const reviewItem = document.createElement('div');
-                    reviewItem.className = 'review-item';
-
-                    const userAnswerIndex = userAnswers[index];
-                    const correctAnswerIndex = question.correctAnswer;
-
-                    const chosenText = userAnswerIndex !== undefined ? question.options[userAnswerIndex] : 'Not answered';
-                    const correctText = question.options[correctAnswerIndex];
-
-                    reviewItem.innerHTML = `
-                        <div class="review-content">
-                            <strong>Question:</strong><br>${question.text}<br>
-                            <strong>Your Answer:</strong><br><span class="user-answer">${chosenText}</span><br>
-                            <strong>Correct Answer:</strong><br><span class="correct-answer">${correctText}</span>
-                        </div>
-                    `;
-                    reviewContainer.appendChild(reviewItem);
+            const reviewContainer = document.getElementById('reviewContainer');
+            reviewContainer.innerHTML = '<h4>مراجعة الأخطاء:</h4>';
+            currentQuestions.forEach((q, idx) => {
+                if (userAnswers[idx] !== q.correctAnswer) {
+                    const item = document.createElement('div');
+                    item.className = 'review-item';
+                    item.innerHTML = `<strong>السؤال:</strong> ${q.text}<br>
+                                      <strong>إجابتك:</strong> <span class="user-answer">${q.options[userAnswers[idx]] || 'لم تجب'}</span><br>
+                                      <strong>الإجابة الصحيحة:</strong> <span class="correct-answer">${q.options[q.correctAnswer]}</span>`;
+                    reviewContainer.appendChild(item);
                 }
             });
 
-            if (!hasWrongAnswers) {
-                reviewContainer.innerHTML += '<p style="color:#2ecc71; text-align:center; font-weight:bold;">Excellent work! Perfect score achieved.</p>';
-            }
-
-            timerContainer.style.display = 'none';
-            optionsContainer.innerHTML = '';
-            questionText.textContent = "تم إنهاء الاختبار وعرض النتائج بالأسفل:";
-            resultsSummary.style.display = 'block';
-
-            let message = "";
-            if (results.percentage >= 90) message = "Excellent! Outstanding performance.";
-            else if (results.percentage >= 70) message = "Very good! Great performance.";
-            else if (results.percentage >= 50) message = "Acceptable! You can improve.";
-            else message = "Needs improvement. Try again.";
-
-            setTimeout(() => {
-                alert(`Congratulations ${currentUser.username}!\n${message}\nYour score: ${results.percentage}%`);
-            }, 500);
+            document.querySelector('.question-container').style.display = 'none';
+            document.querySelector('.navigation').style.display = 'none';
+            document.getElementById('resultsSummary').style.display = 'block';
         }
 
-        function backToQuizzes() {
-            resultsSummary.style.display = 'none';
+        document.getElementById('backToQuizzesBtn').addEventListener('click', () => {
+            document.getElementById('resultsSummary').style.display = 'none';
+            document.querySelector('.question-container').style.display = 'block';
+            document.querySelector('.navigation').style.display = 'flex';
             quizScreen.classList.remove('active');
-            welcomeScreen.classList.add('active');
-            showQuizSelection();
-        }
-
-        function sendToWhatsapp(messageContent) {
-            const fullUrl = `${WAWP_CONFIG.baseUrl}?access_token=${WAWP_CONFIG.accessToken}&chatId=${encodeURIComponent(WAWP_CONFIG.chatId)}&instance_id=${WAWP_CONFIG.instanceId}&message=${encodeURIComponent(messageContent)}`;
-
-            fetch(fullUrl)
-                .then(response => response.json())
-                .then(data => console.log('WhatsApp Alert Sent:', data))
-                .catch(error => console.error('WhatsApp Communication Error:', error));
-        }
-
-        function sendFeedbackToWhatsapp() {
-            const text = feedbackText.value.trim();
-            if (!text) {
-                alert("برجاء كتابة رأيك أولاً!");
-                return;
-            }
-
-            const feedbackMsg = `💬 رأي حول المنصة:\n👤 الطالب: ${currentUser ? currentUser.username : "زائر"}\n📝 الرسالة: ${text}\n⏰ الوقت: ${getFormattedEgyptianDate()}`;
-            sendToWhatsapp(feedbackMsg);
-
-            alert("شكراً لك! تم إرسال رأيك بنجاح لتطوير المنصة.");
-            feedbackText.value = "";
-            feedbackSection.style.display = 'none';
-        }
+            subjectScreen.classList.add('active');
+        });
     </script>
 </body>
-
 </html>
